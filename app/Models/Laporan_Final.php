@@ -12,5 +12,8 @@ class Laporan_Final extends Model
 
     protected $primaryKey = 'id_laporan';
 
-    protected $fillable = ['id_laporan', 'nama_petugas', 'kejadian', 'tanggal', 'id_anggota', 'id_regu'];
+    protected $fillable = ['nama_petugas', 'id_kejadian', 'tanggal', 'petugas_piket', 'regu', 'id_kejadian'];
+    public function Kejadian(){
+        return $this->belongsTo(Kejadian::class,'id_kejadian', 'id_kejadian');
+    }
 }

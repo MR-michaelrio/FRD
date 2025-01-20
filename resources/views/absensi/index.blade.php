@@ -23,15 +23,15 @@ Absen
                     @endphp
                     @foreach($absen as $agt)
                     <tr>
-                        <td>{{ $nomor++ }}</td>
+                        <td>{{ $agt->id_absen }}</td>
                         <td>{{ \Carbon\Carbon::parse($agt->tanggal_absen)->format('d-m-Y') }}</td>
                         <td>{{ $agt->catatan }}</td>
                         <td>
                             <form action="{{route('absen.destroy',$agt->id_absen)}}" method="post">
                                 @csrf
                                 @METHOD('DELETE')
-                                <a href="{{route('absen.show',$agt->id_absen)}}"><button type="button" class="btn btn-secondary">Lihat Absen</button></a>&nbsp
-                                <a href="{{route('absen.edit',$agt->id_absen)}}"><button type="button" class="btn btn-warning">Edit</button></a>&nbsp
+                                <a href="{{ $agt->pdf }}"><button type="button" class="btn btn-secondary">Download PDF</button></a>&nbsp
+                                <a href="{{route('absen.show',$agt->id_absen)}}"><button type="button" class="btn btn-info">Lihat Absen</button></a>&nbsp
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this data?')">Delete</button>
                             </form>
                         </td>

@@ -15,9 +15,10 @@ Anggota
                     <tr>
                         <th>#</th>
                         <th>Nama</th>
-                        <th>Instansi</th>
+                        <th>Lembaga</th>
                         <th>Role</th>
                         <th>Regu</th>
+                        <th>Wilayah</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -29,8 +30,9 @@ Anggota
                     <tr>
                         <td>{{ $nomor++ }}</td>
                         <td>{{ $agt->nama }}</td>
-                        <td>{{ $agt->instansi }}</td>
+                        <td>{{ $agt->lembaga }}</td>
                         <td>{{ $agt->role }}</td>
+                        <td>{{ $agt->wilayah }}</td>
                         <td>
                             @if($agt->id_regu == '4')
                                 -

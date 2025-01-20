@@ -21,7 +21,7 @@ class AnggotaController extends Controller
     public function index2()
     {
         $anggota = anggota::all();
-        return view('anggota.agt',compact('anggota'));
+        return view('anggota.agt2',compact('anggota'));
     }
 
     /**
@@ -85,12 +85,23 @@ class AnggotaController extends Controller
     public function update(Request $request, $id)
     {
         $agt = anggota::find($id);
-
+// echo $request->wilayah;
         $agt->update([
             'nama'=>$request->nama,
-            'instansi'=>$request->instansi,
-            'id_regu'=>$request->regu,
-            'role'=>$request->role
+            'lembaga'=>$request->lembaga,
+            'email'=>$request->email,
+            'tanggal_lahir'=>$request->tanggal_lahir,
+            'jenis_kelamin'=>$request->jenis_kelamin,
+            'alamat'=>$request->alamat,
+            'no_pemegang'=>$request->no_pemegang,
+            'no_darurat1'=>$request->no_darurat1,
+            'nama_darurat1'=>$request->nama_darurat1,
+            'no_darurat2'=>$request->no_darurat2,
+            'nama_darurat2'=>$request->nama_darurat2,
+            'id_regu'=>$request->id_regu,
+            'role'=>$request->role,
+            'wilayah'=>$request->wilayah
+            
         ]);
         // echo $agt;
         return redirect()->route('agt.index2');

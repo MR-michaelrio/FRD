@@ -9,6 +9,7 @@ use App\Models\anggota;
 use Illuminate\Support\Str;
 use PDF;
 use Illuminate\Support\Facades\File;
+use Carbon\Carbon;
 
 class AbsenController extends Controller
 {
@@ -19,15 +20,24 @@ class AbsenController extends Controller
      */
     public function index()
     {
-        $absen = Absen::all();
+        $absen = Absen::orderBy('created_at', 'desc')->get();
         return view('absensi.index', compact('absen'));
     }
 
     public function index2()
     {
-        $anggota = anggota::all()->where('role','!=','anggota');
-        $ag = anggota::all();
-        return view('absensi.absen', compact('anggota','ag'));
+        $anggota = anggota::where('role','!=','anggota')->where('wilayah','jakarta')->get();
+        $ag = anggota::all()->where('wilayah','jakarta');
+        $id = 'jakarta';
+        return view('absensi.absen', compact('anggota','ag','id'));
+    }
+
+    public function index3()
+    {
+        $anggota = Anggota::where('role', '!=', 'anggota')->where('wilayah', 'bekasi')->get();
+        $ag = anggota::all()->where('wilayah','bekasi');
+        $id = 'bekasi';
+        return view('absensi.absen', compact('anggota','ag','id'));
     }
 
     /**
@@ -58,33 +68,35 @@ class AbsenController extends Controller
         while (Absen::where('id_absen', $id_absen)->exists()) {
             $id_absen = rand(100000, 999999);
         }
-        
+        // return $request->wilayah;
         // Create the 'Absen' record
         $absen = Absen::create([
             'id_absen' => $id_absen,
             'tanggal_absen' => $request->tanggal_absen,
             'id_anggota' => $request->petugas,
-            'catatan' => $request->catatan
+            'catatan' => $request->catatan,
+            'wilayah' => $request->wilayah
         ]);
         
         // Process attendance for each member
-        $ag = Anggota::all();
+        $ag = anggota::all()->where('wilayah',$request->wilayah);
+        
         foreach ($ag as $a) {
             $hadirKey = 'absenshadir.' . $a->id_anggota;
             $selectedValue = $request->input($hadirKey);
-        
+            
             // Check if "Lain" is selected and "Lain Text" is provided; otherwise, default to "Hadir" or "Tidak Hadir"
             if ($selectedValue === 'lain' && $request->has("lainText.{$a->id_anggota}")) {
                 $absenshadir = $request->input("lainText.{$a->id_anggota}");
             } else {
                 $absenshadir = $selectedValue === 'hadir' ? 'hadir' : 'tidak hadir';
             }
-        
             // Create the 'Absensi' record
             Absensi::create([
                 'id_absen' => $absen->id_absen,
                 'id_anggota' => $a->id_anggota,
-                'absenshadir' => $absenshadir
+                'absenshadir' => $absenshadir,
+                'wilayah' => $request->wilayah
             ]);
         }
         return redirect()->route('absen.pdf',$absen->id_absen);    
@@ -97,7 +109,9 @@ class AbsenController extends Controller
      */
     public function show($id)
     {
-        $data = Absensi::all()->where('id_absen','==', $id);
+        $data = Absensi::join('anggota', 'absensi.id_anggota', '=', 'anggota.id_anggota')
+        ->where('absensi.id_absen', $id)
+        ->get();
         $tanggal = Absen::find($id);
         
         return view('absensi.show',compact('data','tanggal'));
@@ -109,9 +123,12 @@ class AbsenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id_anggota,$id_absen)
     {
-        //
+        $absen = Absensi::where('id_anggota', $id_anggota)
+        ->where('id_absen', $id_absen)
+        ->first();
+        return view('absensi.editabsen',compact('absen'));
     }
 
     /**
@@ -121,11 +138,18 @@ class AbsenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_anggota,$id_absen)
     {
         //
+        $absen = Absensi::where('id_anggota', $id_anggota)
+        ->where('id_absen', $id_absen)
+        ->first();
+        $a= $absen->update([
+            'absenshadir' => $request->absenshadir
+        ]);
+        return redirect()->route('absen.show',$absen->id_absen);
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *
@@ -158,9 +182,9 @@ class AbsenController extends Controller
     public function generatePDF($id)
     {
         $data = absensi::where('id_absen',$id)->get();
-        $data2 = Absen::where('id_absen',$id)->get();
         $absen = Absen::find($id);
-        $pdf = PDF::loadView('absensi.pdf', compact('data','data2'));
+        $pdf = PDF::loadView('absensi.pdf', compact('data','absen'));
+
         $pdfContent = $pdf->output();
         $publicPath = public_path('pdf');
         if (!is_dir($publicPath)) {
@@ -170,8 +194,6 @@ class AbsenController extends Controller
         $pdfFilePath = $publicPath . '/' . $pdfFileName;
         $pdf->save($pdfFilePath);
         $absen->update(['pdf' => 'pdf/' . $pdfFileName]);
-
-        // return redirect()->route('absen.index');
-        return redirect("http://localhost:3000/file-message?namafile=".$pdfFileName);
+        return redirect("http://101.255.101.60:3000/absen?namafile=".$pdfFileName);
     }
 }

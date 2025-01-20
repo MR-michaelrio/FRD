@@ -28,8 +28,17 @@
         @php
             $no = 1;
         @endphp
+        <table style="border:0px; margin-bottom:10px;">
+            <tr style="border:0px">
+                <td style="width:100px;border:0px"><img src="img/frd-logo.jpg" alt="" srcset="" width="100px"></td>
+                <td style="border:0px"><h1>Forum Radio Digital <span style="text-transform: uppercase;">{{$absen->wilayah}}</span></h1></td>
+            </td>
+        </table>
         <table>
             <thead>
+                <tr>
+                    <th colspan=3>Tanggal Absen {{ \Carbon\Carbon::parse($absen->tanggal_absen)->format('d-m-Y') }}</th>
+                </tr>
                 <tr>
                     <th style="width: 20px">#</th>
                     <th>Nama</th>
@@ -40,7 +49,7 @@
             <tbody>
                 <tr>
                     <td style="text-align:center">{{$no++}}</td>
-                    <td>{{ $d->anggota->nama }} - {{ $d->anggota->instansi }}</td>
+                    <td>{{ $d->anggota->nama }} - {{ $d->anggota->lembaga }}</td>
                     <td>
                         {{ $d->absenshadir }}
                     </td>
@@ -48,9 +57,7 @@
             </tbody>
             @endforeach
         </table>
-        @foreach ($data2 as $item)
-            <h3>Catatan: <p>{{ $item->catatan }}</p></h3>
-        @endforeach
+        <h3>Catatan: <p>{{ $absen->catatan }}</p></h3>
     </div>
 </body>
 

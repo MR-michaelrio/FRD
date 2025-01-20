@@ -11,7 +11,7 @@ class anggota extends Model
     protected $table = "anggota";
     protected $primaryKey = "id_anggota";
 
-    protected $fillable = ['id_anggota', 'nama', 'instansi', 'id_regu', 'role'];
+    protected $fillable = ['id_anggota', 'nama', 'lembaga', 'email', 'alamat', 'no_pemegang', 'no_darurat1', 'nama_darurat1', 'no_darurat2', 'nama_darurat2', 'tanggal_lahir', 'jenis_kelamin', 'id_regu', 'role','wilayah'];
 
     public function Absensi(){
         return $this->belongsTo(Absensi::class,'id_anggota', 'id_anggota');

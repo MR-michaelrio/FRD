@@ -15,17 +15,24 @@ Absen {{ \Carbon\Carbon::parse($tanggal->tanggal_absen)->format('d-m-Y') }}
                         <th>#</th>
                         <th>Nama Anggota</th>
                         <th>Kehadiran</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @php
-                        $nomor = 1;
+                    $nomor = 1;
                     @endphp
                     @foreach($data as $agt)
                     <tr>
                         <td>{{ $nomor++ }}</td>
-                        <td>{{ $agt->anggota->nama }} - {{ $agt->anggota->instansi }}</td>
+                        <td>{{ $agt->nama }} - {{ $agt->lembaga }}</td>
                         <td>{{ $agt->absenshadir }}</td>
+                        <td>
+                            <a
+                                href="{{ route('absen.edit', ['id_anggota' => $agt->id_anggota, 'id_absen' => $agt->id_absen]) }}">
+                                <button type="button" class="btn btn-warning">Edit</button>
+                            </a>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -35,4 +42,4 @@ Absen {{ \Carbon\Carbon::parse($tanggal->tanggal_absen)->format('d-m-Y') }}
     </div>
     <!-- /.card -->
 </div>
-@endsection 
+@endsection

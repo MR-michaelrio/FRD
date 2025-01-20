@@ -19,6 +19,7 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                @if(auth()->user()->level == "admin")
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
@@ -60,7 +61,7 @@
                         </li>
                     </ul>
                 </li>
-
+                @endif
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-list"></i>
@@ -71,9 +72,25 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="{{ route('absen.index2') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Absen Jakarta</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('absen.index3') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Absen Bekasi</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
                             <a href="{{ route('absen.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Absen</p>
+                                <p>Data Absen</p>
                             </a>
                         </li>
                     </ul>
@@ -83,18 +100,44 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>
-                            Laporan Final
+                            Laporan
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('laporan.index') }}" class="nav-link">
+                            <a href="{{ route('lpr.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Buat Laporan</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('lpr.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Laporan</p>
                             </a>
                         </li>
                     </ul>
+                    @if(auth()->user()->level == "admin")
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('lpr.rekap') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Rekap Laporan Kejadian</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('laporan.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Backup Laporan Lama</p>
+                            </a>
+                        </li>
+                    </ul>
+                    @endif
                 </li>
 
                 <li class="nav-item">

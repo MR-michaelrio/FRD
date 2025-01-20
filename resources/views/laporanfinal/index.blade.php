@@ -32,7 +32,7 @@ Laporan Final
                                 @csrf
                                 @METHOD('DELETE')
                                 <a href="{{route('laporan.show',$lp->id_laporan)}}"><button type="button" class="btn btn-secondary">Lihat Laporan</button></a>&nbsp
-                                <a href="{{route('laporan.edit',$lp->id_laporan)}}"><button type="button" class="btn btn-warning">Edit</button></a>&nbsp
+                                <a href="{{route('laporan.edit',$lp->id_kejadian)}}"><button type="button" class="btn btn-warning">Edit</button></a>&nbsp
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this data?')">Delete</button>
                             </form>
                         </td>

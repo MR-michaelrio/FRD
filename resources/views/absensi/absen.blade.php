@@ -77,7 +77,7 @@
 <body>
     <div class="container">
         <div class="card">
-            <h5 class="card-header">LAPORAN ABSENSI FORUM RADIO DIGITAL</h5>
+            <h5 class="card-header">LAPORAN ABSENSI FORUM RADIO DIGITAL <span style="text-transform: uppercase;">{{$id}}</span></h5>
             <form action="{{ route('absen.store2')}}" method="post">
                 @csrf
                 <div class="card-body">
@@ -89,6 +89,8 @@
                                 <label for="datepicker">Tanggal</label>
                                 <input type="text" id="datepicker" placeholder="dd/mm/yyyy" name="tanggal_absen"
                                     class="form-control" autocomplete="off" required>
+                                    
+                                <input type="hidden" name="wilayah" value="{{$id}}">
                             </div>
                         </div>
                     </div>
@@ -108,7 +110,7 @@
                     <hr style="border-top: 3px solid black;">
                     @foreach($ag as $a)
                     <div class="mb-3">
-                        <label class="form-label formlabel1">R - {{ $a->nama }} - {{ $a->instansi }}<span
+                        <label class="form-label formlabel1">R - {{ $a->nama }} - {{ $a->lembaga }}<span
                                 style="color: red;">*</span></label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="absenshadir[{{ $a->id_anggota }}]"
@@ -155,11 +157,25 @@
 </body>
 <script>
 $(document).ready(function() {
+    // Initialize datepicker
     $('#datepicker').datepicker({
         format: 'yyyy-mm-dd',
         autoclose: true
     });
 
+    // Set current date in the datepicker field
+    var currentDate = new Date();
+    var day = currentDate.getDate();
+    var month = currentDate.getMonth() + 1;
+    var year = currentDate.getFullYear();
+    
+    // Adjust format to 'yyyy-mm-dd'
+    var formattedDate = year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+    
+    // Set the formatted date to the input field
+    $('#datepicker').val(formattedDate);
+
+    // Function to show/hide 'Lain' input based on radio button selection
     $('input[type=radio][value="lain"]').change(function() {
         var id = $(this).attr('id').split('-')[1];
         if ($(this).is(':checked')) {
@@ -176,6 +192,7 @@ $(document).ready(function() {
     });
 });
 </script>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

@@ -14,7 +14,7 @@ Anggota 101 & 102
                     <tr>
                         <th>#</th>
                         <th>Nama</th>
-                        <th>Instansi</th>
+                        <th>Lembaga</th>
                         <th>Role</th>
                         <th>Status</th>
                     </tr>
@@ -27,7 +27,7 @@ Anggota 101 & 102
                     <tr>
                         <td>{{ $nomor++ }}</td>
                         <td>{{ $agt->nama }}</td>
-                        <td>{{ $agt->instansi }}</td>
+                        <td>{{ $agt->lembaga }}</td>
                         <td>{{ $agt->role }}</td>
                         <td>
                             <form action="{{route('anggota.destroy',$agt->id_anggota)}}" method="post">

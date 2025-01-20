@@ -87,7 +87,7 @@ class ReguController extends Controller
      */
     public function destroy($id)
     {
-        $regu = anggota::find($id);
+        $regu = Regu::find($id);
         $regu->delete();
         return redirect()->route('regu.index');
     }

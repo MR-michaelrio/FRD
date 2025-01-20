@@ -12,7 +12,8 @@ class Regu extends Model
     protected $primaryKey = "id_regu";
 
     protected $fillable = ['id_regu', 'nama_regu'];
+    
     public function anggota(){
-        return $this->belongsTo(anggota::class,'id_regu', 'nama_regu');
+        return $this->belongsTo(anggota::class,'id_regu', 'id_regu');
     }
 }

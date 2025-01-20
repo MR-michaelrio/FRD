@@ -7,6 +7,9 @@ use App\Models\laporanfinal;
 use App\Models\Regu;
 use App\Models\anggota;
 use App\Models\Laporan_Final;
+use App\Models\Kejadian;
+use Carbon\Carbon;
+use DB;
 class LaporanFinalController extends Controller
 {
     /**
@@ -49,10 +52,10 @@ class LaporanFinalController extends Controller
         $jam = $request->input('jam');
         $menit = $request->input('menit');
         
-        $date = \DateTime::createFromFormat('d-m-Y', $tanggal);
-        $formatted_date = $date->format('d-m-Y');
+        // $date = \DateTime::createFromFormat('Y-m-d', $tanggal);
+        $myDate = Carbon::createFromFormat('d-m-Y', $tanggal)->format('Y-m-d');
         
-        $tanggal_kejadian = $formatted_date . ' ' . str_pad($jam, 2, '0', STR_PAD_LEFT) . ':' . str_pad($menit, 2, '0', STR_PAD_LEFT) . ':00';
+        $tanggal_kejadian = $myDate . ' ' . str_pad($jam, 2, '0', STR_PAD_LEFT) . ':' . str_pad($menit, 2, '0', STR_PAD_LEFT) . ':00';
         
         $nama_petugas = $request->input('nama_petugas');
         $regu = $request->input('regu');
@@ -60,19 +63,29 @@ class LaporanFinalController extends Controller
         
         $petugas_piket = $request->input('petugas_piket');
         $petugas_piket_string = !empty($petugas_piket) ? implode(', ', $petugas_piket) : '';
+
+        $id_kejadian = rand(100000, 999999);
+        do {
+            $id_kejadian = rand(100000, 999999);
+        } while (DB::table('kejadian')->where('id_kejadian', $id_kejadian)->exists());
+        
+        $longTextID = DB::table('kejadian')->insertGetId([
+            'id_kejadian' => $id_kejadian,
+            'kejadian' => $kejadian
+        ]);
         
         // Assuming you have a "Laporan" model with a corresponding migration
-        $laporan = new Laporan_Final();
-        $laporan->nama_petugas = $nama_petugas;
-        $laporan->regu = $regu;
-        $laporan->petugas_piket = $petugas_piket_string;
-        $laporan->kejadian = $kejadian;
-        $laporan->tanggal = $tanggal_kejadian;
-        $laporan->save();
+        Laporan_Final::create([
+            'nama_petugas' => $nama_petugas,
+            'regu' => $regu,
+            'petugas_piket' => $petugas_piket_string,
+            'tanggal' => $myDate,
+            'id_kejadian' => $id_kejadian
+        ]);
         
         $encodedKejadian = urlencode($kejadian);
-
-        $redirectUrl = 'http://101.255.4.222:3000/send-whatsapp-message?tanggal_kejadian=' . $tanggal_kejadian . '&regu=' . $regu . '&petugas_piket=' . $petugas_piket_string . '&nama_petugas=' . $nama_petugas . '&kejadian=' . $encodedKejadian;
+        
+        $redirectUrl = 'http://101.255.101.60:3000/laporanfinal?tanggal_kejadian=' . $tanggal_kejadian . '&regu=' . $regu . '&petugas_piket=' . $petugas_piket_string . '&nama_petugas=' . $nama_petugas . '&kejadian=' . $encodedKejadian;
         
         return redirect($redirectUrl);
     }
@@ -98,7 +111,8 @@ class LaporanFinalController extends Controller
      */
     public function edit($id)
     {
-        //
+        $laporan = Kejadian::find($id);
+        return view('laporanfinal.edit', compact('laporan'));
     }
 
     /**
@@ -110,7 +124,11 @@ class LaporanFinalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kejadian = Kejadian::find($id);
+        $kejadian->update([
+            'kejadian' => $request->kejadian
+        ]);
+        return redirect()->route('laporan.index');
     }
 
     /**

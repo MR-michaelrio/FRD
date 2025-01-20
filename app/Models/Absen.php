@@ -11,9 +11,9 @@ class Absen extends Model
     protected $table = "absen";
     protected $primaryKey = "id_absen";
 
-    protected $fillable = ['id_absen', 'tanggal_absen', 'id_anggota', 'catatan','pdf'];
+    protected $fillable = ['id_absen', 'tanggal_absen', 'id_anggota', 'catatan','pdf','wilayah'];
 
-    public function Absen(){
+    public function Absensi(){
         return $this->belongsTo(Absen::class,'id_absen', 'id_absen');
     }
 }

@@ -18,7 +18,7 @@ Laporan {{ \Carbon\Carbon::parse($data->tanggal_kejadian)->format('d-m-Y') }}
                 <tbody>
                     @foreach($laporan as $agt)
                     <tr>
-                        <td>{{ $agt->kejadian }}</td>
+                        <td>{!! nl2br($agt->Kejadian->kejadian) !!}</td>
                     </tr>
                     @endforeach
                 </tbody>
