@@ -45,6 +45,7 @@ venom
   .then((client) => {
     console.log('Venom session created');
     start(client);
+
     app.get('/laporanfinal', async (req, res) => {
       const groupIds = ['6282114578009@c.us','120363026258560001@g.us','120363183182250375@g.us', '120363173044009164@g.us','120363277021729569@g.us'];
       // const groupIds = ['6282114578009@c.us'];
@@ -87,7 +88,10 @@ venom
       const status = req.query.status;
       const message = `*DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nStatus: ${status}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;      
       const message2 = `*DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nAlamat: ${alamat}\nStatus: ${status}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;      
-        try {
+      console.log('Laporan1:', message);
+      console.log('Laporan2:', message2);
+ 
+      try {
           for (const groupId of groupIds) {
             if(groupId != '120363041008637358@g.us' && groupId != '120363146636607303@g.us'){
               await client.sendText(groupId, message2);
