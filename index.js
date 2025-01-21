@@ -94,7 +94,13 @@ venom
       const message2 = `*DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nAlamat: ${alamat}\nStatus: ${status}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;      
       console.log('Laporan1:', message);
       console.log('Laporan2:', message2);
-      await client.sendText('6282114578009@c.us', "test");
+      for (const groupId of groupIds) {
+        if(groupId != '120363041008637358@g.us' && groupId != '120363146636607303@g.us'){
+          await client.sendText(groupId, message2);
+        }else{
+          await client.sendText(groupId, message);
+        }
+      }
       res.redirect('http://101.255.101.60/lpr');
       // try {
       //     for (const groupId of groupIds) {
