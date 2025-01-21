@@ -89,25 +89,35 @@ venom
       const message2 = `*DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nAlamat: ${alamat}\nStatus: ${status}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;      
       console.log('Laporan1:', message);
       console.log('Laporan2:', message2);
- 
       try {
-        for (const groupId of groupIds) {
-          try {
-            if (groupId !== '120363041008637358@g.us' && groupId !== '120363146636607303@g.us') {
-              await client.sendText(groupId, message2);
-            } else {
-              await client.sendText(groupId, message);
-            }
-          } catch (error) {
-            console.error(`Error sending message to ${groupId}:`, error);
-            // Skip error and continue sending to the next groupId
+        const sendMessages = groupIds.map(groupId => {
+          if (groupId !== '120363041008637358@g.us' && groupId !== '120363146636607303@g.us') {
+            return client.sendText(groupId, message2);
+          } else {
+            return client.sendText(groupId, message);
           }
-        }
+        });
+        await Promise.all(sendMessages);
         res.redirect('http://101.255.101.60/lpr');
       } catch (error) {
-        console.error('Error in the loop:', error);
+        console.error('Error sending message:', error);
         res.status(500).send('Error sending message');
       }
+      
+      // try {
+      //     for (const groupId of groupIds) {
+      //       if(groupId != '120363041008637358@g.us' && groupId != '120363146636607303@g.us'){
+      //         await client.sendText(groupId, message2);
+      //       }else{
+      //         await client.sendText(groupId, message);
+      //       }
+      //     }
+      //     res.redirect('http://101.255.101.60/lpr');
+      //   } catch (error) {
+      //     console.error('Error sending message:', error);
+      //     res.status(500).send('Error sending message');
+      //   }
+      
     });
 
     app.get('/updatelaporan', async (req, res) => {
