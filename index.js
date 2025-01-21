@@ -93,7 +93,7 @@ venom
               await client.sendText(groupId, message);
             }
           }
-          res.redirect('http://101.255.101.60:8081/lpr');
+          res.redirect('http://101.255.101.60/lpr');
         } catch (error) {
           console.error('Error sending message:', error);
           res.status(500).send('Error sending message');
@@ -125,7 +125,7 @@ venom
               await client.sendText(groupId, message);
             }
           }
-          res.redirect('http://101.255.101.60:8081/lpr');
+          res.redirect('http://101.255.101.60/lpr');
         } catch (error) {
           console.error('Error sending message:', error);
           res.status(500).send('Error sending message');
@@ -151,7 +151,7 @@ venom
   
       try {
           // Path to the PDF file you want to send
-          const filePath = `../laporan/public/pdf/${pdfFileName}`;
+          const filePath = `../frd/public/pdf/${pdfFileName}`;
           // Caption for the file
           const caption = 'Absen'
   
@@ -162,7 +162,7 @@ venom
               await client.sendFile(groupId, filePath, pdfFileName, caption);
           }
           console.log('File sent successfully');
-          res.redirect('http://101.255.101.60:8081/');
+          res.redirect('http://101.255.101.60/');
   
       } catch (error) {
           console.error('Error sending file:', error);
