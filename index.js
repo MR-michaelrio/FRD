@@ -75,7 +75,10 @@ venom
 
     app.get('/laporan', async (req, res) => {
       const groupIds = ['6282114578009@c.us','120363041008637358@g.us','120363026258560001@g.us', '120363173044009164@g.us','120363277021729569@g.us','120363146636607303@g.us'];
-
+      if (!kejadian || !kejadian.regu || !kejadian.objek || !kejadian.kejadian || !kejadian.tanggal || !kejadian.nama_petugas || !kejadian.responder || !kejadian.situasi || !kejadian.alamat) {
+        console.log('Data tidak lengkap');
+        return res.status(400).send('Data tidak lengkap');
+      }
       const kejadian = JSON.parse(req.query.kejadian);
       const regu = kejadian.regu;
       const objek = kejadian.objek;
