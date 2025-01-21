@@ -90,23 +90,23 @@ venom
       console.log('Laporan1:', message);
       console.log('Laporan2:', message2);
  
-      if (typeof client !== 'undefined' && client !== null) {
-        try {
-          for (const groupId of groupIds) {
+      try {
+        for (const groupId of groupIds) {
+          try {
             if (groupId !== '120363041008637358@g.us' && groupId !== '120363146636607303@g.us') {
               await client.sendText(groupId, message2);
             } else {
               await client.sendText(groupId, message);
             }
+          } catch (error) {
+            console.error(`Error sending message to ${groupId}:`, error);
+            // Skip error and continue sending to the next groupId
           }
-          res.redirect('http://101.255.101.60/lpr');
-        } catch (error) {
-          console.error('Error sending message:', error);
-          res.status(500).send('Error sending message');
         }
-      } else {
-        console.log('Client not available, skipping message sending');
-        res.redirect('http://101.255.101.60/lpr');  // Proceed without sending messages
+        res.redirect('http://101.255.101.60/lpr');
+      } catch (error) {
+        console.error('Error in the loop:', error);
+        res.status(500).send('Error sending message');
       }
     });
 
