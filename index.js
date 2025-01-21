@@ -130,9 +130,9 @@ venom
       const message2 = `*UPDATE DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nAlamat: ${alamat}\nStatus: ${status}\nWaktu Selesai: ${selesai}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;      
           for (const groupId of groupIds) {
             if(groupId != '120363041008637358@g.us' && groupId != '120363146636607303@g.us'){
-              await client.sendText(groupId, message2);
+              await client.sendText(groupId, "test1");
             }else{
-              await client.sendText(groupId, message);
+              await client.sendText(groupId, "test2");
             }
           }
           res.redirect('http://101.255.101.60/lpr');
