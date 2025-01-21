@@ -11,9 +11,9 @@ const schedule = require('node-schedule');
   // Create a MySQL connection pool
 const pool = mysql.createPool({
   host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'frd_laporan',
+  user: 'michael',
+  password: 'tomsK9as',
+  database: 'frd',
 });
 app.use(express.urlencoded({ extended: true }));
 
