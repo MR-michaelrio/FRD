@@ -144,7 +144,6 @@ venom
               await client.sendText(groupId, message);
             }
           }
-          await client.sendText('6282114578009@c.us', "test");
           res.redirect('http://101.255.101.60/lpr');
         } catch (error) {
           console.error('Error sending message:', error);
