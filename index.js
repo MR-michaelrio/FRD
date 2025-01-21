@@ -94,20 +94,21 @@ venom
       const message2 = `*DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nAlamat: ${alamat}\nStatus: ${status}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;      
       console.log('Laporan1:', message);
       console.log('Laporan2:', message2);
- 
-      try {
-          for (const groupId of groupIds) {
-            if(groupId != '120363041008637358@g.us' && groupId != '120363146636607303@g.us'){
-              await client.sendText(groupId, message2);
-            }else{
-              await client.sendText(groupId, message);
-            }
-          }
-          res.redirect('http://101.255.101.60/lpr');
-        } catch (error) {
-          console.error('Error sending message:', error);
-          res.status(500).send('Error sending message');
-        }
+      await client.sendText('6282114578009@c.us', "test");
+      res.redirect('http://101.255.101.60/lpr');
+      // try {
+      //     for (const groupId of groupIds) {
+      //       if(groupId != '120363041008637358@g.us' && groupId != '120363146636607303@g.us'){
+      //         await client.sendText(groupId, message2);
+      //       }else{
+      //         await client.sendText(groupId, message);
+      //       }
+      //     }
+      //     res.redirect('http://101.255.101.60/lpr');
+      //   } catch (error) {
+      //     console.error('Error sending message:', error);
+      //     res.status(500).send('Error sending message');
+      //   }
       
     });
 
@@ -126,7 +127,15 @@ venom
       const alamat = kejadian.alamat;
       const selesai = kejadian.waktu_selesai;
         try {
-      
+          const message = `*UPDATE DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nStatus: ${status}\nWaktu Selesai: ${selesai}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;      
+          const message2 = `*UPDATE DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nAlamat: ${alamat}\nStatus: ${status}\nWaktu Selesai: ${selesai}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;      
+          for (const groupId of groupIds) {
+            if(groupId != '120363041008637358@g.us' && groupId != '120363146636607303@g.us'){
+              await client.sendText(groupId, message2);
+            }else{
+              await client.sendText(groupId, message);
+            }
+          }
           await client.sendText('6282114578009@c.us', "test");
           res.redirect('http://101.255.101.60/lpr');
         } catch (error) {
