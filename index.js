@@ -76,11 +76,6 @@ venom
     app.get('/laporan', async (req, res) => {
       const groupIds = ['6282114578009@c.us','120363041008637358@g.us','120363026258560001@g.us', '120363173044009164@g.us','120363277021729569@g.us','120363146636607303@g.us'];
       const kejadian = JSON.parse(req.query.kejadian);
-
-      if (!kejadian || !kejadian.regu || !kejadian.objek || !kejadian.kejadian || !kejadian.tanggal || !kejadian.nama_petugas || !kejadian.responder || !kejadian.situasi || !kejadian.alamat) {
-        console.log('Data tidak lengkap');
-        return res.status(400).send('Data tidak lengkap');
-      }
       const regu = kejadian.regu;
       const objek = kejadian.objek;
       const kjd = kejadian.kejadian;
@@ -94,28 +89,25 @@ venom
       const message2 = `*DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nAlamat: ${alamat}\nStatus: ${status}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;      
       console.log('Laporan1:', message);
       console.log('Laporan2:', message2);
-      for (const groupId of groupIds) {
-        if(groupId != '120363041008637358@g.us' && groupId != '120363146636607303@g.us'){
-          await client.sendText(groupId, message2);
-        }else{
-          await client.sendText(groupId, message);
+ 
+      if (typeof client !== 'undefined' && client !== null) {
+        try {
+          for (const groupId of groupIds) {
+            if (groupId !== '120363041008637358@g.us' && groupId !== '120363146636607303@g.us') {
+              await client.sendText(groupId, message2);
+            } else {
+              await client.sendText(groupId, message);
+            }
+          }
+          res.redirect('http://101.255.101.60/lpr');
+        } catch (error) {
+          console.error('Error sending message:', error);
+          res.status(500).send('Error sending message');
         }
+      } else {
+        console.log('Client not available, skipping message sending');
+        res.redirect('http://101.255.101.60/lpr');  // Proceed without sending messages
       }
-      res.redirect('http://101.255.101.60/lpr');
-      // try {
-      //     for (const groupId of groupIds) {
-      //       if(groupId != '120363041008637358@g.us' && groupId != '120363146636607303@g.us'){
-      //         await client.sendText(groupId, message2);
-      //       }else{
-      //         await client.sendText(groupId, message);
-      //       }
-      //     }
-      //     res.redirect('http://101.255.101.60/lpr');
-      //   } catch (error) {
-      //     console.error('Error sending message:', error);
-      //     res.status(500).send('Error sending message');
-      //   }
-      
     });
 
     app.get('/updatelaporan', async (req, res) => {
