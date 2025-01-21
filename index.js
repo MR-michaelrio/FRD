@@ -1,11 +1,8 @@
 const venom = require('venom-bot');
 const express = require('express');
-const axios = require('axios');
 const app = express();
 const port = 3000;
-const mysql = require('mysql2/promise'); // Import the mysql2 library
-const path = require('path');
-const fs = require('fs');
+const mysql = require('mysql2/promise');
 const schedule = require('node-schedule');
 
   // Create a MySQL connection pool
@@ -38,7 +35,11 @@ const sendMessage = (client) => {
 
 venom
   .create({
-    session: 'session-name'
+    session: 'session-name',
+    puppeteerOptions: {
+      headless: true,
+      executablePath: '/root/.cache/puppeteer/chrome/linux-121.0.6167.85/chrome-linux64/chrome', // or the path to your Chrome binary
+    }
   })
   .then((client) => {
     console.log('Venom session created');
