@@ -6,12 +6,13 @@ const mysql = require('mysql2/promise');
 const schedule = require('node-schedule');
 
   // Create a MySQL connection pool
-const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'michael',
-  password: 'tomsK9as',
-  database: 'frd',
-});
+  const pool = mysql.createPool({
+    host: '101.255.101.60',      // Database host
+    user: 'michael',             // Database username
+    password: 'tomsK9as',        // Database password
+    database: 'frd',             // Database name
+    port: 3306                   // Database port (default 3306)
+  });
 app.use(express.urlencoded({ extended: true }));
 
 const teams = ["A", "B", "C"];
