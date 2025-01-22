@@ -266,16 +266,55 @@
             max-height:300px;
             background-repeat: no-repeat;
         }
+        .alert {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            display: none; /* Initially hidden */
+        }
+
+        /* Success Alert */
+        .alert-success {
+            background-color: #4caf50; /* Green background */
+            color: white; /* White text */
+            border: 1px solid #388e3c; /* Darker green border */
+        }
+
+        /* Error Alert */
+        .alert-error {
+            background-color: #f44336; /* Red background */
+            color: white; /* White text */
+            border: 1px solid #d32f2f; /* Darker red border */
+        }
+
+        /* Information Alert */
+        .alert-info {
+            background-color: #2196f3; /* Blue background */
+            color: white; /* White text */
+            border: 1px solid #1976d2; /* Darker blue border */
+        }
+
+        /* Close button */
+        .alert .close-btn {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            float: right;
+            margin-left: 10px;
+        }
     </style>
   </head>  
   <body>
     @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
+        <div class="alert alert-success">
+            <span>{{ session('success') }}</span>
+            <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+        </div>
     @endif
     <div class="testbox">
-    
       <form action="{{ route('anggota.daftar') }}" id="myForm" method="post">
         @csrf
         <div class="banner">
@@ -347,10 +386,20 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <script>
-      flatpickr('#dateInput', {
-          dateFormat: 'd/m/Y',
-          allowInput: true,
-      });
+        flatpickr('#dateInput', {
+            dateFormat: 'd/m/Y',
+            allowInput: true,
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            // Auto-hide success alert after 5 seconds
+            setTimeout(function () {
+                let alert = document.querySelector('.alert-success');
+                if (alert) {
+                    alert.style.display = 'none';
+                }
+            }, 5000); // 5000ms = 5 seconds
+        });
+
     </script>
   </body>
 </html>
