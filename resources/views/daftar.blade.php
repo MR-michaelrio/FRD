@@ -269,12 +269,13 @@
     </style>
   </head>  
   <body>
-    <div class="testbox">
     @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
     @endif
+    <div class="testbox">
+    
       <form action="{{ route('anggota.daftar') }}" id="myForm" method="post">
         @csrf
         <div class="banner">
