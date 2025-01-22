@@ -275,10 +275,10 @@
         {{ session('success') }}
     </div>
     @endif
-      <form action="{{ route('anggota.store') }}" id="myForm" method="post">
+      <form action="{{ route('anggota.daftar') }}" id="myForm" method="post">
         <div class="banner">
           <!-- <h1>Form Pendaftaran Anggota Forum Radio Digital </h1> -->
-          <img src="img/frd-logo.jpg" alt="" srcset="">
+          <img src="{{asset('img/frd-logo.jpg')}}" alt="" srcset="">
         </div>
         <p class="dp">Data Pribadi</p>
         <div class="item">
