@@ -276,6 +276,7 @@
     </div>
     @endif
       <form action="{{ route('anggota.daftar') }}" id="myForm" method="post">
+        @csrf
         <div class="banner">
           <!-- <h1>Form Pendaftaran Anggota Forum Radio Digital </h1> -->
           <img src="{{asset('img/frd-logo.jpg')}}" alt="" srcset="">
