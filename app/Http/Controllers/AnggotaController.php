@@ -126,7 +126,6 @@ class AnggotaController extends Controller
 
     public function daftar(Request $request)
     {
-        return $request->nama;
         $a = anggota::create([
             'nama' => $request->nama,
             'lembaga' => $request->lembaga,
