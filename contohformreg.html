@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form Pendaftaran Anggota Forum Radio Digital</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <body>
+    </body>
+  </head>
+    <div class="testbox">
+      <form action="/">
+        <div class="banner">
+          <h1>Form Pendaftaran Anggota Forum Radio Digital </h1>
+        </div>
+        <p>Data Pribadi</p>
+        <div class="item">
+          <label for="name">Nama<span>*</span></label>
+          <input id="name" type="text" name="name" required/>
+        </div>
+        <div class="item">
+          <label for="name">Nama Lembaga<span>*</span></label>
+          <input id="name" type="text" name="name" required/>
+        </div>
+        <div class="item">
+          <label for="email">Email<span>*</span></label>
+          <input id="email" type="email" name="email" required/>
+        </div>
+        <div class="item">
+          <label for="address">Alamat<span>*</span></label>
+          <input id="address" type="address" name="address" required/>
+        </div>
+        <div class="item">
+          <label for="city">No telp Darurat<span>*</span></label>
+          <input id="city" type="text" name="city" required/>
+        </div>
+        <div class="item">
+          <label for="state">Nama Pemegang Telp Darurat 1<span>*</span></label>
+          <input id="state" type="text" name="state" required/>
+        </div>
+        <div class="item">
+          <label for="zip">No Telp Darurat 2<span>*</span></label>
+          <input id="zip" type="text" name="zip" required/>
+        </div>
+        <div class="item">
+          <label for="phone">Nama Pemegang No Telp Darurat 2<span>*</span></label>
+          <input id="phone" type="number" name="phone" required/>
+        </div>
+        <div class="item">
+          <label for="bdate">Tanggal Lahir<span>*</span></label>
+          <input id="bdate" type="date" name="bdate" required/>
+          <i class="fas fa-calendar-alt"></i>
+        </div>
+        <div class="question">
+          <label>Jenis Kelamin</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="none" id="radio_1" name="gender"/>
+              <label for="radio_1" class="radio"><span>Laki Laki</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="none" id="radio_2" name="gender"/>
+              <label for="radio_2" class="radio"><span>Perempuan</span></label>
+            </div>
+          </div>
+        </div>
+        <div class="danger">
+          <p><strong>Catatan!</strong> Pastikan menu <i>Location Radio</i> untuk selalu di nyalakan agar terekam di server jika terjadi sesuatu hal kami selaku admin bisa mengecek keberadaan lokasi radio terakhir dan bisa menginfokan anggota yang lain agar bisa memberikan bantuan jika terjadi kedaruratan (kerahasiaan database kami simpan secara private dan aman di dalam server agar tidak dibuka oleh orang lain.</p>
+        </div>
+        <div class="btn-block">
+          <button type="submit" href="/">SUBMIT</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
