@@ -48,7 +48,6 @@ class AnggotaController extends Controller
         }));
         
         return redirect()->route('agt.index2');
-        
     }
 
     /**
@@ -118,5 +117,29 @@ class AnggotaController extends Controller
         $agt = anggota::find($id);
         $agt->delete();
         return redirect()->route('agt.index2');
+    }
+
+    public function indexdaftar()
+    {
+        return view('daftar');
+    }
+
+    public function daftar(Request $request)
+    {
+        anggota::create([
+            'nama' => $request->nama,
+            'lembaga' => $request->lembaga,
+            'email' => $request->email,
+            'no_pemegang' => $request->no_pemegang,
+            'alamat' => $request->alamat,
+            'no_darurat1' => $request->no_darurat1,
+            'nama_darurat1' => $request->nama_darurat1,
+            'no_darurat2' => $request->no_darurat2,
+            'nama_darurat2' => $request->nama_darurat2,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'jenis_kelamin' => $request->jenis_kelamin,
+        ]);
+
+        return redirect()->route('anggota.indexdaftar')->with('success', 'Data inserted successfully!');
     }
 }
