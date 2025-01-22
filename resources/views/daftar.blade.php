@@ -272,7 +272,6 @@
             border-radius: 5px;
             font-size: 16px;
             font-weight: bold;
-            display: none; /* Initially hidden */
         }
 
         /* Success Alert */
