@@ -390,16 +390,6 @@
             dateFormat: 'd/m/Y',
             allowInput: true,
         });
-        document.addEventListener('DOMContentLoaded', function () {
-            // Auto-hide success alert after 5 seconds
-            setTimeout(function () {
-                let alert = document.querySelector('.alert-success');
-                if (alert) {
-                    alert.style.display = 'none';
-                }
-            }, 5000); // 5000ms = 5 seconds
-        });
-
     </script>
   </body>
 </html>
