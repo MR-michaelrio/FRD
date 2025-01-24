@@ -36,7 +36,7 @@
                 <!-- Buttons List -->
                 <div class="btn-group" role="group">
                     <!-- Login Button -->
-                    <a href="https://id-responder.org/home" class="btn btn-primary">Login</a>
+                    <a href="https://id-responder.org/home" class="btn btn-primary mr-10">Login</a>
                     <!-- Register Button -->
                     <a href="https://id-responder.org/form_reg" class="btn btn-success">Daftar Anggota</a>
                 </div>
