@@ -34,12 +34,10 @@
             </div>
             <div class="card-body text-center">
                 <!-- Buttons List -->
-                <div class="btn-group" role="group">
-                    <!-- Login Button -->
-                    <a href="https://id-responder.org/" class="btn btn-primary" style="margin-right:10px">Login</a>
+                <!-- Login Button -->
+                <a href="https://id-responder.org/" class="btn btn-primary" style="margin-right:10px">Login</a>
                     <!-- Register Button -->
-                    <a href="https://id-responder.org/form_reg" class="btn btn-success">Daftar Anggota</a>
-                </div>
+                <a href="https://id-responder.org/form_reg" class="btn btn-success">Daftar Anggota</a>
             </div>
         </div>
     </div>
