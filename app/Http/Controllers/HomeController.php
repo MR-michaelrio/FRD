@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\anggota;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return redirect()->route('index');
+        $jmlhanggota = anggota::all()->count();
+        return view('template.master',compact('jmlhanggota'));
+        // return redirect()->route('index');
         // return view("home");
     }
 }

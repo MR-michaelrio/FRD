@@ -21,12 +21,12 @@ use Carbon\Carbon;
 |
 */
 // Route::prefix('laporan')->group(function () {
-    Route::middleware(['auth', 'checkRole:admin,basic'])->group(function () {
-        Route::get('/', function () {
-            $jmlhanggota = anggota::all()->count();
-            return view('template.master',compact('jmlhanggota'));
-        })->name('index');
+    Route::get('/', function () {
+        return view('welcome');
+    })->name('index');
 
+
+    Route::middleware(['auth', 'checkRole:admin,basic'])->group(function () {
         Route::resource('absen', AbsenController::class);
         Route::get('absen/edit/{id_anggota}/{id_absen}', [AbsenController::class, 'edit'])->name('absen.edit');
         Route::put('absen/update/{id_anggota}/{id_absen}', [AbsenController::class, 'update'])->name('absen.update');
@@ -35,10 +35,9 @@ use Carbon\Carbon;
         Route::get('/search/lpr', [LaporanController::class, 'search'])->name('search');
         Route::get('/search/rekap', [LaporanController::class, 'searchrekap'])->name('searchrekap');
 
-        Route::put('/lpr/selesai/{id}',[LaporanController::class, 'selesai'])->name('lpr.selesai');
-
-
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+        Route::put('/lpr/selesai/{id}',[LaporanController::class, 'selesai'])->name('lpr.selesai');
         Route::resource('anggota', AnggotaController::class);
         Route::get('/rekap',[LaporanController::class, 'rekap'])->name('lpr.rekap');
 
