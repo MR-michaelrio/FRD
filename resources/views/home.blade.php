@@ -9,7 +9,7 @@
   <!-- Link to Bootstrap CSS (required for AdminLTE) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css">
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition">
 
 <!-- Main Content -->
 <div class="wrapper">
@@ -19,7 +19,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">AdminLTE Button Links</h1>
+            <h1 class="m-0 text-dark">Indonesia Emergency Responder</h1>
           </div>
         </div>
       </div>
