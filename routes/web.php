@@ -22,7 +22,7 @@ use Carbon\Carbon;
 */
 // Route::prefix('laporan')->group(function () {
     Route::get('/', function () {
-        return view('welcome');
+        return view('home');
     })->name('index');
 
 
