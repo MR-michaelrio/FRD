@@ -2,8 +2,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('home') }}" class="brand-link">
-        <img src="{{asset('img/frd-logo.jpg')}}" alt="Indonesia Emergency Responder" class="brand-image img-circle elevation-3"
-            style="opacity: .8">
+        <!-- <img src="{{asset('img/frd-logo.jpg')}}" alt="Indonesia Emergency Responder" class="brand-image img-circle elevation-3"
+            style="opacity: .8"> -->
         <span class="brand-text font-weight-light" style="font-size:14px">Indonesia Emergency Responder</span>
     </a>
 
