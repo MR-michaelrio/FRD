@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple AdminLTE Page</title>
+    <title>Indonesia Emergency Responder</title>
     <!-- Link to AdminLTE CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0/dist/css/adminlte.min.css">
     <!-- Link to Bootstrap CSS (required for AdminLTE) -->
@@ -30,13 +30,13 @@
     <div class="container-fluid d-flex centered">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Choose an Action</h3>
+                <h3 class="card-title">Silahkan Pilih</h3>
             </div>
             <div class="card-body text-center">
                 <!-- Buttons List -->
                 <div class="btn-group" role="group">
                     <!-- Login Button -->
-                    <a href="https://id-responder.org/home" class="btn btn-primary mr-10">Login</a>
+                    <a href="https://id-responder.org/" class="btn btn-primary" style="margin-right:10px">Login</a>
                     <!-- Register Button -->
                     <a href="https://id-responder.org/form_reg" class="btn btn-success">Daftar Anggota</a>
                 </div>
