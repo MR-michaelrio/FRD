@@ -4,7 +4,7 @@
     <a href="{{ route('home') }}" class="brand-link">
         <img src="{{asset('img/frd-logo.jpg')}}" alt="Indonesia Emergency Responder" class="brand-image img-circle elevation-3"
             style="opacity: .8">
-        <span class=" font-weight-light">Indonesia Emergency Responder</span>
+        <span class="brand-text font-weight-light" style="font-size:10px">Indonesia Emergency Responder</span>
     </a>
 
     <!-- Sidebar -->
