@@ -12,7 +12,7 @@
     <!-- Add Bootstrap-datepicker CSS and JavaScript -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-    <title>LAPORAN KESIAPSIAGAAN FORUM RADIO DIGITAL</title>
+    <title>LAPORAN KESIAPSIAGAAN Indonesia Emergency Responder</title>
     <style>
         .card-header{
             font-size: 30px;
@@ -56,7 +56,7 @@
 <body>
     <div class="container">
         <div class="card">
-            <h5 class="card-header">LAPORAN KESIAPSIAGAAN FORUM RADIO DIGITAL</h5>
+            <h5 class="card-header">LAPORAN KESIAPSIAGAAN Indonesia Emergency Responder</h5>
             <form action="{{route('laporan.store')}}" method="post">
                 @csrf
                 <div class="card-body">

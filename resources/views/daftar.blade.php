@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Form Pendaftaran Anggota Forum Radio Digital</title>
+    <title>Form Pendaftaran Anggota Indonesia Emergency Responder</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
@@ -317,7 +317,7 @@
       <form action="{{ route('anggota.daftar') }}" id="myForm" method="post">
         @csrf
         <div class="banner">
-          <!-- <h1>Form Pendaftaran Anggota Forum Radio Digital </h1> -->
+          <!-- <h1>Form Pendaftaran Anggota Indonesia Emergency Responder </h1> -->
           <img src="{{asset('img/frd-logo.jpg')}}" alt="" srcset="">
         </div>
         <p class="dp">Data Pribadi</p>

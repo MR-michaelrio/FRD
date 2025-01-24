@@ -16,7 +16,7 @@
         rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
     </script>
-    <title>LAPORAN KESIAPSIAGAAN FORUM RADIO DIGITAL</title>
+    <title>LAPORAN KESIAPSIAGAAN Indonesia Emergency Responder</title>
     <style>
     .card-header {
         font-size: 30px;
@@ -77,7 +77,7 @@
 <body>
     <div class="container">
         <div class="card">
-            <h5 class="card-header">LAPORAN ABSENSI FORUM RADIO DIGITAL</h5>
+            <h5 class="card-header">LAPORAN ABSENSI Indonesia Emergency Responder</h5>
             <form action="{{ route('absen.update', $absen->id_absen)}}" method="post">
                 @csrf
                 @METHOD('PUT')
