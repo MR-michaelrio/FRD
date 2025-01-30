@@ -10,7 +10,7 @@
 <body class="d-flex justify-content-center align-items-center" style="height: 100vh;">
 
     <div class="text-center">
-        <a href="{{route('index')}}" class="btn btn-primary btn-lg m-2" role="button">Laporan</a>
+        <a href="{{route('home')}}" class="btn btn-primary btn-lg m-2" role="button">Laporan</a>
         <a href="{{route('anggota.indexdaftar')}}" class="btn btn-secondary btn-lg m-2" role="button">Pendaftaran Anggota</a>
     </div>
 
