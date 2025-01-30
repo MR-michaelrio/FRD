@@ -10,8 +10,8 @@
 <body class="d-flex justify-content-center align-items-center" style="height: 100vh;">
 
     <div class="text-center">
-        <a href="https://id-responder.org/home" class="btn btn-primary btn-lg m-2" role="button">Laporan</a>
-        <a href="https://id-responder.org/form_reg" class="btn btn-secondary btn-lg m-2" role="button">Pendaftaran Anggota</a>
+        <a href="{{route('index')}}" class="btn btn-primary btn-lg m-2" role="button">Laporan</a>
+        <a href="{{route('anggota.indexdaftar')}}" class="btn btn-secondary btn-lg m-2" role="button">Pendaftaran Anggota</a>
     </div>
 
     <!-- Link to Bootstrap JS (Optional) -->
