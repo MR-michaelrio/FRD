@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\anggota;
 use App\Models\Regu;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
 class AnggotaController extends Controller
 {
     /**
@@ -121,7 +124,7 @@ class AnggotaController extends Controller
 
     public function indexdaftar()
     {
-        return view('daftar');
+        return view('daftar-anggota');
     }
 
     public function daftar(Request $request)
@@ -129,7 +132,6 @@ class AnggotaController extends Controller
         $a = anggota::create([
             'nama' => $request->nama,
             'lembaga' => $request->lembaga,
-            'email' => $request->email,
             'no_pemegang' => $request->no_pemegang,
             'alamat' => $request->alamat,
             'no_darurat1' => $request->no_darurat1,
@@ -140,6 +142,15 @@ class AnggotaController extends Controller
             'jenis_kelamin' => $request->jenis_kelamin,
         ]);
 
-        return redirect()->route('daftar')->with('success', 'Data Berhasil Ditambahkan');
+        User::create([
+            'name' => $request->nama,
+            'email' => $request->email,
+            'password' => Hash::make('IR1234'),
+            'level' => 'anggota',
+            'regu' => "0",
+            'id_anggota' => $a->id_anggota
+        ])
+
+        return redirect()->route('daftar-anggota')->with('success', 'Data Berhasil Ditambahkan');
     }
 }
