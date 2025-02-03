@@ -5,25 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Indonesia Emergency Responder</title>
-    <style>
-        .status-select {
-            padding: 5px;
-            border-radius: 5px;
-            width: 100%;
-        }
-
-        .status-select option[value="menunggu persetujuan"] {
-            background-color: #ffc107; /* Kuning */
-        }
-
-        .status-select option[value="disetujui"] {
-            background-color: #28a745; /* Hijau */
-        }
-
-        .status-select option[value="ditolak"] {
-            background-color: #dc3545; /* Merah */
-        }
-    </style>
+    @yield('css')
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
