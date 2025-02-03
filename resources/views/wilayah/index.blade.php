@@ -80,6 +80,7 @@ function updateStatus(wilayahId, newStatus) {
             updateButtonVisibility(wilayahId, newStatus);
             alert('Status berhasil diperbarui.');
         } else {
+            console.log(data);
             alert('Terjadi kesalahan.');
         }
     })
