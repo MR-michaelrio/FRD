@@ -66,7 +66,7 @@ function updateStatus(wilayahId, newStatus) {
     formData.append('status', newStatus);
     
     // Kirim request dengan fetch
-    fetch(`{{ route("wilayah.update",${wilayahId}) }}`, {
+    fetch(`/wilayah/${wilayahId}`, {
         method: 'PUT',
         body: formData,
         headers: {
