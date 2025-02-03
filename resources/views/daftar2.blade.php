@@ -25,16 +25,18 @@
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
         header {
-            text-align: center;
             margin-bottom: 20px;
         }
         header img {
-            max-width: 80px;
+            max-width: 100px;
+            display: block;
+            margin: 0 auto 10px;
         }
         h2 {
-            font-size: 20px;
+            font-size: 22px;
             color: #333;
         }
         label {
@@ -43,6 +45,7 @@
             color: #555;
             display: block;
             margin-top: 10px;
+            text-align: left;
         }
         input, select {
             width: 100%;
@@ -59,6 +62,7 @@
             padding: 10px;
             border-radius: 8px;
             border-left: 5px solid #ffcc00;
+            text-align: left;
         }
         button {
             margin-top: 15px;
