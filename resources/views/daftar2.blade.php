@@ -10,7 +10,7 @@
     <div class="container p-4 bg-white rounded shadow-lg m-5">
         <div class="row align-items-center">
             <div class="col-md-4 text-center">
-                <img src="{{asset('img/frd-logo.jpg')}}" alt="Logo Lembaga" class="img-fluid" style="max-width: 120px;">
+                <img src="{{asset('img/logo-04.jpg')}}" alt="Logo Lembaga" class="img-fluid" style="max-width: 300px;">
             </div>
             <div class="col-md-8">
                 <h2 class="h4 text-center">Form Registrasi Pemegang Radio</h2>
