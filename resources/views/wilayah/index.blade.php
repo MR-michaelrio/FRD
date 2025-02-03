@@ -38,11 +38,11 @@
                         <td>{{ $w->supervisor }}</td>
                         <td id="status-{{ $w->id_wilayah }}">
                             @if($w->status == 'menunggu persetujuan')
-                                <button class="btn btn-warning btn-sm">Menunggu Persetujuan</button>
+                                <button class="btn btn-warning btn-sm" disabled>Menunggu Persetujuan</button>
                             @elseif($w->status == 'disetujui')
-                                <button class="btn btn-success btn-sm">Disetujui</button>
+                                <button class="btn btn-success btn-sm" disabled>Disetujui</button>
                             @elseif($w->status == 'ditolak')
-                                <button class="btn btn-danger btn-sm">Ditolak</button>
+                                <button class="btn btn-danger btn-sm" disabled>Ditolak</button>
                             @endif
                         </td>
                         <td>
