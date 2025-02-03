@@ -26,7 +26,7 @@
         }
     </style>
 </head>
-<body class="bg-light d-flex justify-content-center align-items-center min-vh-100">
+<body class="bg-light d-flex justify-content-center align-items-center ">
     <div class="container p-4 bg-white rounded shadow-lg form-container">
         <div class="row align-items-center">
             <div class="col-md-4 logo-container text-center">
