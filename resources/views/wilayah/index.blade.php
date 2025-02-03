@@ -39,18 +39,17 @@
                             <div class="status-buttons" data-id="{{ $w->id }}">
                                 <!-- Tombol untuk Menunggu Persetujuan -->
                                 @if($w->status == 'menunggu persetujuan')
-                                    <button class="btn btn-success btn-sm" onclick="updateStatus(this, 'disetujui')">Disetujui</button>
-                                    <button class="btn btn-danger btn-sm" onclick="updateStatus(this, 'ditolak')">Ditolak</button>
+                                    <button class="btn btn-success btn-sm" onclick="updateStatus({{ $w->id }}, 'disetujui')">Disetujui</button>
+                                    <button class="btn btn-danger btn-sm" onclick="updateStatus({{ $w->id }}, 'ditolak')">Ditolak</button>
                                 @elseif($w->status == 'disetujui')
-                                    <button class="btn btn-warning btn-sm" onclick="updateStatus(this, 'menunggu persetujuan')">Menunggu Persetujuan</button>
-                                    <button class="btn btn-danger btn-sm" onclick="updateStatus(this, 'ditolak')">Ditolak</button>
+                                    <button class="btn btn-warning btn-sm" onclick="updateStatus({{ $w->id }}, 'menunggu persetujuan')">Menunggu Persetujuan</button>
+                                    <button class="btn btn-danger btn-sm" onclick="updateStatus({{ $w->id }}, 'ditolak')">Ditolak</button>
                                 @elseif($w->status == 'ditolak')
-                                    <button class="btn btn-warning btn-sm" onclick="updateStatus(this, 'menunggu persetujuan')">Menunggu Persetujuan</button>
-                                    <button class="btn btn-success btn-sm" onclick="updateStatus(this, 'disetujui')">Disetujui</button>
+                                    <button class="btn btn-warning btn-sm" onclick="updateStatus({{ $w->id }}, 'menunggu persetujuan')">Menunggu Persetujuan</button>
+                                    <button class="btn btn-success btn-sm" onclick="updateStatus({{ $w->id }}, 'disetujui')">Disetujui</button>
                                 @endif
                             </div>
                         </td>
-
                     </tr>
                     @endforeach
                 </tbody>
@@ -61,26 +60,37 @@
     <!-- /.card -->
 </div>
 <script>
-function updateStatus(button, newStatus) {
-    const wilayahId = button.closest('.status-buttons').getAttribute('data-id');
-
-    // Kirim request untuk update status
-    axios.post('/update-status-wilayah', {
-        wilayah_id: wilayahId,
-        status: newStatus
+function updateStatus(wilayahId, newStatus) {
+    // Buat data untuk dikirim
+    const formData = new FormData();
+    formData.append('wilayah_id', wilayahId);
+    formData.append('status', newStatus);
+    
+    // Kirim request dengan fetch
+    fetch('{{ route("update-status") }}', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        }
     })
-    .then(function(response) {
-        // Setelah status berhasil diperbarui, ubah tampilan tombol yang tersedia
-        updateButtonVisibility(newStatus, wilayahId);
-        console.log('Status berhasil diperbarui.');
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Jika sukses, update tombol
+            updateButtonVisibility(wilayahId, newStatus);
+            alert('Status berhasil diperbarui.');
+        } else {
+            alert('Terjadi kesalahan.');
+        }
     })
-    .catch(function(error) {
-        console.error("Ada kesalahan saat memperbarui status:", error);
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Terjadi kesalahan.');
     });
 }
 
-// Fungsi untuk memperbarui tombol berdasarkan status terbaru
-function updateButtonVisibility(newStatus, wilayahId) {
+function updateButtonVisibility(wilayahId, newStatus) {
     const buttonsContainer = document.querySelector(`.status-buttons[data-id="${wilayahId}"]`);
     
     // Sembunyikan tombol berdasarkan status baru
@@ -88,18 +98,18 @@ function updateButtonVisibility(newStatus, wilayahId) {
 
     if (newStatus === 'menunggu persetujuan') {
         buttonsContainer.innerHTML = `
-            <button class="btn btn-success btn-sm" onclick="updateStatus(this, 'disetujui')">Disetujui</button>
-            <button class="btn btn-danger btn-sm" onclick="updateStatus(this, 'ditolak')">Ditolak</button>
+            <button class="btn btn-success btn-sm" onclick="updateStatus(${wilayahId}, 'disetujui')">Disetujui</button>
+            <button class="btn btn-danger btn-sm" onclick="updateStatus(${wilayahId}, 'ditolak')">Ditolak</button>
         `;
     } else if (newStatus === 'disetujui') {
         buttonsContainer.innerHTML = `
-            <button class="btn btn-warning btn-sm" onclick="updateStatus(this, 'menunggu persetujuan')">Menunggu Persetujuan</button>
-            <button class="btn btn-danger btn-sm" onclick="updateStatus(this, 'ditolak')">Ditolak</button>
+            <button class="btn btn-warning btn-sm" onclick="updateStatus(${wilayahId}, 'menunggu persetujuan')">Menunggu Persetujuan</button>
+            <button class="btn btn-danger btn-sm" onclick="updateStatus(${wilayahId}, 'ditolak')">Ditolak</button>
         `;
     } else if (newStatus === 'ditolak') {
         buttonsContainer.innerHTML = `
-            <button class="btn btn-warning btn-sm" onclick="updateStatus(this, 'menunggu persetujuan')">Menunggu Persetujuan</button>
-            <button class="btn btn-success btn-sm" onclick="updateStatus(this, 'disetujui')">Disetujui</button>
+            <button class="btn btn-warning btn-sm" onclick="updateStatus(${wilayahId}, 'menunggu persetujuan')">Menunggu Persetujuan</button>
+            <button class="btn btn-success btn-sm" onclick="updateStatus(${wilayahId}, 'disetujui')">Disetujui</button>
         `;
     }
 }
