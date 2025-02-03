@@ -36,7 +36,7 @@
                         <td>{{ $nomor++ }}</td>
                         <td>{{ $w->nama_wilayah }}</td>
                         <td>{{ $w->supervisor }}</td>
-                        <td>
+                        <td id="status-{{ $w->id_wilayah }}">
                             @if($w->status == 'menunggu persetujuan')
                                 <button class="btn btn-warning btn-sm">Menunggu Persetujuan</button>
                             @elseif($w->status == 'disetujui')
@@ -95,6 +95,7 @@ function updateStatus(wilayahId, newStatus) {
         if (data.success) {
             // Jika sukses, update tombol
             updateButtonVisibility(wilayahId, newStatus);
+            updateStatusLabel(wilayahId, newStatus);
             alert('Status berhasil diperbarui.');
         } else {
             console.log(data);
@@ -133,5 +134,17 @@ function updateButtonVisibility(wilayahId, newStatus) {
     }
 }
 
+function updateStatusLabel(wilayahId, newStatus) {
+    const statusColumn = document.querySelector(`#status-${wilayahId}`);
+
+    if (newStatus === 'menunggu persetujuan') {
+        statusColumn.innerHTML = `<button class="btn btn-warning btn-sm">Menunggu Persetujuan</button>`;
+    } else if (newStatus === 'disetujui') {
+        statusColumn.innerHTML = `<button class="btn btn-success btn-sm">Disetujui</button>`;
+    } else if (newStatus === 'ditolak') {
+        statusColumn.innerHTML = `<button class="btn btn-danger btn-sm">Ditolak</button>`;
+    }
+}
+</script>
 </script>
 @endsection
