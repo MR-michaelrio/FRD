@@ -47,8 +47,8 @@
                         <td>{{ $w->nama_wilayah }}</td>
                         <td>{{ $w->supervisor }}</td>
                         <td>
-                            <select class="status-select" data-id="{{ $w->id }}" onchange="updateStatus(this)">
-                                <option value="menunggu persetujuan" style="background-color:red" @if($w->status == 'menunggu persetujuan') selected @endif>Menunggu Persetujuan</option>
+                            <select class="status-select" data-id="{{ $w->id }}"style="background-color:red" onchange="updateStatus(this)">
+                                <option value="menunggu persetujuan"  @if($w->status == 'menunggu persetujuan') selected @endif>Menunggu Persetujuan</option>
                                 <option value="disetujui" @if($w->status == 'disetujui') selected @endif >Disetujui</option>
                                 <option value="ditolak" @if($w->status == 'ditolak') selected @endif >Ditolak</option>
                             </select>
