@@ -4,25 +4,6 @@
     Wilayah
 @endsection
 
-@section('css')
-    <style>
-        /* Styling untuk select */
-.status-select {
-    padding: 5px 15px;
-    border-radius: 5px;
-    width: 100%;
-    border: 1px solid red;
-}
-
-.status-select option {
-    padding: 10px;
-    font-weight: bold;
-}
-
-
-    </style>
-@endsection
-
 @section('content')
 <div class="col-12">
     <div class="card">
@@ -47,7 +28,7 @@
                         <td>{{ $w->nama_wilayah }}</td>
                         <td>{{ $w->supervisor }}</td>
                         <td>
-                            <select class="status-select" data-id="{{ $w->id }}"style="background-color:red" onchange="updateStatus(this)">
+                            <select class="status-select" data-id="{{ $w->id }}" style="background-color: {{ $w->status == 'menunggu persetujuan' ? 'yellow' : ($w->status == 'disetujui' ? 'blue' : ($w->status == 'ditolak' ? 'red' : 'transparent')) }};"> onchange="updateStatus(this)">
                                 <option value="menunggu persetujuan"  @if($w->status == 'menunggu persetujuan') selected @endif>Menunggu Persetujuan</option>
                                 <option value="disetujui" @if($w->status == 'disetujui') selected @endif >Disetujui</option>
                                 <option value="ditolak" @if($w->status == 'ditolak') selected @endif >Ditolak</option>
