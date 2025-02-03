@@ -28,14 +28,17 @@ Laporan
                 <form action="{{route('lpr.destroy',$a->id_kejadian)}}" method="post">
                     @csrf
                     @METHOD('DELETE')
+                    
                     @if($a->status != 'selesai')
-                    <a href="{{ route('lpr.edit',$a->id_kejadian) }}" class="btn btn-warning">Update</a>
+                        <a href="{{ route('lpr.edit',$a->id_kejadian) }}" class="btn btn-warning">Update</a>
                     @else
-                    <a href="{{ route('lpr.edit',$a->id_kejadian) }}" class="btn btn-warning">Edit</a>
+                        <a href="{{ route('lpr.edit',$a->id_kejadian) }}" class="btn btn-warning">Edit</a>
                     @endif
-                    @if(auth()->user()->level == "admin")
-                    <button type="submit" class="btn btn-danger border" onclick="return confirm('Are you sure you want to delete this data?')">Delete</button>
+
+                    @if(auth()->user()->level == "supervisor" || auth()->user()->level == "admin")
+                        <button type="submit" class="btn btn-danger border" onclick="return confirm('Are you sure you want to delete this data?')">Delete</button>
                     @endif
+                    
                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                 </form>
                 
