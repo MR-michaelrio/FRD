@@ -12,7 +12,6 @@
     border-radius: 5px;
     width: 100%;
     border: 1px solid #ccc;
-    background-color: #f8f9fa;
 }
 
 .status-select option {
@@ -49,9 +48,9 @@
                         <td>{{ $w->supervisor }}</td>
                         <td>
                             <select class="status-select" data-id="{{ $w->id }}" onchange="updateStatus(this)">
-                                <option value="menunggu persetujuan" @if($w->status == 'menunggu persetujuan') selected @endif style="background-color: #ffc107; color: white;">Menunggu Persetujuan</option>
-                                <option value="disetujui" @if($w->status == 'disetujui') selected @endif style="background-color: #28a745; color: white;">Disetujui</option>
-                                <option value="ditolak" @if($w->status == 'ditolak') selected @endif style="background-color: #dc3545; color: white;">Ditolak</option>
+                                <option value="menunggu persetujuan" style="background-color: #ffc107; color: white;" @if($w->status == 'menunggu persetujuan') selected @endif>Menunggu Persetujuan</option>
+                                <option value="disetujui" style="background-color: #28a745; color: white;" @if($w->status == 'disetujui') selected @endif >Disetujui</option>
+                                <option value="ditolak" style="background-color: #dc3545; color: white;" @if($w->status == 'ditolak') selected @endif >Ditolak</option>
                             </select>
                         </td>
                     </tr>
