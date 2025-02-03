@@ -5,12 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Registrasi Pemegang Radio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-container {
+            max-width: 900px;
+            width: 100%;
+            margin: auto;
+        }
+        .logo-container img {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .logo-container {
+                text-align: center;
+                margin-bottom: 15px;
+            }
+            .logo-container img {
+                max-width: 200px;
+            }
+        }
+    </style>
 </head>
-<body class="bg-light d-flex justify-content-center align-items-center">
-    <div class="container p-4 bg-white rounded shadow-lg m-5">
+<body class="bg-light d-flex justify-content-center align-items-center min-vh-100">
+    <div class="container p-4 bg-white rounded shadow-lg form-container">
         <div class="row align-items-center">
-            <div class="col-md-4 text-center">
-                <img src="{{asset('img/logo-04.jpg')}}" alt="Logo Lembaga" class="img-fluid" style="max-width: 300px;">
+            <div class="col-md-4 logo-container text-center">
+                <img src="{{asset('img/logo-04.jpg')}}" alt="Logo Lembaga" class="img-fluid">
             </div>
             <div class="col-md-8">
                 <h2 class="h4 text-center">Form Registrasi Pemegang Radio</h2>
