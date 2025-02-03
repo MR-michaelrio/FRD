@@ -4,6 +4,14 @@
     Wilayah
 @endsection
 
+@section('css')
+<style>
+.status-buttons .btn {
+    margin-right: 5px;
+}
+</style>
+@endsection
+
 @section('content')
 <div class="col-12">
     <div class="card">
@@ -28,13 +36,21 @@
                         <td>{{ $w->nama_wilayah }}</td>
                         <td>{{ $w->supervisor }}</td>
                         <td>
-                        <select class="form-control" data-id="{{ $w->id }}" onchange="updateStatus(this)" id="status-{{ $w->id_wilayah }}">
-    <option value="menunggu persetujuan" @if($w->status == 'menunggu persetujuan') selected @endif>Menunggu Persetujuan</option>
-    <option value="disetujui" @if($w->status == 'disetujui') selected @endif>Disetujui</option>
-    <option value="ditolak" @if($w->status == 'ditolak') selected @endif>Ditolak</option>
-</select>
-
+                            <div class="status-buttons" data-id="{{ $w->id }}">
+                                <!-- Tombol untuk Menunggu Persetujuan -->
+                                @if($w->status == 'menunggu persetujuan')
+                                    <button class="btn btn-success btn-sm" onclick="updateStatus(this, 'disetujui')">Disetujui</button>
+                                    <button class="btn btn-danger btn-sm" onclick="updateStatus(this, 'ditolak')">Ditolak</button>
+                                @elseif($w->status == 'disetujui')
+                                    <button class="btn btn-warning btn-sm" onclick="updateStatus(this, 'menunggu persetujuan')">Menunggu Persetujuan</button>
+                                    <button class="btn btn-danger btn-sm" onclick="updateStatus(this, 'ditolak')">Ditolak</button>
+                                @elseif($w->status == 'ditolak')
+                                    <button class="btn btn-warning btn-sm" onclick="updateStatus(this, 'menunggu persetujuan')">Menunggu Persetujuan</button>
+                                    <button class="btn btn-success btn-sm" onclick="updateStatus(this, 'disetujui')">Disetujui</button>
+                                @endif
+                            </div>
                         </td>
+
                     </tr>
                     @endforeach
                 </tbody>
@@ -45,30 +61,17 @@
     <!-- /.card -->
 </div>
 <script>
-    // Fungsi untuk memperbarui status dan latar belakang pilihan
-function updateStatus(select) {
-    const status = select.value;
-    const wilayahId = select.getAttribute('data-id');
-
-    // Mengubah background setiap option sesuai dengan status
-    const options = select.options;
-    for (let i = 0; i < options.length; i++) {
-        let option = options[i];
-        if (option.value === 'menunggu persetujuan') {
-            option.style.backgroundColor = '#ffc107'; // Kuning
-        } else if (option.value === 'disetujui') {
-            option.style.backgroundColor = '#28a745'; // Hijau
-        } else if (option.value === 'ditolak') {
-            option.style.backgroundColor = '#dc3545'; // Merah
-        }
-    }
+function updateStatus(button, newStatus) {
+    const wilayahId = button.closest('.status-buttons').getAttribute('data-id');
 
     // Kirim request untuk update status
     axios.post('/update-status-wilayah', {
         wilayah_id: wilayahId,
-        status: status
+        status: newStatus
     })
     .then(function(response) {
+        // Setelah status berhasil diperbarui, ubah tampilan tombol yang tersedia
+        updateButtonVisibility(newStatus, wilayahId);
         console.log('Status berhasil diperbarui.');
     })
     .catch(function(error) {
@@ -76,26 +79,30 @@ function updateStatus(select) {
     });
 }
 
-// Inisialisasi warna pada halaman load
-window.addEventListener('DOMContentLoaded', function() {
-    const selects = document.querySelectorAll('select[data-id]');
-    console.log("sel;ect",selects);
-    selects.forEach(function(select) {
-        const status = select.value;
-        const options = select.options;
-        for (let i = 0; i < options.length; i++) {
-            let option = options[i];
-            if (option.value === 'menunggu persetujuan') {
-                option.style.backgroundColor = '#ffc107'; // Kuning
-            } else if (option.value === 'disetujui') {
-                option.style.backgroundColor = '#28a745'; // Hijau
-            } else if (option.value === 'ditolak') {
-                option.style.backgroundColor = '#dc3545'; // Merah
-            }
-        }
-    });
-});
+// Fungsi untuk memperbarui tombol berdasarkan status terbaru
+function updateButtonVisibility(newStatus, wilayahId) {
+    const buttonsContainer = document.querySelector(`.status-buttons[data-id="${wilayahId}"]`);
+    
+    // Sembunyikan tombol berdasarkan status baru
+    buttonsContainer.innerHTML = '';
 
+    if (newStatus === 'menunggu persetujuan') {
+        buttonsContainer.innerHTML = `
+            <button class="btn btn-success btn-sm" onclick="updateStatus(this, 'disetujui')">Disetujui</button>
+            <button class="btn btn-danger btn-sm" onclick="updateStatus(this, 'ditolak')">Ditolak</button>
+        `;
+    } else if (newStatus === 'disetujui') {
+        buttonsContainer.innerHTML = `
+            <button class="btn btn-warning btn-sm" onclick="updateStatus(this, 'menunggu persetujuan')">Menunggu Persetujuan</button>
+            <button class="btn btn-danger btn-sm" onclick="updateStatus(this, 'ditolak')">Ditolak</button>
+        `;
+    } else if (newStatus === 'ditolak') {
+        buttonsContainer.innerHTML = `
+            <button class="btn btn-warning btn-sm" onclick="updateStatus(this, 'menunggu persetujuan')">Menunggu Persetujuan</button>
+            <button class="btn btn-success btn-sm" onclick="updateStatus(this, 'disetujui')">Disetujui</button>
+        `;
+    }
+}
 
 </script>
 @endsection
