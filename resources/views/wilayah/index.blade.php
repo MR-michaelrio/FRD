@@ -63,6 +63,7 @@
 function updateStatus(wilayahId, newStatus) {
     // Buat data untuk dikirim
     const formData = new FormData();
+    console.log("newStatus",newStatus);
     formData.append('status', newStatus);
     
     // Kirim request dengan fetch
