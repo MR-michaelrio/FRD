@@ -67,7 +67,7 @@ function updateStatus(wilayahId, newStatus) {
     
     // Kirim request dengan fetch
     fetch(`{{ route("wilayah.update",${wilayahId}) }}`, {
-        method: 'POST',
+        method: 'PUT',
         body: formData,
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
