@@ -63,11 +63,10 @@
 function updateStatus(wilayahId, newStatus) {
     // Buat data untuk dikirim
     const formData = new FormData();
-    formData.append('wilayah_id', wilayahId);
     formData.append('status', newStatus);
     
     // Kirim request dengan fetch
-    fetch('{{ route("wilayah.update") }}', {
+    fetch(`{{ route("wilayah.update",${wilayahId}) }}`, {
         method: 'POST',
         body: formData,
         headers: {
