@@ -28,63 +28,69 @@
 </head>
 <body class="bg-light d-flex justify-content-center align-items-center p-4">
     <div class="container p-4 bg-white rounded shadow-lg form-container">
+        @if(session('success'))
+            <div class="alert alert-success text-center" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="row align-items-center">
             <div class="col-md-4 logo-container text-center">
                 <img src="{{asset('img/logo-04.jpg')}}" alt="Logo Lembaga" class="img-fluid">
             </div>
             <div class="col-md-8">
                 <h2 class="h4 text-center">Form Registrasi Pemegang Radio</h2>
-                <form>
+                <form action="{{ route('anggota.daftar') }}" id="myForm" method="post">
+                    @csrf
                     <div class="row mb-2">
                         <div class="col-md-6">
                             <label class="form-label">Nama Pemegang Radio</label>
-                            <input type="text" class="form-control" required>
+                            <input type="text" class="form-control" name="nama" required>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">No Tlp Pemegang Radio</label>
-                            <input type="tel" class="form-control" required>
+                            <input type="tel" class="form-control" name="no_pemegang" required>
                         </div>
                     </div>
                     <div class="mb-2">
                         <label class="form-label">Nama Lembaga</label>
-                        <input type="text" class="form-control" required>
+                        <input type="text" class="form-control" name="lembaga" required>
                     </div>
                     <div class="mb-2">
                         <label class="form-label">Email</label>
-                        <input type="email" class="form-control" required>
+                        <input type="email" class="form-control" name="email" required>
                     </div>
                     <div class="mb-2">
                         <label class="form-label">Alamat</label>
-                        <input type="text" class="form-control" required>
+                        <input type="text" class="form-control" name="alamat" required>
                     </div>
                     <div class="row mb-2">
                         <div class="col-md-6">
-                            <label class="form-label">No Tlp Darurat</label>
-                            <input type="tel" class="form-control" required>
+                            <label class="form-label">No Tlp Darurat 1</label>
+                            <input type="tel" class="form-control" name="no_darurat1" required>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Nama Pemegang Telp Darurat 1</label>
-                            <input type="text" class="form-control" required>
+                            <input type="text" class="form-control" name="nama_darurat1" required>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-md-6">
                             <label class="form-label">No Tlp Darurat 2</label>
-                            <input type="tel" class="form-control">
+                            <input type="tel"  class="form-control" name="no_darurat2">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Nama Pemegang No Tlp Darurat 2</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" name="nama_darurat2">
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-md-6">
                             <label class="form-label">Tanggal Lahir</label>
-                            <input type="date" class="form-control" required>
+                            <input type="date" class="form-control" name="tanggal_lahir" required>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Jenis Kelamin</label>
-                            <select class="form-select" required>
+                            <select class="form-select" name="jenis_kelamin" required>
                                 <option value="">Pilih</option>
                                 <option value="Laki-Laki">Laki-Laki</option>
                                 <option value="Perempuan">Perempuan</option>
