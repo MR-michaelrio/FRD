@@ -79,11 +79,7 @@ class WilayahController extends Controller
      
          $wilayah = Wilayah::find($id);
      
-         if (!$wilayah) {
-             return response()->json(['success' => false, 'message' => 'Wilayah tidak ditemukan.'], 404);
-         }
-     
-         $wilayah->status = $request->status;
+         $wilayah->status = $request->newStatus;
          $wilayah->save();
      
          return response()->json(['success' => true, 'message' => 'Status wilayah berhasil diperbarui.']);
