@@ -24,6 +24,7 @@
                         <th>Wilayah</th>
                         <th>Supervisor</th>
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,6 +36,15 @@
                         <td>{{ $nomor++ }}</td>
                         <td>{{ $w->nama_wilayah }}</td>
                         <td>{{ $w->supervisor }}</td>
+                        <td>
+                            @if($w->status == 'menunggu persetujuan')
+                                <button class="btn btn-warning btn-sm">Menunggu Persetujuan</button>
+                            @elseif($w->status == 'disetujui')
+                                <button class="btn btn-success btn-sm">Disetujui</button>
+                            @elseif($w->status == 'ditolak')
+                                <button class="btn btn-danger btn-sm">Ditolak</button>
+                            @endif
+                        </td>
                         <td>
                             <div class="status-buttons" data-id="{{ $w->id_wilayah }}">
                                 <!-- Tombol untuk Menunggu Persetujuan -->
@@ -61,9 +71,7 @@
 </div>
 <script>
 function updateStatus(wilayahId, newStatus) {
-    // Buat data untuk dikirim
-    console.log("newStatus",newStatus);
-    
+    // Buat data untuk dikirim    
     // Kirim request dengan fetch
     fetch(`/wilayah/${wilayahId}`, {
         method: 'PUT',
