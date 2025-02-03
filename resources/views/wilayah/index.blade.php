@@ -73,7 +73,16 @@ function updateStatus(wilayahId, newStatus) {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
         }
     })
-    .then(response => response.json())
+    .then(response => {
+        // Periksa jika status response tidak ok (misalnya 400, 500, dll)
+        if (!response.ok) {
+            return response.json().then(errorData => {
+                // Jika ada error, lempar error tersebut
+                throw new Error(errorData.message || 'Terjadi kesalahan di server');
+            });
+        }
+        return response.json();  // Jika berhasil, lanjutkan ke .then() berikutnya
+    })
     .then(data => {
         if (data.success) {
             // Jika sukses, update tombol
@@ -85,10 +94,12 @@ function updateStatus(wilayahId, newStatus) {
         }
     })
     .catch(error => {
-        console.error('Error:', error);
-        alert('Terjadi kesalahan.');
+        // Tangani error baik dari fetch maupun dari server
+        console.error('Error:', error.message || error);
+        alert(`Terjadi kesalahan: ${error.message || error}`);
     });
 }
+
 
 function updateButtonVisibility(wilayahId, newStatus) {
     const buttonsContainer = document.querySelector(`.status-buttons[data-id="${wilayahId}"]`);
