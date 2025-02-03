@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Wilayah;
+use Illuminate\Support\Facades\Log;
 
 class WilayahController extends Controller
 {
@@ -78,7 +79,7 @@ class WilayahController extends Controller
      {
      
          $wilayah = Wilayah::find($id);
-     
+         Log::info('Received request status: ' . $request->status);
          $wilayah->status = $request->status;
          $wilayah->save();
      
