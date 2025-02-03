@@ -15,7 +15,7 @@ class WilayahController extends Controller
     public function index()
     {
         $wilayah = Wilayah::all();
-        return view("daftar-wilayah", compact("wilayah"));
+        return view("index", compact("wilayah"));
     }
 
     /**
