@@ -79,6 +79,7 @@ function updateStatus(select) {
 // Inisialisasi warna pada halaman load
 window.addEventListener('DOMContentLoaded', function() {
     const selects = document.querySelectorAll('select[data-id]');
+    console.log(selects);
     selects.forEach(function(select) {
         const status = select.value;
         const options = select.options;
