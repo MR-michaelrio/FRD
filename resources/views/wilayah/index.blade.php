@@ -138,11 +138,11 @@ function updateStatusLabel(wilayahId, newStatus) {
     const statusColumn = document.querySelector(`#status-${wilayahId}`);
 
     if (newStatus === 'menunggu persetujuan') {
-        statusColumn.innerHTML = `<button class="btn btn-warning btn-sm">Menunggu Persetujuan</button>`;
+        statusColumn.innerHTML = `<button class="btn btn-warning btn-sm" disabled>Menunggu Persetujuan</button>`;
     } else if (newStatus === 'disetujui') {
-        statusColumn.innerHTML = `<button class="btn btn-success btn-sm">Disetujui</button>`;
+        statusColumn.innerHTML = `<button class="btn btn-success btn-sm" disabled>Disetujui</button>`;
     } else if (newStatus === 'ditolak') {
-        statusColumn.innerHTML = `<button class="btn btn-danger btn-sm">Ditolak</button>`;
+        statusColumn.innerHTML = `<button class="btn btn-danger btn-sm" disabled>Ditolak</button>`;
     }
 }
 </script>
