@@ -74,18 +74,27 @@ class WilayahController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function update(Request $request, $id)
-{
-
-    // Cari wilayah berdasarkan ID
-    $wilayah = Wilayah::find($id);
-
-    // Perbarui status wilayah
-    $wilayah->status = $request->status;
-    $wilayah->save();
-
-    return response()->json(['success' => true, 'message' => 'Status wilayah berhasil diperbarui.']);
-}
+     public function update(Request $request, $id)
+     {
+         // Debug request
+         dd($request->all());
+     
+         $request->validate([
+             'status' => 'required|in:menunggu persetujuan,disetujui,ditolak',
+         ]);
+     
+         $wilayah = Wilayah::find($id);
+     
+         if (!$wilayah) {
+             return response()->json(['success' => false, 'message' => 'Wilayah tidak ditemukan.'], 404);
+         }
+     
+         $wilayah->status = $request->status;
+         $wilayah->save();
+     
+         return response()->json(['success' => true, 'message' => 'Status wilayah berhasil diperbarui.']);
+     }
+     
 
     /**
      * Remove the specified resource from storage.
