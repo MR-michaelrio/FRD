@@ -76,12 +76,6 @@ class WilayahController extends Controller
 
      public function update(Request $request, $id)
      {
-         // Debug request
-         dd($request->all());
-     
-         $request->validate([
-             'status' => 'required|in:menunggu persetujuan,disetujui,ditolak',
-         ]);
      
          $wilayah = Wilayah::find($id);
      
