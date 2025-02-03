@@ -62,14 +62,12 @@
 <script>
 function updateStatus(wilayahId, newStatus) {
     // Buat data untuk dikirim
-    const formData = new FormData();
     console.log("newStatus",newStatus);
-    formData.append('status', newStatus);
     
     // Kirim request dengan fetch
     fetch(`/wilayah/${wilayahId}`, {
         method: 'PUT',
-        body: formData,
+        body: JSON.stringify({ status: newStatus }),
         headers: {
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': '{{ csrf_token() }}'
