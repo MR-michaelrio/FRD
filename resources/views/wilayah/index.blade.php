@@ -71,7 +71,8 @@ function updateStatus(wilayahId, newStatus) {
         method: 'PUT',
         body: formData,
         headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
         }
     })
     .then(response => {
