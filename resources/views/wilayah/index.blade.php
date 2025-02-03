@@ -36,17 +36,17 @@
                         <td>{{ $w->nama_wilayah }}</td>
                         <td>{{ $w->supervisor }}</td>
                         <td>
-                            <div class="status-buttons" data-id="{{ $w->id }}">
+                            <div class="status-buttons" data-id="{{ $w->id_wilayah }}">
                                 <!-- Tombol untuk Menunggu Persetujuan -->
                                 @if($w->status == 'menunggu persetujuan')
-                                    <button class="btn btn-success btn-sm" onclick="updateStatus({{ $w->id }}, 'disetujui')">Disetujui</button>
-                                    <button class="btn btn-danger btn-sm" onclick="updateStatus({{ $w->id }}, 'ditolak')">Ditolak</button>
+                                    <button class="btn btn-success btn-sm" onclick="updateStatus({{ $w->id_wilayah }}, 'disetujui')">Disetujui</button>
+                                    <button class="btn btn-danger btn-sm" onclick="updateStatus({{ $w->id_wilayah }}, 'ditolak')">Ditolak</button>
                                 @elseif($w->status == 'disetujui')
-                                    <button class="btn btn-warning btn-sm" onclick="updateStatus({{ $w->id }}, 'menunggu persetujuan')">Menunggu Persetujuan</button>
-                                    <button class="btn btn-danger btn-sm" onclick="updateStatus({{ $w->id }}, 'ditolak')">Ditolak</button>
+                                    <button class="btn btn-warning btn-sm" onclick="updateStatus({{ $w->id_wilayah }}, 'menunggu persetujuan')">Menunggu Persetujuan</button>
+                                    <button class="btn btn-danger btn-sm" onclick="updateStatus({{ $w->id_wilayah }}, 'ditolak')">Ditolak</button>
                                 @elseif($w->status == 'ditolak')
-                                    <button class="btn btn-warning btn-sm" onclick="updateStatus({{ $w->id }}, 'menunggu persetujuan')">Menunggu Persetujuan</button>
-                                    <button class="btn btn-success btn-sm" onclick="updateStatus({{ $w->id }}, 'disetujui')">Disetujui</button>
+                                    <button class="btn btn-warning btn-sm" onclick="updateStatus({{ $w->id_wilayah }}, 'menunggu persetujuan')">Menunggu Persetujuan</button>
+                                    <button class="btn btn-success btn-sm" onclick="updateStatus({{ $w->id_wilayah }}, 'disetujui')">Disetujui</button>
                                 @endif
                             </div>
                         </td>
@@ -67,7 +67,7 @@ function updateStatus(wilayahId, newStatus) {
     formData.append('status', newStatus);
     
     // Kirim request dengan fetch
-    fetch('{{ route("update-status") }}', {
+    fetch('{{ route("wilayah.update") }}', {
         method: 'POST',
         body: formData,
         headers: {
