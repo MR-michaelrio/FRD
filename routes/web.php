@@ -24,6 +24,7 @@ use Carbon\Carbon;
     Route::get('/', function () {
         return view('home');
     })->name('index');
+    
     Route::get('/daftar2', function () {
         return view('daftar2');
     })->name('daftar2');
