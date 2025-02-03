@@ -8,10 +8,8 @@
 </head>
 <body class="bg-light d-flex justify-content-center align-items-center vh-100">
     <div class="container p-4 bg-white rounded shadow-lg" style="max-width: 500px;">
-        <header class="text-center mb-3">
             <img src="logo.png" alt="Logo Lembaga" class="mb-2" style="max-width: 80px;">
             <h2 class="h4">Form Registrasi Pemegang Radio</h2>
-        </header>
         <form>
             <div class="mb-2">
                 <label class="form-label">Nama Pemegang Radio</label>
