@@ -26,7 +26,7 @@ use Carbon\Carbon;
     })->name('index');
     Route::get('/daftar2', function () {
         return view('daftar2');
-    });
+    })->name('daftar2');
 
 
     Route::middleware(['auth', 'checkRole:admin,basic'])->group(function () {

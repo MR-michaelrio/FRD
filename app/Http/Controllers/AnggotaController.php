@@ -140,6 +140,6 @@ class AnggotaController extends Controller
             'jenis_kelamin' => $request->jenis_kelamin,
         ]);
 
-        return redirect()->route('anggota.indexdaftar')->with('success', 'Data inserted successfully!');
+        return redirect()->route('daftar2')->with('success', 'Data inserted successfully!');
     }
 }
