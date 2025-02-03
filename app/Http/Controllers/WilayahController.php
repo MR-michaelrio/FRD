@@ -80,11 +80,6 @@ class WilayahController extends Controller
     // Cari wilayah berdasarkan ID
     $wilayah = Wilayah::find($id);
 
-    // Periksa apakah wilayah ditemukan
-    if (!$wilayah) {
-        return response()->json(['success' => false, 'message' => 'Wilayah tidak ditemukan.'], 404);
-    }
-
     // Perbarui status wilayah
     $wilayah->status = $request->status;
     $wilayah->save();
