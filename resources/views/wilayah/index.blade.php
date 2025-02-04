@@ -126,7 +126,7 @@
   // Fungsi untuk menyimpan perubahan
 function saveUpdate(idWilayah) {
   var formData = new FormData(document.getElementById('updateForm'));
-
+console.log(formData);
   // Mengirimkan data ke server untuk update menggunakan fetch
   fetch('/wilayah/' + idWilayah, {
     method: 'POST',

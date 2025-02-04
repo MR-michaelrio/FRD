@@ -94,6 +94,11 @@ class WilayahController extends Controller
             Log::info('Updating supervisor to: ' . $request->supervisor);
             $wilayah->supervisor = $request->supervisor;
         }
+
+        if ($request->has('nama_wilayah')) {
+            Log::info('Updating nama wilayah to: ' . $request->nama_wilayah);
+            $wilayah->nama_wilayah = $request->nama_wilayah;
+        }
         
         // Simpan perubahan ke database
         $wilayah->save();
