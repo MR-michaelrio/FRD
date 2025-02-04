@@ -106,7 +106,7 @@ class WilayahController extends Controller
         // Kembalikan response JSON dengan pesan sukses
         return response()->json([
             'success' => true,
-            'message' => 'Data wilayah berhasil diperbarui.'+$request->supervisor
+            'message' => 'Data wilayah berhasil diperbarui.'
         ]);
     }
 
