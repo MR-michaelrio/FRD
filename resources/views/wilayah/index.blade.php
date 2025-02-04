@@ -165,6 +165,10 @@
             alert('Terjadi kesalahan, coba lagi!');
         });
     });
+    document.querySelector('.btn-secondary').addEventListener('click', function() {
+        var modal = bootstrap.Modal.getInstance(document.getElementById('updateModal'));
+        modal.hide();
+    });
 
 
 </script>
