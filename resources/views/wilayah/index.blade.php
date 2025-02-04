@@ -142,7 +142,6 @@ function saveUpdate(idWilayah) {
     // Handle response sukses
     if (data.success) {
       alert('Data berhasil diperbarui!');
-      location.reload(); // Reload halaman untuk melihat perubahan
     } else {
       alert('Gagal memperbarui data.');
     }
