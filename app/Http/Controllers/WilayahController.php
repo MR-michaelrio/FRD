@@ -103,10 +103,10 @@ class WilayahController extends Controller
         // Simpan perubahan ke database
         $wilayah->save();
 
-        // Kembalikan response JSON dengan pesan sukses
         return response()->json([
             'success' => true,
-            'message' => $request->supervisor
+            'message' => $request->supervisor, // Pesan berhasil yang dikembalikan
+            'data' => $wilayah // Menampilkan data wilayah yang baru diperbarui
         ]);
     }
 
