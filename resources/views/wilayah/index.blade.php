@@ -86,7 +86,7 @@
             @csrf
             <div class="form-group">
                 <label for="supervisor">Supervisor Name</label>
-                <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" name="supervisor" id="supervisor" tabindex="-1">
+                <select class="form-control select2" style="width: 100%;" name="supervisor" id="supervisor" tabindex="-1">
                     <option value="test">test</option>
 
                     @foreach($supervisors as $d)
