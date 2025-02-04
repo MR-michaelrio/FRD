@@ -83,16 +83,17 @@
       </div>
       <div class="modal-body">
         <form action="" method="POST">
-          @csrf
-          <div class="form-group">
-                <label>Supervisor Name</label>
-                <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                    <option>Alaska</option>
-                </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-ntdd-container"><span class="select2-selection__rendered" id="select2-ntdd-container" role="textbox" aria-readonly="true" title="Alabama">Alabama</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+            @csrf
+            <div class="form-group">
+                <label for="supervisor">Supervisor Name</label>
+                <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" name="supervisor" id="supervisor" tabindex="-1">
+                    @foreach($supervisors as $d)
+                        <option value="{{$d->id_anggota}}">{{$d->nama}}</option>
+                    @endforeach
+                </select>
             </div>
-
-          <input type="hidden" name="id" id="supervisorId">
-          <button type="submit" class="btn btn-primary">Submit</button>
+            <input type="hidden" name="id" id="supervisorId">
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
     </div>
@@ -100,12 +101,6 @@
 </div>
 
 <script>
-    $(function () {
-        $('select2').select2({
-            theme: 'bootstrap4'
-        });
-    });
-
     $(document).ready(function() {
         // Open modal when supervisor link is clicked
         $('.open-form').on('click', function(e) {
