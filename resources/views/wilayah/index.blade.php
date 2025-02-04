@@ -32,11 +32,11 @@
                         $nomor = 1;
                     @endphp
                     @foreach($wilayah as $w)
-                    <tr>
+                    <tr data-toggle="modal" data-target="#modal-default" data-id="{{ $w->id_wilayah }}">
                         <td>{{ $nomor++ }}</td>
                         <td>{{ $w->nama_wilayah }}</td>
                         <td>  
-                            <a href="#" data-toggle="modal" data-target="#modal-default" data-id="{{ $w->id_wilayah }}">{{ $w->supervisor ?? 'Tidak Ada' }} </a>
+                            <a href="#" >{{ $w->supervisor ?? 'Tidak Ada' }} </a>
                         </td>
                         <td id="status-{{ $w->id_wilayah }}">
                             @if($w->status == 'menunggu persetujuan')
@@ -82,7 +82,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="" method="POST">
+        <form action="{{ route('wilayah.update') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="supervisor">Supervisor Name</label>
