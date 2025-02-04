@@ -27,7 +27,7 @@
     </style>
 </head>
 <body class="bg-light d-flex justify-content-center align-items-center p-4">
-    <div class="container p-4 bg-white rounded shadow-lg form-container">
+    <div class="container p-4 bg-white rounded shadow-lg form-container vh-100">
         @if(session('success'))
             <div class="alert alert-success text-center" role="alert">
                 {{ session('success') }}
