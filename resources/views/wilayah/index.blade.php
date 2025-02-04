@@ -102,16 +102,23 @@
 
 <script>
 $(document).ready(function () {
-    // Event listener ketika baris tabel diklik
+    // When any <tr> is clicked that has the data-toggle="modal"
     $('tr[data-toggle="modal"]').on('click', function () {
-        var wilayahId = $(this).data('id'); // Ambil ID wilayah dari atribut data-id
-        var supervisorId = $(this).data('supervisor-id'); // Misalnya, ambil ID supervisor juga jika ada
-        $('#supervisorId').val(wilayahId); // Masukkan ID wilayah ke input hidden
+        var wilayahId = $(this).data('id'); // Get the wilayah ID from data-id
+        var supervisorId = $(this).data('supervisor-id'); // If you want to get supervisor ID, adjust your data attributes accordingly
+        console.log('wilayahId',wilayahId);
+        console.log('supervisorId',supervisorId);
+        // Update the form action to include the correct wilayahId
+        var formAction = '{{ route("wilayah.update", ":id") }}';
+        formAction = formAction.replace(':id', wilayahId); // Replace :id with actual wilayahId
+        $('#formSupervisor').attr('action', formAction); // Set the form action dynamically
 
-        // Jika kamu ingin memulai dengan supervisor yang sudah dipilih sebelumnya, lakukan ini:
-        $('#supervisorSelect').val(supervisorId).trigger('change'); // Pilih supervisor yang sudah ada
+        // If you have a supervisor ID to update, set it as well
+        $('#supervisorId').val(wilayahId); // Set the supervisor ID if needed
+        $('#supervisorSelect').val(supervisorId).trigger('change'); // Set the supervisor dropdown selection if needed
     });
 });
+
 
 function updateStatus(wilayahId, newStatus) {
     // Buat data untuk dikirim    
