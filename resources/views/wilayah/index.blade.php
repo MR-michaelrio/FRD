@@ -91,7 +91,6 @@
             <label for="supervisorSelect" class="form-label">Supervisor</label>
             <select class="form-control select2" id="supervisorSelect" name="supervisor" style="width: 100%;">
                 <option value="0" selected>Pilih Supervisor</option>
-
                 @foreach($supervisors as $d)
                     <option value="{{$d->id_anggota}}">{{$d->nama}}</option>
                   @endforeach
@@ -130,11 +129,9 @@
   // Fungsi untuk menyimpan perubahan
 function saveUpdate(idWilayah) {
   var formData = new FormData(document.getElementById('updateForm'));
-  formData.forEach(function(value, key) {
-  console.log(key + ": " + value);
-});  // Mengirimkan data ke server untuk update menggunakan fetch
+// Mengirimkan data ke server untuk update menggunakan fetch
   fetch('/wilayah/' + idWilayah, {
-    method: 'POST',
+    method: 'PUT',
     body: formData,
   })
   .then(response => response.json())  // Mengonversi response ke JSON
