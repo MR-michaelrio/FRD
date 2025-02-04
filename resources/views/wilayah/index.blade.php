@@ -127,32 +127,43 @@
 
   // Fungsi untuk menyimpan perubahan
   // Fungsi untuk menyimpan perubahan
-function saveUpdate(idWilayah) {
-  var formData = new FormData(document.getElementById('updateForm'));
+  document.getElementById('updateForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Mencegah form submit otomatis
 
-  fetch('/wilayah/' + idWilayah, {
-    method: 'PUT',
-    headers: {
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-    },
-    body: formData,
-  })
-  .then(response => response.json())  // Mengonversi response ke JSON
-  .then(data => {
-    // Handle response sukses
-    console.log("data",data);
-    if (data.success) {
-      alert('Data berhasil diperbarui!');
-    } else {
-      alert('Gagal memperbarui data.');
-    }
-  })
-  .catch(error => {
-    // Handle error
-    console.error('Terjadi kesalahan:', error);
-    alert('Terjadi kesalahan, coba lagi!');
-  });
-}
+        // Mengambil nilai input dari form
+        var namaWilayah = document.getElementById('namaWilayah').value;
+        var supervisor = document.getElementById('supervisorSelect').value;
+
+        // Membuat objek data untuk dikirim
+        var data = {
+            nama_wilayah: namaWilayah,
+            supervisor: supervisor
+        };
+
+        // Mengirim data menggunakan fetch
+        fetch('/wilayah/' + idWilayah, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            },
+            body: JSON.stringify(data), // Mengonversi data menjadi format JSON
+        })
+        .then(response => response.json()) // Mengonversi response ke JSON
+        .then(data => {
+            if (data.success) {
+                alert('Data berhasil diperbarui!');
+                location.reload(); // Reload halaman untuk melihat perubahan
+            } else {
+                alert('Gagal memperbarui data.');
+            }
+        })
+        .catch(error => {
+            console.error('Terjadi kesalahan:', error);
+            alert('Terjadi kesalahan, coba lagi!');
+        });
+    });
+
 
 </script>
 
