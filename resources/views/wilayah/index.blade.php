@@ -82,8 +82,9 @@
       </div>
       <div class="modal-body">
         <form action="" method="POST" id="formSupervisor">
+        @method('PUT')
+
             @csrf
-            @method('PUT')
             <div class="form-group">
                 <label for="supervisor">Supervisor Name</label>
                 <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
