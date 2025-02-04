@@ -102,21 +102,19 @@
 
 <script>
 $(document).ready(function() {
-    // When a row is clicked
     $('tr').on('click', function() {
         var idWilayah = $(this).data('id-wilayah');
         var idSupervisor = $(this).data('id-supervisor');
         
-        // Set the modal inputs with the values
+        // Set the modal inputs
         $('#supervisorId').val(idSupervisor);
-        
-        // Optionally, if you want to select the supervisor from the dropdown:
         $('#formSupervisor select').val(idSupervisor).trigger('change');
         
-        // Show the modal
+        // Open the modal using AdminLTE (Bootstrap)
         $('#modal-default').modal('show');
     });
 });
+
 
 
 function updateStatus(wilayahId, newStatus) {
