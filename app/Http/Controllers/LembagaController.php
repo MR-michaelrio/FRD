@@ -16,6 +16,10 @@ class LembagaController extends Controller
         //
     }
 
+    public function indexdaftar()
+    {
+        return view("lembaga.daftar-lembaga");
+    }
     /**
      * Show the form for creating a new resource.
      *

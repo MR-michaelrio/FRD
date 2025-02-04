@@ -53,6 +53,7 @@ use Carbon\Carbon;
             Route::resource('laporan', LaporanFinalController::class);
         });
     });
+
     Route::get('/damkar', [LaporanController::class, 'damkar65'])->name('damkar');
 
     Auth::routes();
@@ -71,7 +72,9 @@ use Carbon\Carbon;
     Route::get('/form_reg', [AnggotaController::class, 'indexdaftar'])->name('anggota.indexdaftar');
 
     Route::resource('wilayah', WilayahController::class);
-    Route::resource('Lembaga', LembagaController::class);
+
+    Route::resource('lembaga', LembagaController::class);
+    Route::get('/daftar-lembaga', [LembagaController::class, 'indexdaftar'])->name('lembaga.indexdaftar');
 
 // });
 
