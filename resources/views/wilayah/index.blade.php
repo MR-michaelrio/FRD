@@ -78,55 +78,50 @@
         <h5 class="modal-title" id="updateModalLabel">Update Wilayah</h5>
       </div>
       <form id="updateForm">
-
-      <div class="modal-body">
-          <div class="mb-3">
-            <label for="namaWilayah" class="form-label">Nama Wilayah</label>
-            <input type="text" class="form-control" id="namaWilayah" name="nama_wilayah" required>
-            <input type="hidden" class="form-control" id="idWilayah" name="id_wilayah" required>
-          </div>
-          <div class="mb-3">
-            <label for="supervisorSelect" class="form-label">Supervisor</label>
-            <select class="form-control select2" id="supervisorSelect" name="supervisor" style="width: 100%;">
-                <option value="0" selected>Pilih Supervisor</option>
-                @foreach($supervisors as $d)
-                    <option value="{{$d->id_anggota}}">{{$d->id_anggota}}-{{$d->nama}}</option>
-                @endforeach
-            </select>
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" id="saveChangesButton">Save changes</button>
-      </div>
+        <div class="modal-body">
+            <div class="mb-3">
+                <label for="namaWilayah" class="form-label">Nama Wilayah</label>
+                <input type="text" class="form-control" id="namaWilayah" name="nama_wilayah" required>
+                <input type="hidden" class="form-control" id="idWilayah" name="id_wilayah" required>
+            </div>
+            <div class="mb-3">
+                <label for="supervisorSelect" class="form-label">Supervisor</label>
+                <select class="form-control select2" id="supervisorSelect" name="supervisor" style="width: 100%;">
+                    <option value="0" selected>Pilih Supervisor</option>
+                    @foreach($supervisors as $d)
+                        <option value="{{$d->id_anggota}}">{{$d->id_anggota}}-{{$d->nama}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="saveChangesButton">Save changes</button>
+        </div>
       </form>
-
     </div>
   </div>
 </div>
 
 <script>
-  // Fungsi untuk membuka modal update
-  function openUpdateModal(idWilayah, namaWilayah, supervisorId) {
-    // Isi form dengan data yang sudah ada
-    document.getElementById('idWilayah').value = idWilayah;
+    function openUpdateModal(idWilayah, namaWilayah, supervisorId) {
+        // Isi form dengan data yang sudah ada
+        document.getElementById('idWilayah').value = idWilayah;
 
-    document.getElementById('namaWilayah').value = namaWilayah;
-    if (supervisorId !== null) {
-      document.getElementById('supervisorSelect').value = supervisorId;
-    } else {
-      document.getElementById('supervisorSelect').value = '';
+        document.getElementById('namaWilayah').value = namaWilayah;
+        if (supervisorId !== null) {
+        document.getElementById('supervisorSelect').value = supervisorId;
+        } else {
+        document.getElementById('supervisorSelect').value = '';
+        }
+
+        // Simpan ID wilayah untuk nanti digunakan saat simpan perubahan
+        $('#saveChangesButton').attr('onclick', `saveUpdate(${idWilayah})`);
+
+        // Buka modal
+        $('#updateModal').modal('show');
     }
 
-    // Simpan ID wilayah untuk nanti digunakan saat simpan perubahan
-    $('#saveChangesButton').attr('onclick', `saveUpdate(${idWilayah})`);
-
-    // Buka modal
-    $('#updateModal').modal('show');
-  }
-
-  // Fungsi untuk menyimpan perubahan
-  // Fungsi untuk menyimpan perubahan
     document.getElementById('updateForm').addEventListener('submit', function(e) {
         e.preventDefault(); // Mencegah form submit otomatis
 
@@ -165,88 +160,82 @@
             alert('Terjadi kesalahan, coba lagi!');
         });
     });
-    document.querySelector('.btn-secondary').addEventListener('click', function() {
-        $('#updateModal').modal('show');
-    });
-
-
 </script>
 
 <script>
-function updateStatus(wilayahId, newStatus) {
-    // Buat data untuk dikirim    
-    // Kirim request dengan fetch
-    fetch(`/wilayah/${wilayahId}`, {
-        method: 'PUT',
-        body: JSON.stringify({ status: newStatus }),
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        }
-    })
-    .then(response => {
-        // Periksa jika status response tidak ok (misalnya 400, 500, dll)
-        if (!response.ok) {
-            return response.json().then(errorData => {
-                // Jika ada error, lempar error tersebut
-                throw new Error(errorData.message || 'Terjadi kesalahan di server');
-            });
-        }
-        return response.json();  // Jika berhasil, lanjutkan ke .then() berikutnya
-    })
-    .then(data => {
-        if (data.success) {
-            // Jika sukses, update tombol
-            updateButtonVisibility(wilayahId, newStatus);
-            updateStatusLabel(wilayahId, newStatus);
-            alert('Status berhasil diperbarui.');
-        } else {
-            console.log(data);
-            alert('Terjadi kesalahan.');
-        }
-    })
-    .catch(error => {
-        // Tangani error baik dari fetch maupun dari server
-        console.error('Error:', error.message || error);
-        alert(`Terjadi kesalahan: ${error.message || error}`);
-    });
-}
-
-
-function updateButtonVisibility(wilayahId, newStatus) {
-    const buttonsContainer = document.querySelector(`.status-buttons[data-id="${wilayahId}"]`);
-    
-    // Sembunyikan tombol berdasarkan status baru
-    buttonsContainer.innerHTML = '';
-
-    if (newStatus === 'menunggu persetujuan') {
-        buttonsContainer.innerHTML = `
-            <button class="btn btn-success btn-sm" onclick="updateStatus(${wilayahId}, 'disetujui')">Disetujui</button>
-            <button class="btn btn-danger btn-sm" onclick="updateStatus(${wilayahId}, 'ditolak')">Ditolak</button>
-        `;
-    } else if (newStatus === 'disetujui') {
-        buttonsContainer.innerHTML = `
-            <button class="btn btn-warning btn-sm" onclick="updateStatus(${wilayahId}, 'menunggu persetujuan')">Menunggu Persetujuan</button>
-            <button class="btn btn-danger btn-sm" onclick="updateStatus(${wilayahId}, 'ditolak')">Ditolak</button>
-        `;
-    } else if (newStatus === 'ditolak') {
-        buttonsContainer.innerHTML = `
-            <button class="btn btn-warning btn-sm" onclick="updateStatus(${wilayahId}, 'menunggu persetujuan')">Menunggu Persetujuan</button>
-            <button class="btn btn-success btn-sm" onclick="updateStatus(${wilayahId}, 'disetujui')">Disetujui</button>
-        `;
+    function updateStatus(wilayahId, newStatus) {
+        // Buat data untuk dikirim    
+        // Kirim request dengan fetch
+        fetch(`/wilayah/${wilayahId}`, {
+            method: 'PUT',
+            body: JSON.stringify({ status: newStatus }),
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        })
+        .then(response => {
+            // Periksa jika status response tidak ok (misalnya 400, 500, dll)
+            if (!response.ok) {
+                return response.json().then(errorData => {
+                    // Jika ada error, lempar error tersebut
+                    throw new Error(errorData.message || 'Terjadi kesalahan di server');
+                });
+            }
+            return response.json();  // Jika berhasil, lanjutkan ke .then() berikutnya
+        })
+        .then(data => {
+            if (data.success) {
+                // Jika sukses, update tombol
+                updateButtonVisibility(wilayahId, newStatus);
+                updateStatusLabel(wilayahId, newStatus);
+                alert('Status berhasil diperbarui.');
+            } else {
+                console.log(data);
+                alert('Terjadi kesalahan.');
+            }
+        })
+        .catch(error => {
+            // Tangani error baik dari fetch maupun dari server
+            console.error('Error:', error.message || error);
+            alert(`Terjadi kesalahan: ${error.message || error}`);
+        });
     }
-}
 
-function updateStatusLabel(wilayahId, newStatus) {
-    const statusColumn = document.querySelector(`#status-${wilayahId}`);
+    function updateButtonVisibility(wilayahId, newStatus) {
+        const buttonsContainer = document.querySelector(`.status-buttons[data-id="${wilayahId}"]`);
+        
+        // Sembunyikan tombol berdasarkan status baru
+        buttonsContainer.innerHTML = '';
 
-    if (newStatus === 'menunggu persetujuan') {
-        statusColumn.innerHTML = `<button class="btn btn-warning btn-sm" disabled>Menunggu Persetujuan</button>`;
-    } else if (newStatus === 'disetujui') {
-        statusColumn.innerHTML = `<button class="btn btn-success btn-sm" disabled>Disetujui</button>`;
-    } else if (newStatus === 'ditolak') {
-        statusColumn.innerHTML = `<button class="btn btn-danger btn-sm" disabled>Ditolak</button>`;
+        if (newStatus === 'menunggu persetujuan') {
+            buttonsContainer.innerHTML = `
+                <button class="btn btn-success btn-sm" onclick="updateStatus(${wilayahId}, 'disetujui')">Disetujui</button>
+                <button class="btn btn-danger btn-sm" onclick="updateStatus(${wilayahId}, 'ditolak')">Ditolak</button>
+            `;
+        } else if (newStatus === 'disetujui') {
+            buttonsContainer.innerHTML = `
+                <button class="btn btn-warning btn-sm" onclick="updateStatus(${wilayahId}, 'menunggu persetujuan')">Menunggu Persetujuan</button>
+                <button class="btn btn-danger btn-sm" onclick="updateStatus(${wilayahId}, 'ditolak')">Ditolak</button>
+            `;
+        } else if (newStatus === 'ditolak') {
+            buttonsContainer.innerHTML = `
+                <button class="btn btn-warning btn-sm" onclick="updateStatus(${wilayahId}, 'menunggu persetujuan')">Menunggu Persetujuan</button>
+                <button class="btn btn-success btn-sm" onclick="updateStatus(${wilayahId}, 'disetujui')">Disetujui</button>
+            `;
+        }
     }
-}
+
+    function updateStatusLabel(wilayahId, newStatus) {
+        const statusColumn = document.querySelector(`#status-${wilayahId}`);
+
+        if (newStatus === 'menunggu persetujuan') {
+            statusColumn.innerHTML = `<button class="btn btn-warning btn-sm" disabled>Menunggu Persetujuan</button>`;
+        } else if (newStatus === 'disetujui') {
+            statusColumn.innerHTML = `<button class="btn btn-success btn-sm" disabled>Disetujui</button>`;
+        } else if (newStatus === 'ditolak') {
+            statusColumn.innerHTML = `<button class="btn btn-danger btn-sm" disabled>Ditolak</button>`;
+        }
+    }
 </script>
 @endsection
