@@ -93,7 +93,7 @@
                 <option value="0" selected>Pilih Supervisor</option>
                 @foreach($supervisors as $d)
                     <option value="{{$d->id_anggota}}">{{$d->id_anggota}}-{{$d->nama}}</option>
-                  @endforeach
+                @endforeach
             </select>
           </div>
       </div>
@@ -130,6 +130,11 @@
 function saveUpdate(idWilayah) {
   var formData = new FormData(document.getElementById('updateForm'));
 // Mengirimkan data ke server untuk update menggunakan fetch
+// Log FormData untuk memastikan nilai yang terkirim
+formData.forEach((value, key) => {
+  console.log(key + ": " + value);
+});
+
   fetch('/wilayah/' + idWilayah, {
     method: 'PUT',
     headers: {
