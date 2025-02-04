@@ -81,7 +81,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ route('supervisor.update') }}" method="POST">
+        <form action="" method="POST">
           @csrf
           <div class="form-group">
             <label for="supervisorName">Supervisor Name</label>
