@@ -32,7 +32,7 @@
                         $nomor = 1;
                     @endphp
                     @foreach($wilayah as $w)
-                    <tr onclick="openUpdateModal({{ $w->id_wilayah }}, '{{ $w->nama_wilayah }}', {{ $w->supervisor_id ?? 'null' }})">
+                    <tr style="cursor: pointer;" onclick="openUpdateModal({{ $w->id_wilayah }}, '{{ $w->nama_wilayah }}', {{ $w->supervisor_id ?? 'null' }})">
                         <td>{{ $nomor++ }}</td>
                         <td>{{ $w->nama_wilayah }}</td>
                         <td>{{ $w->anggota->nama ?? 'Tidak Ada' }}</a>
@@ -60,9 +60,6 @@
                                     <button class="btn btn-success btn-sm" onclick="updateStatus({{ $w->id_wilayah }}, 'disetujui')">Disetujui</button>
                                 @endif
                             </div>
-                        </td>
-                        <td>
-                            <button class="btn btn-info btn-sm" onclick="openUpdateModal({{ $w->id_wilayah }}, '{{ $w->nama_wilayah }}', {{ $w->supervisor_id ?? 'null' }})">Update</button>
                         </td>
                     </tr>
                     @endforeach
