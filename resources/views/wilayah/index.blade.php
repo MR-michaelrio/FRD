@@ -81,7 +81,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ route('wilayah.update', ['wilayah' => ':wilayahId') }}" method="POST" id="formSupervisor">
+        <form action="{{ route('wilayah.update', ['wilayah' => ':wilayahId']) }}" method="POST" id="formSupervisor">
             @csrf
             @method('PUT')
             <div class="form-group">
