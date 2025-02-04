@@ -80,7 +80,7 @@ class WilayahController extends Controller
     public function update(Request $request, $id)
     {
         // Temukan wilayah berdasarkan ID
-        $wilayah = Wilayah::findOrFail($id);
+        $wilayah = Wilayah::where('id_wilayah',$id)->first();
 
         // Menangani logika pembaruan berdasarkan field yang diterima
         if ($request->has('status')) {
