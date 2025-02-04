@@ -85,9 +85,12 @@
         <form action="" method="POST">
           @csrf
           <div class="form-group">
-            <label for="supervisorName">Supervisor Name</label>
-            <input type="text" class="form-control" id="supervisorName" name="supervisor" required>
-          </div>
+                <label>Supervisor Name</label>
+                <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                    <option>Alaska</option>
+                </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-ntdd-container"><span class="select2-selection__rendered" id="select2-ntdd-container" role="textbox" aria-readonly="true" title="Alabama">Alabama</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+            </div>
+
           <input type="hidden" name="id" id="supervisorId">
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -97,21 +100,25 @@
 </div>
 
 <script>
-  $(document).ready(function() {
-    // Open modal when supervisor link is clicked
-    $('.open-form').on('click', function(e) {
-      e.preventDefault();
-      var supervisorId = $(this).data('id');  // Get the ID from data-id attribute
-      var supervisorName = $(this).text();    // Get the supervisor name
-      
-      // Set the modal values
-      $('#supervisorId').val(supervisorId);
-      $('#supervisorName').val(supervisorName);
-      
-      // Show the modal
-      $('#formModal').modal('show');
+    $(function () {
+        $('select2').select2();
     });
-  });
+
+    $(document).ready(function() {
+        // Open modal when supervisor link is clicked
+        $('.open-form').on('click', function(e) {
+        e.preventDefault();
+        var supervisorId = $(this).data('id');  // Get the ID from data-id attribute
+        var supervisorName = $(this).text();    // Get the supervisor name
+        
+        // Set the modal values
+        $('#supervisorId').val(supervisorId);
+        $('#supervisorName').val(supervisorName);
+        
+        // Show the modal
+        $('#formModal').modal('show');
+        });
+    });
 </script>
 
 
