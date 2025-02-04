@@ -73,12 +73,12 @@
     </div>
     <!-- /.card -->
 </div>
+
 <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="updateModalLabel">Update Wilayah</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form id="updateForm">
@@ -123,21 +123,32 @@
   }
 
   // Fungsi untuk menyimpan perubahan
-  function saveUpdate(idWilayah) {
-    var formData = new FormData(document.getElementById('updateForm'));
+  // Fungsi untuk menyimpan perubahan
+function saveUpdate(idWilayah) {
+  var formData = new FormData(document.getElementById('updateForm'));
 
-    // Mengirimkan data ke server untuk update
-    axios.post('/update-wilayah/' + idWilayah, formData)
-      .then(function(response) {
-        // Handle response sukses
-        alert('Data berhasil diperbarui!');
-        location.reload(); // Reload halaman untuk melihat perubahan
-      })
-      .catch(function(error) {
-        // Handle error
-        alert('Terjadi kesalahan, coba lagi!');
-      });
-  }
+  // Mengirimkan data ke server untuk update menggunakan fetch
+  fetch('/wilayah/' + idWilayah, {
+    method: 'POST',
+    body: formData,
+  })
+  .then(response => response.json())  // Mengonversi response ke JSON
+  .then(data => {
+    // Handle response sukses
+    if (data.success) {
+      alert('Data berhasil diperbarui!');
+      location.reload(); // Reload halaman untuk melihat perubahan
+    } else {
+      alert('Gagal memperbarui data.');
+    }
+  })
+  .catch(error => {
+    // Handle error
+    console.error('Terjadi kesalahan:', error);
+    alert('Terjadi kesalahan, coba lagi!');
+  });
+}
+
 </script>
 
 <script>
