@@ -92,7 +92,7 @@
             <select class="form-control select2" id="supervisorSelect" name="supervisor" style="width: 100%;">
                 <option value="0" selected>Pilih Supervisor</option>
                 @foreach($supervisors as $d)
-                    <option value="{{$d->id_anggota}}">{{$d->nama}}</option>
+                    <option value="{{$d->id_anggota}}">{{$d->id_anggota}}-{{$d->nama}}</option>
                   @endforeach
             </select>
           </div>
