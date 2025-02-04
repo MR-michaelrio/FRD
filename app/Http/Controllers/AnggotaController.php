@@ -149,7 +149,7 @@ class AnggotaController extends Controller
             'level' => 'anggota',
             'regu' => "0",
             'id_anggota' => $a->id_anggota
-        ])
+        ]);
 
         return redirect()->route('daftar-anggota')->with('success', 'Data Berhasil Ditambahkan');
     }
