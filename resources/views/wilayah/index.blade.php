@@ -86,6 +86,7 @@
           <div class="mb-3">
             <label for="namaWilayah" class="form-label">Nama Wilayah</label>
             <input type="text" class="form-control" id="namaWilayah" name="nama_wilayah" required>
+            <input type="text" class="form-control" id="idWilayah" name="id_wilayah" required>
           </div>
           <div class="mb-3">
             <label for="supervisorSelect" class="form-label">Supervisor</label>
@@ -111,6 +112,8 @@
   // Fungsi untuk membuka modal update
   function openUpdateModal(idWilayah, namaWilayah, supervisorId) {
     // Isi form dengan data yang sudah ada
+    document.getElementById('idWilayah').value = idWilayah;
+
     document.getElementById('namaWilayah').value = namaWilayah;
     if (supervisorId !== null) {
       document.getElementById('supervisorSelect').value = supervisorId;
@@ -127,10 +130,12 @@
 
   // Fungsi untuk menyimpan perubahan
   // Fungsi untuk menyimpan perubahan
-  document.getElementById('updateForm').addEventListener('submit', function(e) {
+    document.getElementById('updateForm').addEventListener('submit', function(e) {
         e.preventDefault(); // Mencegah form submit otomatis
 
         // Mengambil nilai input dari form
+        var idWilayah = document.getElementById('idWilayah').value;
+
         var namaWilayah = document.getElementById('namaWilayah').value;
         var supervisor = document.getElementById('supervisorSelect').value;
 
