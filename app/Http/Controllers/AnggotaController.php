@@ -146,7 +146,7 @@ class AnggotaController extends Controller
             'name' => $request->nama,
             'email' => $request->email,
             'password' => Hash::make('IR1234'),
-            'level' => 'anggota',
+            'level' => 'basic',
             'regu' => "0",
             'id_anggota' => $a->id_anggota
         ]);
