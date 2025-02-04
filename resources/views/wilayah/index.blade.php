@@ -32,7 +32,7 @@
                         $nomor = 1;
                     @endphp
                     @foreach($wilayah as $w)
-                    <tr data-toggle="modal" data-target="#modal-default" data-id="{{ $w->id_wilayah }}" data-supervisor-id="{{ $w->supervisor }}">
+                    <tr data-toggle="modal" data-target="#modal-default" data-id="1" data-supervisor-id="2">
                         <td>{{ $nomor++ }}</td>
                         <td>{{ $w->nama_wilayah }}</td>
                         <td>{{ $w->supervisor ?? 'Tidak Ada' }}</a>
@@ -104,7 +104,7 @@
 $(document).ready(function () {
     // When any <tr> with data-toggle="modal" is clicked
     $('tr[data-toggle="modal"]').on('click', function () {
-        // Log the whole row to see what data is available
+        // Log the entire row to see what data is available
         console.log($(this));
 
         // Retrieve the attributes from the clicked row
@@ -115,14 +115,20 @@ $(document).ready(function () {
         console.log('wilayahId:', wilayahId);
         console.log('supervisorId:', supervisorId);
 
-        // Your original code to update form action and dropdown values
+        // Ensure the form action is dynamically updated with the correct wilayahId
         var formAction = $('#formSupervisor').attr('action');
         formAction = formAction.replace('replace_id', wilayahId);
         $('#formSupervisor').attr('action', formAction);
+
+        // Set supervisorId to the hidden input field (supervisorId is the wilayahId for now)
         $('#supervisorId').val(wilayahId);
+
+        // Set the supervisor dropdown value if applicable
+        // Ensure the select element has the correct ID and values
         $('#supervisorSelect').val(supervisorId).trigger('change');
     });
 });
+
 
 function updateStatus(wilayahId, newStatus) {
     // Buat data untuk dikirim    
