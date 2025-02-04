@@ -32,11 +32,8 @@
                         $nomor = 1;
                     @endphp
                     @foreach($wilayah as $w)
-                    <tr>
-                        <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default" data-id="{{ $w->id }}" data-supervisor-id="{{ $w->supervisor_id }}">
-    Open Modal
-</button>
-</td>
+                    <tr data-id-wilayah="{{ $w->id_wilayah }}" data-id-supervisor="{{ $w->id_supervisor }}">
+                        <td>{{ $nomor++ }}</td>
                         <td>{{ $w->nama_wilayah }}</td>
                         <td>{{ $w->supervisor ?? 'Tidak Ada' }}</a>
                         </td>
@@ -104,17 +101,21 @@
 </div>
 
 <script>
-$('#modal-default').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget); // Tombol yang membuka modal
-    var id = button.data('id'); // Mendapatkan data-id
-    var supervisorId = button.data('supervisor-id'); // Mendapatkan data-supervisor-id
-
-    // Memperbarui action form dengan id yang sesuai
-    var form = $('#formSupervisor');
-    form.attr('action', '/wilayah/' + id); // Update action form
-
-    // Mengisi input dengan supervisor ID
-    $('#supervisorId').val(supervisorId);
+$(document).ready(function() {
+    // When a row is clicked
+    $('tr').on('click', function() {
+        var idWilayah = $(this).data('id-wilayah');
+        var idSupervisor = $(this).data('id-supervisor');
+        
+        // Set the modal inputs with the values
+        $('#supervisorId').val(idSupervisor);
+        
+        // Optionally, if you want to select the supervisor from the dropdown:
+        $('#formSupervisor select').val(idSupervisor).trigger('change');
+        
+        // Show the modal
+        $('#modal-default').modal('show');
+    });
 });
 
 
