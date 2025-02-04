@@ -85,30 +85,12 @@
         <form action="" method="POST">
             @csrf
             <div class="form-group">
-                  <label>Minimal</label>
-                  <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="17" tabindex="-1" aria-hidden="true">
-                    <option selected="selected" data-select2-id="19">Alabama</option>
-                    <option data-select2-id="53">Alaska</option>
-                    <option data-select2-id="54">California</option>
-                    <option data-select2-id="55">Delaware</option>
-                    <option data-select2-id="56">Tennessee</option>
-                    <option data-select2-id="57">Texas</option>
-                    <option data-select2-id="58">Washington</option>
-                  </select>
-                </div>
-
-            <div class="form-group">
                 <label for="supervisor">Supervisor Name</label>
                 <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                    <option selected="selected" data-select2-id="3">Alabama</option>
-                    <option data-select2-id="33">Alaska</option>
-                    <option data-select2-id="34">California</option>
-                    <option data-select2-id="35">Delaware</option>
-                    <option data-select2-id="36">Tennessee</option>
-                    <option data-select2-id="37">Texas</option>
-                    <option data-select2-id="38">Washington</option>
-                  </select>
-                  <span class="select2 select2-container select2-container--default select2-container--below select2-container--open select2-container--focus" dir="ltr" data-select2-id="2" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="true" tabindex="0" aria-disabled="false" aria-labelledby="select2-ntdd-container" aria-owns="select2-ntdd-results" aria-activedescendant="select2-ntdd-result-5tby-Alabama"><span class="select2-selection__rendered" id="select2-ntdd-container" role="textbox" aria-readonly="true" title="Alabama">Alabama</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                    @foreach($supervisors as $d)
+                        <option value="{{$d->id_anggota}}">{{$d->nama}}</option>
+                    @endforeach
+                </select>
             </div>
             <input type="hidden" name="id" id="supervisorId">
             <button type="submit" class="btn btn-primary">Submit</button>
