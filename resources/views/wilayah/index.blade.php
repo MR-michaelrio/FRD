@@ -32,7 +32,7 @@
                         $nomor = 1;
                     @endphp
                     @foreach($wilayah as $w)
-                    <tr data-toggle="modal" data-target="#modal-default" data-id-wilayah="{{ $w->id_wilayah }}" data-id-supervisor="{{ $w->id_supervisor }}">
+                    <tr>
                         <td>{{ $nomor++ }}</td>
                         <td>{{ $w->nama_wilayah }}</td>
                         <td>{{ $w->supervisor ?? 'Tidak Ada' }}</a>
@@ -61,6 +61,9 @@
                                 @endif
                             </div>
                         </td>
+                        <td>
+                            <button class="btn btn-info btn-sm" onclick="openUpdateModal({{ $w->id_wilayah }}, '{{ $w->nama_wilayah }}', {{ $w->supervisor_id ?? 'null' }})">Update</button>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -70,53 +73,74 @@
     </div>
     <!-- /.card -->
 </div>
-
-<div class="modal fade" id="modal-default" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="formModalLabel">Form Supervisor</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h5 class="modal-title" id="updateModalLabel">Update Wilayah</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="" method="POST" id="formSupervisor">
-            @csrf
-            @method('PUT')
-            <div class="form-group">
-                <label for="supervisor">Supervisor Name</label>
-                <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                    @foreach($supervisors as $d)
-                        <option value="{{$d->id_anggota}}">{{$d->nama}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <input type="text" name="id" id="supervisorId">
-            <button type="submit" class="btn btn-primary">Submit</button>
+        <form id="updateForm">
+          <div class="mb-3">
+            <label for="namaWilayah" class="form-label">Nama Wilayah</label>
+            <input type="text" class="form-control" id="namaWilayah" name="nama_wilayah" required>
+          </div>
+          <div class="mb-3">
+            <label for="supervisorSelect" class="form-label">Supervisor</label>
+            <select class="form-control select2" id="supervisorSelect" name="supervisor_id" style="width: 100%;">
+              @foreach($supervisors as $d)
+                <option value="{{$d->id_anggota}}">{{$d->nama}}</option>
+              @endforeach
+            </select>
+          </div>
         </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveChangesButton">Save changes</button>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-$(document).ready(function() {
-    $('tr').on('click', function() {
-        var idWilayah = $(this).data('id-wilayah');
-        var idSupervisor = $(this).data('id-supervisor');
-        
-        // Set the modal inputs
-        $('#supervisorId').val(idSupervisor);
-        $('#formSupervisor select').val(idSupervisor).trigger('change');
-        
-        // Open the modal using AdminLTE (Bootstrap)
-        $('#modal-default').modal('show');
-    });
-});
+  // Fungsi untuk membuka modal update
+  function openUpdateModal(idWilayah, namaWilayah, supervisorId) {
+    // Isi form dengan data yang sudah ada
+    document.getElementById('namaWilayah').value = namaWilayah;
+    if (supervisorId !== null) {
+      document.getElementById('supervisorSelect').value = supervisorId;
+    } else {
+      document.getElementById('supervisorSelect').value = '';
+    }
 
+    // Simpan ID wilayah untuk nanti digunakan saat simpan perubahan
+    $('#saveChangesButton').attr('onclick', `saveUpdate(${idWilayah})`);
 
+    // Buka modal
+    $('#updateModal').modal('show');
+  }
 
+  // Fungsi untuk menyimpan perubahan
+  function saveUpdate(idWilayah) {
+    var formData = new FormData(document.getElementById('updateForm'));
+
+    // Mengirimkan data ke server untuk update
+    axios.post('/update-wilayah/' + idWilayah, formData)
+      .then(function(response) {
+        // Handle response sukses
+        alert('Data berhasil diperbarui!');
+        location.reload(); // Reload halaman untuk melihat perubahan
+      })
+      .catch(function(error) {
+        // Handle error
+        alert('Terjadi kesalahan, coba lagi!');
+      });
+  }
+</script>
+
+<script>
 function updateStatus(wilayahId, newStatus) {
     // Buat data untuk dikirim    
     // Kirim request dengan fetch
