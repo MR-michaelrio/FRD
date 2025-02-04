@@ -32,8 +32,11 @@
                         $nomor = 1;
                     @endphp
                     @foreach($wilayah as $w)
-                    <tr data-toggle="modal" data-target="#modal-default" data-id="1" data-supervisor-id="2">
-                        <td>{{ $nomor++ }}</td>
+                    <tr>
+                        <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default" data-id="{{ $w->id }}" data-supervisor-id="{{ $w->supervisor_id }}">
+    Open Modal
+</button>
+</td>
                         <td>{{ $w->nama_wilayah }}</td>
                         <td>{{ $w->supervisor ?? 'Tidak Ada' }}</a>
                         </td>
@@ -101,19 +104,19 @@
 </div>
 
 <script>
-    $('#modal-default').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget); // The button that triggered the modal
-    var id = button.data('id'); // Extract the data-id attribute
-    console.log(id);
-    var supervisorId = button.data('supervisor-id'); // Extract the data-supervisor-id attribute
-    
-    // Update the form action to include the ID of the wilayah
+$('#modal-default').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Tombol yang membuka modal
+    var id = button.data('id'); // Mendapatkan data-id
+    var supervisorId = button.data('supervisor-id'); // Mendapatkan data-supervisor-id
+
+    // Memperbarui action form dengan id yang sesuai
     var form = $('#formSupervisor');
-    form.attr('action', '/wilayah/' + id); // Update the form action dynamically
-    
-    // Set the supervisor ID in the hidden input field
+    form.attr('action', '/wilayah/' + id); // Update action form
+
+    // Mengisi input dengan supervisor ID
     $('#supervisorId').val(supervisorId);
 });
+
 
 function updateStatus(wilayahId, newStatus) {
     // Buat data untuk dikirim    
