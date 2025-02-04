@@ -60,7 +60,7 @@ class LembagaController extends Controller
             'logo_lembaga' => $logoPath,
         ]);
 
-        return redirect()->back()->with('success', 'Lembaga berhasil didaftarkan!');
+        return redirect()->back()->with('success', 'Lembaga Berhasil Didaftarkan!');
     }
 
     /**
