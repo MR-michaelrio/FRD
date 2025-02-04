@@ -81,7 +81,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="" method="POST" id="formSupervisor">
+        <form action="{{ route('wilayah.update', ['wilayah' => ':wilayahId') }}" method="POST" id="formSupervisor">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -101,26 +101,18 @@
 </div>
 
 <script>
-    $(document).ready(function () {
-    // Ketika baris tabel diklik
+$(document).ready(function () {
+    // Event listener ketika baris tabel diklik
     $('tr[data-toggle="modal"]').on('click', function () {
-        var wilayahId = $(this).data('id'); // Ambil ID wilayah dari data-id
-        var actionUrl = '/wilayah/' + wilayahId; // URL untuk form update
+        var wilayahId = $(this).data('id'); // Ambil ID wilayah dari atribut data-id
+        var supervisorId = $(this).data('supervisor-id'); // Misalnya, ambil ID supervisor juga jika ada
+        $('#supervisorId').val(wilayahId); // Masukkan ID wilayah ke input hidden
 
-        // Set form action ke rute yang benar
-        $('#formSupervisor').attr('action', actionUrl);
-        
-        // Set ID wilayah di input tersembunyi
-        $('#supervisorId').val(wilayahId);
-
-        // Show modal
-        $('#modal-default').modal('show');
+        // Jika kamu ingin memulai dengan supervisor yang sudah dipilih sebelumnya, lakukan ini:
+        $('#supervisorSelect').val(supervisorId).trigger('change'); // Pilih supervisor yang sudah ada
     });
 });
-</script>
 
-
-<script>
 function updateStatus(wilayahId, newStatus) {
     // Buat data untuk dikirim    
     // Kirim request dengan fetch
