@@ -35,7 +35,7 @@
                     <tr>
                         <td>{{ $nomor++ }}</td>
                         <td>{{ $w->nama_wilayah }}</td>
-                        <td>{{ $w->supervisor ?? 'Tidak Ada' }}</a>
+                        <td>{{ $w->anggota->nama ?? 'Tidak Ada' }}</a>
                         </td>
                         <td id="status-{{ $w->id_wilayah }}">
                             @if($w->status == 'menunggu persetujuan')
