@@ -104,20 +104,26 @@
 $(document).ready(function () {
     // When any <tr> is clicked that has the data-toggle="modal"
     $('tr[data-toggle="modal"]').on('click', function () {
-        var wilayahId = $(this).data('id'); // Get the wilayah ID from data-id
-        var supervisorId = $(this).data('supervisor-id'); // If you want to get supervisor ID, adjust your data attributes accordingly
-        console.log('wilayahId',wilayahId);
-        console.log('supervisorId',supervisorId);
+        var wilayahId = $(this).data('id'); // Get the wilayah ID from data-id attribute
+        var supervisorId = $(this).data('supervisor-id'); // Get the supervisor ID from data-supervisor-id
+
+        // Log to the console for debugging
+        console.log('wilayahId:', wilayahId);
+        console.log('supervisorId:', supervisorId);
+
         // Update the form action to include the correct wilayahId
-        var formAction = '{{ route("wilayah.update", ":id") }}';
+        var formAction = $('#formSupervisor').attr('action'); // Get current action URL from the form
         formAction = formAction.replace(':id', wilayahId); // Replace :id with actual wilayahId
         $('#formSupervisor').attr('action', formAction); // Set the form action dynamically
 
-        // If you have a supervisor ID to update, set it as well
-        $('#supervisorId').val(wilayahId); // Set the supervisor ID if needed
-        $('#supervisorSelect').val(supervisorId).trigger('change'); // Set the supervisor dropdown selection if needed
+        // Set the supervisor ID to the hidden input field
+        $('#supervisorId').val(wilayahId); // Set supervisorId as the hidden input value
+
+        // Set the supervisor dropdown value, and trigger change to update the select2 dropdown
+        $('#supervisorSelect').val(supervisorId).trigger('change'); // Set and update the select2 dropdown
     });
 });
+
 
 
 function updateStatus(wilayahId, newStatus) {
