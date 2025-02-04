@@ -104,6 +104,7 @@
     $('#modal-default').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget); // The button that triggered the modal
     var id = button.data('id'); // Extract the data-id attribute
+    console.log(id);
     var supervisorId = button.data('supervisor-id'); // Extract the data-supervisor-id attribute
     
     // Update the form action to include the ID of the wilayah
