@@ -88,7 +88,7 @@
           </div>
           <div class="mb-3">
             <label for="supervisorSelect" class="form-label">Supervisor</label>
-            <select class="form-control select2" id="supervisorSelect" name="supervisor_id" style="width: 100%;">
+            <select class="form-control select2" id="supervisorSelect" name="supervisor" style="width: 100%;">
               @foreach($supervisors as $d)
                 <option value="{{$d->id_anggota}}">{{$d->nama}}</option>
               @endforeach
