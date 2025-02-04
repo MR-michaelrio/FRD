@@ -32,7 +32,7 @@
                         $nomor = 1;
                     @endphp
                     @foreach($wilayah as $w)
-                    <tr data-id-wilayah="{{ $w->id_wilayah }}" data-id-supervisor="{{ $w->id_supervisor }}">
+                    <tr data-toggle="modal" data-target="#modal-default" data-id-wilayah="{{ $w->id_wilayah }}" data-id-supervisor="{{ $w->id_supervisor }}">
                         <td>{{ $nomor++ }}</td>
                         <td>{{ $w->nama_wilayah }}</td>
                         <td>{{ $w->supervisor ?? 'Tidak Ada' }}</a>
