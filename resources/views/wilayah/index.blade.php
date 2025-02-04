@@ -81,7 +81,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ route('wilayah.update', ['wilayah' => ':wilayahId']) }}" method="POST" id="formSupervisor">
+        <form action="/wilayah/:wilayahId" method="POST" id="formSupervisor">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -111,7 +111,7 @@ $(document).ready(function () {
         console.log('wilayahId:', wilayahId);
         console.log('supervisorId:', supervisorId);
 
-        // Get the form action and replace :wilayahId with the actual wilayahId
+        // Update the form action by replacing :wilayahId with the actual wilayahId
         var formAction = $('#formSupervisor').attr('action');
         formAction = formAction.replace(':wilayahId', wilayahId); // Replace :wilayahId with actual wilayahId
         
@@ -125,6 +125,7 @@ $(document).ready(function () {
         $('#supervisorSelect').val(supervisorId).trigger('change'); // Set and update the select2 dropdown
     });
 });
+
 
 
 
