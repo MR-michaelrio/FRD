@@ -82,9 +82,8 @@
       </div>
       <div class="modal-body">
         <form action="" method="POST" id="formSupervisor">
-        @method('PUT')
-
             @csrf
+            @method('PUT')
             <div class="form-group">
                 <label for="supervisor">Supervisor Name</label>
                 <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
@@ -102,7 +101,7 @@
 </div>
 
 <script>
-$(document).ready(function () {
+    $(document).ready(function () {
     // Ketika baris tabel diklik
     $('tr[data-toggle="modal"]').on('click', function () {
         var wilayahId = $(this).data('id'); // Ambil ID wilayah dari data-id
@@ -114,31 +113,10 @@ $(document).ready(function () {
         // Set ID wilayah di input tersembunyi
         $('#supervisorId').val(wilayahId);
 
-        // Reset atau bersihkan form sebelumnya
-        $('#supervisorName').val(''); // Kosongkan field supervisor jika ada
-        $('#statusSelect').val(''); // Kosongkan field status jika ada
-
-        // Tentukan jenis update yang akan dilakukan
-        var status = $(this).data('status'); // Ambil status atau supervisor dari data-* attributes
-        
-        // Jika update status
-        if (status) {
-            // Tentukan status yang dipilih
-            $('#statusSelect').val(status);
-            // Set form action sesuai dengan pembaruan status
-            $('#formSupervisor').attr('action', actionUrl + '/update-status');
-            $('#supervisorName').prop('disabled', true); // Matikan input supervisor untuk update status
-        } else {
-            // Jika update supervisor
-            $('#supervisorName').prop('disabled', false); // Nyalakan input supervisor untuk update supervisor
-            $('#formSupervisor').attr('action', actionUrl + '/update-supervisor'); // Set form action untuk update supervisor
-        }
-
-        // Tampilkan modal
+        // Show modal
         $('#modal-default').modal('show');
     });
 });
-
 </script>
 
 
