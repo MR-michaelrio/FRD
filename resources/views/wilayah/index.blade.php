@@ -59,10 +59,9 @@
                                     <button class="btn btn-warning btn-sm" onclick="updateStatus({{ $w->id_wilayah }}, 'menunggu persetujuan')">Menunggu Persetujuan</button>
                                     <button class="btn btn-success btn-sm" onclick="updateStatus({{ $w->id_wilayah }}, 'disetujui')">Disetujui</button>
                                 @endif
+                                <button class="btn btn-info btn-sm" onclick="openUpdateModal({{ $w->id_wilayah }}, '{{ $w->nama_wilayah }}', {{ $w->supervisor_id ?? 'null' }})">Update</button>
+
                             </div>
-                        </td>
-                        <td>
-                            <button class="btn btn-info btn-sm" onclick="openUpdateModal({{ $w->id_wilayah }}, '{{ $w->nama_wilayah }}', {{ $w->supervisor_id ?? 'null' }})">Update</button>
                         </td>
                     </tr>
                     @endforeach
