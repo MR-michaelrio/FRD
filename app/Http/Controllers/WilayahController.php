@@ -81,7 +81,7 @@ class WilayahController extends Controller
     {
         // Temukan wilayah berdasarkan ID
         $wilayah = Wilayah::where('id_wilayah',$id)->first();
-        Log::info('Updating status to: ' . $wilayah);
+        Log::info('Updating status to: ' . $request);
 
         // Menangani logika pembaruan berdasarkan field yang diterima
         if ($request->has('status')) {
