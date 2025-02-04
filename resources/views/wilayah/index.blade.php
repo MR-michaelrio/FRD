@@ -101,34 +101,18 @@
 </div>
 
 <script>
-$(document).ready(function () {
-    // When any <tr> with data-toggle="modal" is clicked
-    $('tr[data-toggle="modal"]').on('click', function () {
-        // Log the entire row to see what data is available
-        console.log($(this));
-
-        // Retrieve the attributes from the clicked row
-        var wilayahId = $(this).data('id'); // Get the wilayah ID from data-id attribute
-        var supervisorId = $(this).data('supervisor-id'); // Get the supervisor ID from data-supervisor-id
-
-        // Log the variables for debugging
-        console.log('wilayahId:', wilayahId);
-        console.log('supervisorId:', supervisorId);
-
-        // Ensure the form action is dynamically updated with the correct wilayahId
-        var formAction = $('#formSupervisor').attr('action');
-        formAction = formAction.replace('replace_id', wilayahId);
-        $('#formSupervisor').attr('action', formAction);
-
-        // Set supervisorId to the hidden input field (supervisorId is the wilayahId for now)
-        $('#supervisorId').val(wilayahId);
-
-        // Set the supervisor dropdown value if applicable
-        // Ensure the select element has the correct ID and values
-        $('#supervisorSelect').val(supervisorId).trigger('change');
-    });
+    $('#modal-default').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // The button that triggered the modal
+    var id = button.data('id'); // Extract the data-id attribute
+    var supervisorId = button.data('supervisor-id'); // Extract the data-supervisor-id attribute
+    
+    // Update the form action to include the ID of the wilayah
+    var form = $('#formSupervisor');
+    form.attr('action', '/wilayah/' + id); // Update the form action dynamically
+    
+    // Set the supervisor ID in the hidden input field
+    $('#supervisorId').val(supervisorId);
 });
-
 
 function updateStatus(wilayahId, newStatus) {
     // Buat data untuk dikirim    
