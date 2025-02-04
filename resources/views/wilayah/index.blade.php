@@ -132,6 +132,9 @@ function saveUpdate(idWilayah) {
 // Mengirimkan data ke server untuk update menggunakan fetch
   fetch('/wilayah/' + idWilayah, {
     method: 'PUT',
+    headers: {
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+    },
     body: formData,
   })
   .then(response => response.json())  // Mengonversi response ke JSON
