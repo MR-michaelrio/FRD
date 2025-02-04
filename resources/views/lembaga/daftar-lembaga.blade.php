@@ -44,15 +44,19 @@
         @endif
         <div class="row align-items-center">
             <div class="col-md-4 logo-container text-center">
-                <img src="{{asset('img/logo-04.jpg')}}" alt="Logo Lembaga" class="img-fluid">
+                <img src="{{ asset('img/logo-04.jpg') }}" alt="Logo Lembaga" class="img-fluid">
             </div>
             <div class="col-md-8">
                 <h2 class="h4 text-center">Form Registrasi Lembaga</h2>
-                <form action="{{ route('lembaga.store') }}" id="myForm" method="post">
+                <form action="{{ route('lembaga.store') }}" id="myForm" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-2">
                         <label class="form-label">Nama Lembaga</label>
                         <input type="text" class="form-control" name="nama_lembaga" required>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Logo Lembaga</label>
+                        <input type="file" class="form-control" name="logo_lembaga" accept="image/*" required>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Daftar</button>
                 </form>
