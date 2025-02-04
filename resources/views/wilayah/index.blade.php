@@ -32,10 +32,12 @@
                         $nomor = 1;
                     @endphp
                     @foreach($wilayah as $w)
-                    <tr class="clickable-row" data-id="{{ $w->id_wilayah }}" data-supervisor="{{ $w->supervisor }}">
+                    <tr>
                         <td>{{ $nomor++ }}</td>
                         <td>{{ $w->nama_wilayah }}</td>
-                        <td>{{ $w->supervisor }}</td>
+                        <td>  
+                            <a href="#" class="open-form" data-id="{{ $w->id }}">{{ $w->supervisor }}</a>
+                        </td>
                         <td id="status-{{ $w->id_wilayah }}">
                             @if($w->status == 'menunggu persetujuan')
                                 <button class="btn btn-warning btn-sm" disabled>Menunggu Persetujuan</button>
@@ -69,54 +71,46 @@
     </div>
     <!-- /.card -->
 </div>
-
-<!-- Modal Edit Supervisor -->
-<div class="modal fade" id="editSupervisorModal" tabindex="-1" role="dialog" aria-labelledby="editSupervisorModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editSupervisorModalLabel">Edit Supervisor</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="editSupervisorForm">
-                    <input type="hidden" id="id_wilayah" name="id_wilayah">
-                    <div class="form-group">
-                        <label for="supervisor">Supervisor</label>
-                        <select id="supervisor" name="supervisor" class="form-control select2" style="width: 100%;">
-                            <option value="">Pilih Supervisor</option>
-                            @foreach($supervisors as $supervisor)
-                                <option value="{{ $supervisor->id_anggota }}">{{ $supervisor->nama }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </form>
-            </div>
-        </div>
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="formModalLabel">Form Supervisor</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ route('supervisor.update') }}" method="POST">
+          @csrf
+          <div class="form-group">
+            <label for="supervisorName">Supervisor Name</label>
+            <input type="text" class="form-control" id="supervisorName" name="supervisor" required>
+          </div>
+          <input type="hidden" name="id" id="supervisorId">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
     </div>
+  </div>
 </div>
 
 <script>
-$(document).ready(function() {
-    // Inisialisasi Select2
-    $('.select2').select2();
-
-    // Klik pada <tr> untuk membuka modal
-    $('.clickable-row').click(function() {
-        let idWilayah = $(this).data('id');
-        let supervisor = $(this).data('supervisor');
-
-        // Set nilai ke modal
-        $('#id_wilayah').val(idWilayah);
-        $('#supervisor').val(supervisor).trigger('change');
-
-        // Tampilkan modal
-        $('#editSupervisorModal').modal('show');
+  $(document).ready(function() {
+    // Open modal when supervisor link is clicked
+    $('.open-form').on('click', function(e) {
+      e.preventDefault();
+      var supervisorId = $(this).data('id');  // Get the ID from data-id attribute
+      var supervisorName = $(this).text();    // Get the supervisor name
+      
+      // Set the modal values
+      $('#supervisorId').val(supervisorId);
+      $('#supervisorName').val(supervisorName);
+      
+      // Show the modal
+      $('#formModal').modal('show');
     });
-});
+  });
 </script>
 
 
@@ -196,6 +190,5 @@ function updateStatusLabel(wilayahId, newStatus) {
         statusColumn.innerHTML = `<button class="btn btn-danger btn-sm" disabled>Ditolak</button>`;
     }
 }
-</script>
 </script>
 @endsection
