@@ -140,6 +140,7 @@ function saveUpdate(idWilayah) {
   .then(response => response.json())  // Mengonversi response ke JSON
   .then(data => {
     // Handle response sukses
+    console.log("data",data);
     if (data.success) {
       alert('Data berhasil diperbarui!');
     } else {
