@@ -96,13 +96,13 @@
                     <option data-select2-id="38">Washington</option>
                   </select>
 
-                <select class="form-control select2" style="width: 100%;" name="supervisor" id="supervisor" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                <!-- <select class="form-control select2" style="width: 100%;" name="supervisor" id="supervisor" data-select2-id="1" tabindex="-1" aria-hidden="true">
                     <option value="test">test</option>
 
                     @foreach($supervisors as $d)
                         <option value="{{$d->id_anggota}}">{{$d->nama}}</option>
                     @endforeach
-                </select>
+                </select> -->
             </div>
             <input type="hidden" name="id" id="supervisorId">
             <button type="submit" class="btn btn-primary">Submit</button>
