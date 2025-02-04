@@ -81,7 +81,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="/wilayah/:wilayahId" method="POST" id="formSupervisor">
+        <form action="" method="POST" id="formSupervisor">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -102,27 +102,25 @@
 
 <script>
 $(document).ready(function () {
-    // When any <tr> is clicked that has the data-toggle="modal"
+    // When any <tr> with data-toggle="modal" is clicked
     $('tr[data-toggle="modal"]').on('click', function () {
+        // Log the whole row to see what data is available
+        console.log($(this));
+
+        // Retrieve the attributes from the clicked row
         var wilayahId = $(this).data('id'); // Get the wilayah ID from data-id attribute
         var supervisorId = $(this).data('supervisor-id'); // Get the supervisor ID from data-supervisor-id
 
-        // Log to the console for debugging
+        // Log the variables for debugging
         console.log('wilayahId:', wilayahId);
         console.log('supervisorId:', supervisorId);
 
-        // Update the form action by replacing :wilayahId with the actual wilayahId
+        // Your original code to update form action and dropdown values
         var formAction = $('#formSupervisor').attr('action');
-        formAction = formAction.replace(':wilayahId', wilayahId); // Replace :wilayahId with actual wilayahId
-        
-        // Set the form action dynamically
+        formAction = formAction.replace('replace_id', wilayahId);
         $('#formSupervisor').attr('action', formAction);
-
-        // Set the supervisor ID to the hidden input field
-        $('#supervisorId').val(wilayahId); // Set supervisorId as the hidden input value
-
-        // Set the supervisor dropdown value, and trigger change to update the select2 dropdown
-        $('#supervisorSelect').val(supervisorId).trigger('change'); // Set and update the select2 dropdown
+        $('#supervisorId').val(wilayahId);
+        $('#supervisorSelect').val(supervisorId).trigger('change');
     });
 });
 
