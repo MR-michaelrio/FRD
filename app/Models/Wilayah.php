@@ -14,4 +14,9 @@ class Wilayah extends Model
     protected $primaryKey = 'id_wilayah';
 
     protected $fillable = ['nama_wilayah', 'supervisor', 'status'];
+
+    public function anggota()
+    {
+        return $this->belongsTo(anggota::class,'supervisor', 'id_anggota');
+    }
 }

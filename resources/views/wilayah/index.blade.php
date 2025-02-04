@@ -86,7 +86,7 @@
           <div class="mb-3">
             <label for="namaWilayah" class="form-label">Nama Wilayah</label>
             <input type="text" class="form-control" id="namaWilayah" name="nama_wilayah" required>
-            <input type="text" class="form-control" id="idWilayah" name="id_wilayah" required>
+            <input type="hidden" class="form-control" id="idWilayah" name="id_wilayah" required>
           </div>
           <div class="mb-3">
             <label for="supervisorSelect" class="form-label">Supervisor</label>
