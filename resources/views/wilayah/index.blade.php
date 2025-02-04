@@ -75,7 +75,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Supervisor</h5>
+                <h5 class="modal-title" id="editSupervisorModalLabel">Edit Supervisor</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -102,11 +102,9 @@
 <script>
 $(document).ready(function() {
     // Inisialisasi Select2
-    $('.select2').select2({
-        dropdownParent: $('#editSupervisorModal')
-    });
+    $('.select2').select2();
 
-    // Klik baris tabel untuk edit supervisor
+    // Klik pada <tr> untuk membuka modal
     $('.clickable-row').click(function() {
         let idWilayah = $(this).data('id');
         let supervisor = $(this).data('supervisor');
@@ -118,33 +116,9 @@ $(document).ready(function() {
         // Tampilkan modal
         $('#editSupervisorModal').modal('show');
     });
-
-    // Handle submit form
-    $('#editSupervisorForm').submit(function(e) {
-        e.preventDefault();
-
-        let idWilayah = $('#id_wilayah').val();
-        let supervisorId = $('#supervisor').val();
-
-        $.ajax({
-            url: '/update-supervisor', // Sesuaikan dengan route update supervisor
-            method: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-                id_wilayah: idWilayah,
-                supervisor: supervisorId
-            },
-            success: function(response) {
-                alert('Supervisor berhasil diperbarui!');
-                location.reload(); // Reload halaman setelah update
-            },
-            error: function(err) {
-                alert('Terjadi kesalahan.');
-            }
-        });
-    });
 });
 </script>
+
 
 <script>
 function updateStatus(wilayahId, newStatus) {
