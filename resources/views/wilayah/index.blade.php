@@ -36,7 +36,7 @@
                         <td>{{ $nomor++ }}</td>
                         <td>{{ $w->nama_wilayah }}</td>
                         <td>  
-                            <a href="#" class="open-form" data-id="{{ $w->id_wilayah }}">{{ $w->supervisor }} ?? Tidak Ada</a>
+                            <a href="#" data-toggle="modal" data-target="#modal-default" data-id="{{ $w->id_wilayah }}">{{ $w->supervisor }} ?? Tidak Ada</a>
                         </td>
                         <td id="status-{{ $w->id_wilayah }}">
                             @if($w->status == 'menunggu persetujuan')
@@ -71,7 +71,8 @@
     </div>
     <!-- /.card -->
 </div>
-<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="modal-default" aria-hidden="true" style="display: none;">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
