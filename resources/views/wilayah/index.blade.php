@@ -98,7 +98,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="saveChangesButton">Save changes</button>
+        <button type="submit" class="btn btn-primary" id="saveChangesButton">Save changes</button>
       </div>
       </form>
 
@@ -128,8 +128,9 @@
   // Fungsi untuk menyimpan perubahan
 function saveUpdate(idWilayah) {
   var formData = new FormData(document.getElementById('updateForm'));
-console.log(formData);
-  // Mengirimkan data ke server untuk update menggunakan fetch
+  formData.forEach(function(value, key) {
+  console.log(key + ": " + value);
+});  // Mengirimkan data ke server untuk update menggunakan fetch
   fetch('/wilayah/' + idWilayah, {
     method: 'POST',
     body: formData,
