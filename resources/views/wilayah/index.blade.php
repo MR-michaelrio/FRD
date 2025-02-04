@@ -80,8 +80,9 @@
       <div class="modal-header">
         <h5 class="modal-title" id="updateModalLabel">Update Wilayah</h5>
       </div>
+      <form id="updateForm">
+
       <div class="modal-body">
-        <form id="updateForm">
           <div class="mb-3">
             <label for="namaWilayah" class="form-label">Nama Wilayah</label>
             <input type="text" class="form-control" id="namaWilayah" name="nama_wilayah" required>
@@ -94,12 +95,13 @@
               @endforeach
             </select>
           </div>
-        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" id="saveChangesButton">Save changes</button>
       </div>
+      </form>
+
     </div>
   </div>
 </div>
