@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Wilayah;
+use App\Models\anggota;
 use Illuminate\Support\Facades\Log;
 
 class WilayahController extends Controller
@@ -16,7 +17,8 @@ class WilayahController extends Controller
     public function index()
     {
         $wilayah = Wilayah::all();
-        return view("wilayah.index", compact("wilayah"));
+        $supervisors = anggota::all();
+        return view("wilayah.index", compact("wilayah", "supervisors"));
     }
 
     /**

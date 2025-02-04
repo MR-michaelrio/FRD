@@ -32,7 +32,7 @@
                         $nomor = 1;
                     @endphp
                     @foreach($wilayah as $w)
-                    <tr>
+                    <tr class="clickable-row" data-id="{{ $w->id_wilayah }}" data-supervisor="{{ $w->supervisor }}">
                         <td>{{ $nomor++ }}</td>
                         <td>{{ $w->nama_wilayah }}</td>
                         <td>{{ $w->supervisor }}</td>
@@ -69,6 +69,83 @@
     </div>
     <!-- /.card -->
 </div>
+
+<!-- Modal Edit Supervisor -->
+<div class="modal fade" id="editSupervisorModal" tabindex="-1" role="dialog" aria-labelledby="editSupervisorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Supervisor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editSupervisorForm">
+                    <input type="hidden" id="id_wilayah" name="id_wilayah">
+                    <div class="form-group">
+                        <label for="supervisor">Supervisor</label>
+                        <select id="supervisor" name="supervisor" class="form-control select2" style="width: 100%;">
+                            <option value="">Pilih Supervisor</option>
+                            @foreach($supervisors as $supervisor)
+                                <option value="{{ $supervisor->id_anggota }}">{{ $supervisor->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    // Inisialisasi Select2
+    $('.select2').select2({
+        dropdownParent: $('#editSupervisorModal')
+    });
+
+    // Klik baris tabel untuk edit supervisor
+    $('.clickable-row').click(function() {
+        let idWilayah = $(this).data('id');
+        let supervisor = $(this).data('supervisor');
+
+        // Set nilai ke modal
+        $('#id_wilayah').val(idWilayah);
+        $('#supervisor').val(supervisor).trigger('change');
+
+        // Tampilkan modal
+        $('#editSupervisorModal').modal('show');
+    });
+
+    // Handle submit form
+    $('#editSupervisorForm').submit(function(e) {
+        e.preventDefault();
+
+        let idWilayah = $('#id_wilayah').val();
+        let supervisorId = $('#supervisor').val();
+
+        $.ajax({
+            url: '/update-supervisor', // Sesuaikan dengan route update supervisor
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                id_wilayah: idWilayah,
+                supervisor: supervisorId
+            },
+            success: function(response) {
+                alert('Supervisor berhasil diperbarui!');
+                location.reload(); // Reload halaman setelah update
+            },
+            error: function(err) {
+                alert('Terjadi kesalahan.');
+            }
+        });
+    });
+});
+</script>
+
 <script>
 function updateStatus(wilayahId, newStatus) {
     // Buat data untuk dikirim    
