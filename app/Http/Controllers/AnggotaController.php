@@ -151,6 +151,6 @@ class AnggotaController extends Controller
             'id_anggota' => $a->id_anggota
         ]);
 
-        return redirect()->route('anggota.indexdaftar')->with('success', 'Data Berhasil Ditambahkan');
+        return redirect()->back()->with('success', 'Data Berhasil Ditambahkan');
     }
 }

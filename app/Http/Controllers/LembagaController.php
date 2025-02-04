@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Lembaga;
 
 class LembagaController extends Controller
 {
@@ -38,7 +39,28 @@ class LembagaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_lembaga' => 'required|string|max:255',
+            'logo_lembaga' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Maks 2MB
+        ]);
+
+        // Simpan logo jika ada
+        if ($request->hasFile('logo_lembaga')) {
+            $file = $request->file('logo_lembaga');
+            $filename = time() . '_' . $file->getClientOriginalName(); // Buat nama unik
+            $file->move(public_path('lembaga'), $filename); // Simpan ke public/logos
+            $logoPath = 'lembaga/' . $filename; // Path untuk disimpan di database
+        } else {
+            $logoPath = null;
+        }
+
+        // Simpan data ke database
+        Lembaga::create([
+            'nama_lembaga' => $request->nama_lembaga,
+            'logo_lembaga' => $logoPath,
+        ]);
+
+        return redirect()->back()->with('success', 'Lembaga berhasil didaftarkan!');
     }
 
     /**
