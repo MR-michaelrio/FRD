@@ -36,7 +36,7 @@
                         <td>{{ $nomor++ }}</td>
                         <td>{{ $w->nama_wilayah }}</td>
                         <td>  
-                            <a href="#" class="open-form" data-id="{{ $w->id }}">{{ $w->supervisor }}</a>
+                            <a href="#" class="open-form" data-id="{{ $w->id_wilayah }}">{{ $w->supervisor }}</a>
                         </td>
                         <td id="status-{{ $w->id_wilayah }}">
                             @if($w->status == 'menunggu persetujuan')
