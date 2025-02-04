@@ -92,7 +92,7 @@
                     @endforeach
                 </select>
             </div>
-            <input type="hidden" name="id" id="supervisorId">
+            <input type="text" name="id" id="supervisorId">
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
@@ -111,10 +111,12 @@ $(document).ready(function () {
         console.log('wilayahId:', wilayahId);
         console.log('supervisorId:', supervisorId);
 
-        // Update the form action to include the correct wilayahId
-        var formAction = $('#formSupervisor').attr('action'); // Get current action URL from the form
-        formAction = formAction.replace(':id', wilayahId); // Replace :id with actual wilayahId
-        $('#formSupervisor').attr('action', formAction); // Set the form action dynamically
+        // Get the form action and replace :wilayahId with the actual wilayahId
+        var formAction = $('#formSupervisor').attr('action');
+        formAction = formAction.replace(':wilayahId', wilayahId); // Replace :wilayahId with actual wilayahId
+        
+        // Set the form action dynamically
+        $('#formSupervisor').attr('action', formAction);
 
         // Set the supervisor ID to the hidden input field
         $('#supervisorId').val(wilayahId); // Set supervisorId as the hidden input value
@@ -123,6 +125,7 @@ $(document).ready(function () {
         $('#supervisorSelect').val(supervisorId).trigger('change'); // Set and update the select2 dropdown
     });
 });
+
 
 
 
