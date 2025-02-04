@@ -175,7 +175,7 @@
     <script>
         $(document).ready(function () {
             $('#dateInput').datepicker();
-            $('.select2bs4').select2({
+            $('.select2').select2({
                 theme: "bootstrap4" // Optional theme, use "default" or customize as needed
             });
         });
@@ -184,9 +184,7 @@
     <script>
         $(function () {
             
-            $('.select2').select2({
-                theme: "bootstrap4" // Optional theme, use "default" or customize as needed
-            });
+            
         });
     </script>
     <script>
