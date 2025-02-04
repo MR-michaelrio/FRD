@@ -36,7 +36,7 @@
                         <td>{{ $nomor++ }}</td>
                         <td>{{ $w->nama_wilayah }}</td>
                         <td>  
-                            <a href="#" data-toggle="modal" data-target="#modal-default" data-id="{{ $w->id_wilayah }}">{{ $w->supervisor }} ?? Tidak Ada</a>
+                            <a href="#" data-toggle="modal" data-target="#modal-default" data-id="{{ $w->id_wilayah }}">{{ $w->supervisor ?? Tidak Ada }} </a>
                         </td>
                         <td id="status-{{ $w->id_wilayah }}">
                             @if($w->status == 'menunggu persetujuan')
