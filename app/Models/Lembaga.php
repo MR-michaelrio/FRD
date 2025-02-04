@@ -13,5 +13,5 @@ class Lembaga extends Model
 
     protected $primaryKey = 'id_lembaga';
 
-    protected $fillable = ['nama_lembaga', 'id_supervisor', 'status', 'logo_lembaga'];
+    protected $fillable = ['nama_lembaga', 'logo_lembaga'];
 }
