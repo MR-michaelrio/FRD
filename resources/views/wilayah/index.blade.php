@@ -126,10 +126,6 @@ $(document).ready(function () {
     });
 });
 
-
-
-
-
 function updateStatus(wilayahId, newStatus) {
     // Buat data untuk dikirim    
     // Kirim request dengan fetch

@@ -125,6 +125,8 @@
     <!-- ./wrapper -->
 
     <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="{{asset('layout/plugins/jquery/jquery.min.js')}}"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{{asset('layout/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
