@@ -77,16 +77,35 @@ class WilayahController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function update(Request $request, $id)
-     {
-     
-         $wilayah = Wilayah::find($id);
-         Log::info('Received request status: ' . $request->status);
-         $wilayah->status = $request->status;
-         $wilayah->save();
-     
-         return response()->json(['success' => true, 'message' => 'Status wilayah berhasil diperbarui.']);
-     }
+    public function update(Request $request, $id)
+    {
+        // Temukan wilayah berdasarkan ID
+        $wilayah = Wilayah::findOrFail($id);
+
+        // Menangani logika pembaruan berdasarkan field yang diterima
+        if ($request->has('status')) {
+            // Jika status yang diterima, perbarui status
+            Log::info('Updating status to: ' . $request->status);
+            $wilayah->status = $request->status;
+        }
+
+        if ($request->has('supervisor')) {
+            // Jika supervisor yang diterima, perbarui supervisor
+            Log::info('Updating supervisor to: ' . $request->supervisor);
+            $wilayah->supervisor = $request->supervisor;
+        }
+        
+        // Simpan perubahan ke database
+        $wilayah->save();
+
+        // Kembalikan response JSON dengan pesan sukses
+        return response()->json([
+            'success' => true,
+            'message' => 'Data wilayah berhasil diperbarui.'
+        ]);
+    }
+
+
      
 
     /**

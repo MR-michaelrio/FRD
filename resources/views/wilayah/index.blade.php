@@ -35,8 +35,7 @@
                     <tr data-toggle="modal" data-target="#modal-default" data-id="{{ $w->id_wilayah }}">
                         <td>{{ $nomor++ }}</td>
                         <td>{{ $w->nama_wilayah }}</td>
-                        <td>  
-                            <a href="#" >{{ $w->supervisor ?? 'Tidak Ada' }} </a>
+                        <td>{{ $w->supervisor ?? 'Tidak Ada' }}</a>
                         </td>
                         <td id="status-{{ $w->id_wilayah }}">
                             @if($w->status == 'menunggu persetujuan')
@@ -82,8 +81,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ route('wilayah.update') }}" method="POST">
+        <form action="" method="POST" id="formSupervisor">
             @csrf
+            @method('PUT')
             <div class="form-group">
                 <label for="supervisor">Supervisor Name</label>
                 <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
@@ -101,21 +101,43 @@
 </div>
 
 <script>
-    $(document).ready(function() {
-        // Open modal when supervisor link is clicked
-        $('.open-form').on('click', function(e) {
-        e.preventDefault();
-        var supervisorId = $(this).data('id');  // Get the ID from data-id attribute
-        var supervisorName = $(this).text();    // Get the supervisor name
+$(document).ready(function () {
+    // Ketika baris tabel diklik
+    $('tr[data-toggle="modal"]').on('click', function () {
+        var wilayahId = $(this).data('id'); // Ambil ID wilayah dari data-id
+        var actionUrl = '/wilayah/' + wilayahId; // URL untuk form update
+
+        // Set form action ke rute yang benar
+        $('#formSupervisor').attr('action', actionUrl);
         
-        // Set the modal values
-        $('#supervisorId').val(supervisorId);
-        $('#supervisorName').val(supervisorName);
+        // Set ID wilayah di input tersembunyi
+        $('#supervisorId').val(wilayahId);
+
+        // Reset atau bersihkan form sebelumnya
+        $('#supervisorName').val(''); // Kosongkan field supervisor jika ada
+        $('#statusSelect').val(''); // Kosongkan field status jika ada
+
+        // Tentukan jenis update yang akan dilakukan
+        var status = $(this).data('status'); // Ambil status atau supervisor dari data-* attributes
         
-        // Show the modal
-        $('#formModal').modal('show');
-        });
+        // Jika update status
+        if (status) {
+            // Tentukan status yang dipilih
+            $('#statusSelect').val(status);
+            // Set form action sesuai dengan pembaruan status
+            $('#formSupervisor').attr('action', actionUrl + '/update-status');
+            $('#supervisorName').prop('disabled', true); // Matikan input supervisor untuk update status
+        } else {
+            // Jika update supervisor
+            $('#supervisorName').prop('disabled', false); // Nyalakan input supervisor untuk update supervisor
+            $('#formSupervisor').attr('action', actionUrl + '/update-supervisor'); // Set form action untuk update supervisor
+        }
+
+        // Tampilkan modal
+        $('#modal-default').modal('show');
     });
+});
+
 </script>
 
 
