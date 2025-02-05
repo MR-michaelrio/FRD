@@ -6,10 +6,19 @@
     <title>Form Registrasi Wilayah</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
         .form-container {
             max-width: 900px;
             width: 100%;
-            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .logo-container img {
             max-width: 100%;
@@ -26,10 +35,10 @@
         }
     </style>
 </head>
-<body class="bg-light d-flex justify-content-center align-items-center p-4">
-    <div class="container p-4 bg-white rounded shadow-lg form-container">
+<body class="bg-light">
+    <div class="form-container">
         @if(session('success'))
-            <div class="alert alert-warning text-center" role="alert">
+            <div class="alert alert-success text-center" role="alert">
                 {{ session('success') }}
             </div>
         @endif
