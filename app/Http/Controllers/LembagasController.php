@@ -103,21 +103,21 @@ class LembagasController extends Controller
         // Cek jika ada file baru yang diupload
         if ($request->hasFile('logo_lembaga')) {
             // Hapus logo lama jika ada
-            if ($lembaga->logo_lembaga && File::exists(public_path('lembaga/' . $lembaga->logo_lembaga))) {
-                File::delete(public_path('lembaga/' . $lembaga->logo_lembaga));
+            if ($lembaga->logo_lembaga && File::exists(public_path('logo_lembaga/' . $lembaga->logo_lembaga))) {
+                File::delete(public_path('logo_lembaga/' . $lembaga->logo_lembaga));
             }
 
             // Simpan logo baru di public/lembaga/
             $file = $request->file('logo_lembaga');
             $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('lembaga'), $filename);
+            $file->move(public_path('logo_lembaga'), $filename);
             $lembaga->logo_lembaga = $filename;
         }
 
         $lembaga->nama_lembaga = $request->nama_lembaga;
         $lembaga->save();
 
-        return redirect()->route('lembaga.index')->with('success', 'Lembaga berhasil diperbarui!');
+        return redirect()->route('lembagas.index')->with('success', 'Lembaga berhasil diperbarui!');
     }
 
     /**
@@ -132,12 +132,12 @@ class LembagasController extends Controller
 
         // Hapus file logo jika ada
         if ($lembaga->logo_lembaga && File::exists(public_path('lembaga/' . $lembaga->logo_lembaga))) {
-            File::delete(public_path('lembaga/' . $lembaga->logo_lembaga));
+            File::delete(public_path('logo_lembaga/' . $lembaga->logo_lembaga));
         }
 
         // Hapus data dari database
         $lembaga->delete();
 
-        return redirect()->route('lembaga.index')->with('success', 'Lembaga berhasil dihapus!');
+        return redirect()->route('lembagas.index')->with('success', 'Lembaga berhasil dihapus!');
     }
 }
