@@ -26,7 +26,7 @@ class LembagasController extends Controller
      */
     public function create()
     {
-        //
+        return view("lembaga.daftar-lembaga");
     }
 
     /**
