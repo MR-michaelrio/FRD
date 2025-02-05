@@ -9,7 +9,7 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Edit Lembaga</h4>
-            <form action="{{ route('lembaga.update', $lembaga->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('lembaga.update', $lembaga->id_lembaga) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
