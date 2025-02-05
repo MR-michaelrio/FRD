@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Lembaga;
-use Illuminate\Support\Facades\File;
 
 class LembagaController extends Controller
 {
@@ -84,8 +83,7 @@ class LembagaController extends Controller
      */
     public function edit($id)
     {
-        $lembaga = Lembaga::findOrFail($id);
-        return view('lembaga.edit', compact('lembaga'));
+        //
     }
 
     /**
@@ -97,31 +95,7 @@ class LembagaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama_lembaga' => 'required|string|max:255',
-            'logo_lembaga' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Maks 2MB
-        ]);
-
-        $lembaga = Lembaga::findOrFail($id);
-
-        // Cek jika ada file baru yang diupload
-        if ($request->hasFile('logo_lembaga')) {
-            // Hapus logo lama jika ada
-            if ($lembaga->logo_lembaga && File::exists(public_path('lembaga/' . $lembaga->logo_lembaga))) {
-                File::delete(public_path('lembaga/' . $lembaga->logo_lembaga));
-            }
-
-            // Simpan logo baru di public/lembaga/
-            $file = $request->file('logo_lembaga');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('lembaga'), $filename);
-            $lembaga->logo_lembaga = $filename;
-        }
-
-        $lembaga->nama_lembaga = $request->nama_lembaga;
-        $lembaga->save();
-
-        return redirect()->route('lembaga.index')->with('success', 'Lembaga berhasil diperbarui!');
+        //
     }
 
     /**
@@ -132,16 +106,6 @@ class LembagaController extends Controller
      */
     public function destroy($id)
     {
-        $lembaga = Lembaga::findOrFail($id);
-
-        // Hapus file logo jika ada
-        if ($lembaga->logo_lembaga && File::exists(public_path('lembaga/' . $lembaga->logo_lembaga))) {
-            File::delete(public_path('lembaga/' . $lembaga->logo_lembaga));
-        }
-
-        // Hapus data dari database
-        $lembaga->delete();
-
-        return redirect()->route('lembaga.index')->with('success', 'Lembaga berhasil dihapus!');
+        //
     }
 }
