@@ -45,7 +45,7 @@ class WilayahController extends Controller
             "status" => "menunggu persetujuan"
         ]);
 
-        return redirect()->route('daftar-wilayah')->with('success', 'Wilayah Baru Sedang Dalam Pengajuan');
+        return redirect()->route('wilayah.create')->with('success', 'Wilayah Baru Sedang Dalam Pengajuan');
     }
 
     /**
