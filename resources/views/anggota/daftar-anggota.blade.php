@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <div class="mb-2">
+                        <div class="col-md-6">
                             <label class="form-label">Nama Lembaga</label>
                             <input type="text" class="form-control" name="lembaga" required>
                         </div>
