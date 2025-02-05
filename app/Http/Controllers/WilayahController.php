@@ -14,6 +14,7 @@ class WilayahController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $wilayah = Wilayah::all();
@@ -110,9 +111,6 @@ class WilayahController extends Controller
             'data' => $wilayah // Menampilkan data wilayah yang baru diperbarui
         ]);
     }
-
-
-     
 
     /**
      * Remove the specified resource from storage.
