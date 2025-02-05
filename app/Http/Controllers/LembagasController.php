@@ -117,7 +117,7 @@ class LembagasController extends Controller
         $lembaga->nama_lembaga = $request->nama_lembaga;
         $lembaga->save();
 
-        return redirect()->route('lembagas.index')->with('success', 'Lembaga berhasil diperbarui!');
+        return redirect()->route('lembaga.index')->with('success', 'Lembaga berhasil diperbarui!');
     }
 
     /**
@@ -138,6 +138,6 @@ class LembagasController extends Controller
         // Hapus data dari database
         $lembaga->delete();
 
-        return redirect()->route('lembagas.index')->with('success', 'Lembaga berhasil dihapus!');
+        return redirect()->route('lembaga.index')->with('success', 'Lembaga berhasil dihapus!');
     }
 }
