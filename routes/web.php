@@ -75,9 +75,10 @@ use Carbon\Carbon;
     Route::post('/anggota/daftar', [AnggotaController::class, 'daftar'])->name('anggota.daftar');
     Route::get('/form_reg', [AnggotaController::class, 'indexdaftar'])->name('anggota.indexdaftar');
 
-    
     Route::get('/daftar-lembaga', [LembagasController::class, 'create'])->name('lembaga.create');
     Route::get('/daftar-wilayah', [WilayahController::class, 'create'])->name('wilayah.create');
+    Route::post('/lembaga', [LembagasController::class, 'store'])->name('lembaga.store');
+    Route::post('/wilayah', [WilayahController::class, 'store'])->name('wilayah.store');
 
 // });
 
