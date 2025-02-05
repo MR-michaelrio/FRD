@@ -74,6 +74,7 @@ use Carbon\Carbon;
     Route::resource('wilayah', WilayahController::class);
 
     Route::resource('lembaga', LembagasController::class);
+    Route::resource('lembah', LembagasController::class);
     Route::get('/daftar-lembaga', [LembagasController::class, 'indexdaftar'])->name('lembaga.indexdaftar');
 
 // });
