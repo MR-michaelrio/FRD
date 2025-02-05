@@ -42,4 +42,11 @@ Lembaga
         </form>
     </div>
 </div>
+<script>
+    document.querySelector(".custom-file-input").addEventListener("change", function(e) {
+        let fileName = e.target.files[0].name;
+        this.nextElementSibling.innerText = fileName;
+    });
+</script>
+
 @endsection
