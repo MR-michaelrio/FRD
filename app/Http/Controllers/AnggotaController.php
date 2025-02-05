@@ -125,7 +125,7 @@ class AnggotaController extends Controller
 
     public function indexdaftar()
     {
-        $wilayah = Wilayah::all();
+        $wilayah = Wilayah::where("status", "disetujui")->get();
         return view('anggota.daftar-anggota', compact('wilayah'));
     }
 
