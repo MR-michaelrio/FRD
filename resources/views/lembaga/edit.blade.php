@@ -18,12 +18,20 @@ Lembaga
                     <input type="text" class="form-control" name="nama_lembaga" value="{{ $lembaga->nama_lembaga }}" required>
                 </div>
                 <div class="form-group">
-                    <label>Logo</label>
-                    <input type="file" class="form-control" name="logo_lembaga" accept="image/*">
+                    <label for="exampleInputFile">Logo</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="exampleInputFile" name="logo_lembaga" accept="image/*">
+                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                      </div>
+                      <div class="input-group-append">
+                        <span class="input-group-text">Upload</span>
+                      </div>
+                    </div>
                     @if($lembaga->logo_lembaga)
                         <p class="mt-2">Logo Saat Ini:</p>
-                        <img src="{{ asset($lembaga->logo_lembaga) }}" width="100">
-                    @endif                
+                        <img src="{{ asset($lembaga->logo_lembaga) }}" class="img-thumbnail" width="120">
+                    @endif   
                 </div>
             </div>
             <!-- /.card-body -->
