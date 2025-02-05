@@ -30,7 +30,7 @@ Lembaga
                     </div>
                     @if($lembaga->logo_lembaga)
                         <p class="mt-2">Logo Saat Ini:</p>
-                        <img src="{{ asset($lembaga->logo_lembaga) }}" class="img-thumbnail" width="120">
+                        <img src="{{ asset($lembaga->logo_lembaga) }}" class="img-thumbnail" width="250">
                     @endif   
                 </div>
             </div>
