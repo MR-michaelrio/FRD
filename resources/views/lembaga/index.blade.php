@@ -14,7 +14,6 @@
                     <tr>
                         <th>#</th>
                         <th>Nama Lembaga</th>
-                        <th>Logo</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -26,13 +25,6 @@
                     <tr>
                         <td>{{ $nomor++ }}</td>
                         <td>{{ $w->nama_lembaga }}</td>
-                        <td>
-                            @if($w->logo_lembaga)
-                                <img src="{{ asset($w->logo_lembaga) }}" alt="Logo {{ $w->nama_lembaga }}" width="50">
-                            @else
-                                -
-                            @endif
-                        </td>
                         <td>
                             <!-- Tombol Edit -->
                             <a href="{{ route('lembagas.edit', $w->id) }}" class="btn btn-warning btn-sm">Edit</a>
