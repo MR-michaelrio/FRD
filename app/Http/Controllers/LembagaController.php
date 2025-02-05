@@ -12,8 +12,10 @@ class LembagaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
+        dd(Auth::user());
         $lembaga = Lembaga::all();
         return view("lembaga.index", compact("lembaga"));
     }
