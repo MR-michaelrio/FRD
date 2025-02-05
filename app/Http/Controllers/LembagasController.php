@@ -45,8 +45,8 @@ class LembagasController extends Controller
         if ($request->hasFile('logo_lembaga')) {
             $file = $request->file('logo_lembaga');
             $filename = time() . '_' . $file->getClientOriginalName(); // Buat nama unik
-            $file->move(public_path('lembaga'), $filename); // Simpan ke public/logos
-            $logoPath = 'lembaga/' . $filename; // Path untuk disimpan di database
+            $file->move(public_path('logo_lembaga'), $filename); // Simpan ke public/logos
+            $logoPath = 'logo_lembaga/' . $filename; // Path untuk disimpan di database
         } else {
             $logoPath = null;
         }
