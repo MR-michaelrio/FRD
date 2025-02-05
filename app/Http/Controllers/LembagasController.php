@@ -14,8 +14,8 @@ class LembagasController extends Controller
      */
     public function index()
     {
-        //
-        dd(Auth::user());
+        $lembaga = Lembaga::index();
+        return view("lembaga.index", compact("lembaga"));
     }
 
     /**
