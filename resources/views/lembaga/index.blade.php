@@ -38,11 +38,7 @@
                             <a href="{{ route('lembaga.edit', $w->id) }}" class="btn btn-warning btn-sm">Edit</a>
 
                             <!-- Tombol Hapus -->
-                            <form action="{{ route('lembaga.destroy', $w->id) }}" method="POST" style="display:inline;" onsubmit="return confirmDelete()">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
+                            
                         </td>
                     </tr>
                     @endforeach
