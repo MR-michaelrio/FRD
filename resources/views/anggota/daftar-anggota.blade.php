@@ -63,7 +63,7 @@
                             <label class="form-label">Wilayah</label>
                             <select class="form-control select2" name="wilayah" style="width: 100%;">
                                 @foreach($wilayah as $r)
-                                    <option value="{{ $r->id_wilayah }}">{{ $r->nama_wilayah }}</option>
+                                    <option value="{{ $r->id_wilayah }}" style="text-transform: capitalize;">{{ $r->nama_wilayah }}</option>
                                 @endforeach
                             </select>
                         </div>
