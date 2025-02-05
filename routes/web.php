@@ -8,7 +8,7 @@ use App\Http\Controllers\LaporanFinalController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WilayahController;
-use App\Http\Controllers\LembagaController;
+use App\Http\Controllers\LembagasController;
 use App\Models\anggota;
 use App\Models\Laporan;
 use Carbon\Carbon;
@@ -73,8 +73,8 @@ use Carbon\Carbon;
 
     Route::resource('wilayah', WilayahController::class);
 
-    Route::resource('lembaga', LembagaController::class);
-    Route::get('/daftar-lembaga', [LembagaController::class, 'indexdaftar'])->name('lembaga.indexdaftar');
+    Route::resource('lembaga', LembagasController::class);
+    Route::get('/daftar-lembaga', [LembagasController::class, 'indexdaftar'])->name('lembaga.indexdaftar');
 
 // });
 

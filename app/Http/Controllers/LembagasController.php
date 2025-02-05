@@ -4,26 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Lembaga;
-
-class LembagaController extends Controller
+use Auth;
+class LembagasController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    
     public function index()
     {
+        //
         dd(Auth::user());
-        $lembaga = Lembaga::all();
-        return view("lembaga.index", compact("lembaga"));
     }
 
-    public function indexdaftar()
-    {
-        return view("lembaga.daftar-lembaga");
-    }
     /**
      * Show the form for creating a new resource.
      *
