@@ -128,7 +128,7 @@ class LembagasController extends Controller
 
         // Hapus file logo jika ada
         if ($lembaga->logo_lembaga && file_exists(public_path('logo_lembaga/' . $lembaga->logo_lembaga))) {
-            unlink(public_path('logo_lembaga/' . $lembaga->logo_lembaga));
+            unlink(public_path($lembaga->logo_lembaga));
         }
 
         // Hapus data dari database
