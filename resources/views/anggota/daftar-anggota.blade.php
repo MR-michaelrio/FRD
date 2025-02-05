@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Registrasi Pemegang Radio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{asset('layout/plugins/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('layout/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
     <style>
         .form-container {
             max-width: 900px;
@@ -117,5 +120,15 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Select2 -->
+    <script src="{{asset('layout/plugins/select2/js/select2.full.min.js')}}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dateInput').datepicker();
+            $('.select2').select2({
+                theme: "bootstrap4" // Optional theme, use "default" or customize as needed
+            });
+        });
+    </script>
 </body>
 </html>
