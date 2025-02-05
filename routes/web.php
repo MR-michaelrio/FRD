@@ -52,6 +52,10 @@ use Carbon\Carbon;
             Route::resource('regu', ReguController::class);
             Route::resource('laporan', LaporanFinalController::class);
         });
+
+        Route::resource('wilayah', WilayahController::class);
+
+        Route::resource('lembaga', LembagasController::class);
     });
 
     Route::get('/damkar', [LaporanController::class, 'damkar65'])->name('damkar');
@@ -71,9 +75,7 @@ use Carbon\Carbon;
     Route::post('/anggota/daftar', [AnggotaController::class, 'daftar'])->name('anggota.daftar');
     Route::get('/form_reg', [AnggotaController::class, 'indexdaftar'])->name('anggota.indexdaftar');
 
-    Route::resource('wilayah', WilayahController::class);
-
-    Route::resource('lembaga', LembagasController::class);
+    
     Route::get('/daftar-lembaga', [LembagasController::class, 'create'])->name('lembaga.create');
     Route::get('/daftar-wilayah', [WilayahController::class, 'create'])->name('wilayah.create');
 
