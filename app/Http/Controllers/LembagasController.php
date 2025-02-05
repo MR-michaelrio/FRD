@@ -14,7 +14,7 @@ class LembagasController extends Controller
      */
     public function index()
     {
-        $lembaga = Lembaga::index();
+        $lembaga = Lembaga::all();
         return view("lembaga.index", compact("lembaga"));
     }
 
