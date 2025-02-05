@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\anggota;
 use App\Models\Regu;
 use App\Models\User;
+use App\Models\Wilayah;
 use Illuminate\Support\Facades\Hash;
 
 class AnggotaController extends Controller
@@ -124,7 +125,8 @@ class AnggotaController extends Controller
 
     public function indexdaftar()
     {
-        return view('daftar-anggota');
+        $wilayah = Wilayah::all();
+        return view('anggota.daftar-anggota', compact('wilayah'));
     }
 
     public function daftar(Request $request)
@@ -148,9 +150,11 @@ class AnggotaController extends Controller
             'password' => Hash::make('IR1234'),
             'level' => 'basic',
             'regu' => "0",
-            'id_anggota' => $a->id_anggota
+            'id_anggota' => $a->id_anggota,
+            'wilayah' => $request->wilayah,
+            'status' => "pending"
         ]);
 
-        return redirect()->back()->with('success', 'Data Berhasil Ditambahkan');
+        return redirect()->back()->with('success', 'User Sedang Dalam Pengajuan');
     }
 }

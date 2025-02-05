@@ -51,10 +51,21 @@
                             <input type="tel" class="form-control" name="no_pemegang" required>
                         </div>
                     </div>
-                    <div class="mb-2">
-                        <label class="form-label">Nama Lembaga</label>
-                        <input type="text" class="form-control" name="lembaga" required>
+                    <div class="row mb-2">
+                        <div class="mb-2">
+                            <label class="form-label">Nama Lembaga</label>
+                            <input type="text" class="form-control" name="lembaga" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Wilayah</label>
+                            <select class="form-control select2" name="wilayah" style="width: 100%;">
+                                @foreach($wilayah as $r)
+                                    <option value="{{ $r->id_wilayah }}">{{ $r->nama_wilayah }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
+                    
                     <div class="mb-2">
                         <label class="form-label">Email</label>
                         <input type="email" class="form-control" name="email" required>
