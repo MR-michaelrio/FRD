@@ -48,14 +48,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function approvals()
+    {
+        return $this->hasMany(UserApproval::class, 'id_user', 'id');
+    }
+    
     public function isApproved() {
         $totalSupervisors = DB::table('users')->where('level', 'supervisor')->count();
         return $this->approvals()->count() >= $totalSupervisors;
     }
     
 
-    public function approvals()
-    {
-        return $this->hasMany(UserApproval::class, 'id_user', 'id');
-    }
+    
 }
