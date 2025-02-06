@@ -57,11 +57,15 @@
                     <div class="row mb-2">
                         <div class="col-md-6">
                             <label class="form-label">Nama Lembaga</label>
-                            <input type="text" class="form-control" name="lembaga" required>
+                            <select class="form-control select2" name="wilayah" style="width: 100%;" required>
+                                @foreach($wilayah as $r)
+                                    <option value="{{ $r->id_wilayah }}" >{{ ucwords($r->nama_wilayah) }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Wilayah</label>
-                            <select class="form-control select2" name="wilayah" style="width: 100%;">
+                            <select class="form-control select2" name="wilayah" style="width: 100%;" required>
                                 @foreach($wilayah as $r)
                                     <option value="{{ $r->id_wilayah }}" >{{ ucwords($r->nama_wilayah) }}</option>
                                 @endforeach

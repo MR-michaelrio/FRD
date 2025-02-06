@@ -7,6 +7,7 @@ use App\Models\anggota;
 use App\Models\Regu;
 use App\Models\User;
 use App\Models\Wilayah;
+use App\Models\Lembaga;
 use Illuminate\Support\Facades\Hash;
 
 class AnggotaController extends Controller
@@ -126,7 +127,8 @@ class AnggotaController extends Controller
     public function indexdaftar()
     {
         $wilayah = Wilayah::where("status", "disetujui")->get();
-        return view('anggota.daftar-anggota', compact('wilayah'));
+        $lembaga = Lembaga::all();
+        return view('anggota.daftar-anggota', compact('wilayah', 'lembaga'));
     }
 
     public function daftar(Request $request)
