@@ -70,4 +70,4 @@ Route::get('/daftar-wilayah', [WilayahController::class, 'create'])->name('wilay
 Route::post('/lembaga', [LembagasController::class, 'store'])->name('lembaga.store');
 Route::post('/wilayah', [WilayahController::class, 'store'])->name('wilayah.store');
 Route::post('/approve-user/{userId}', [ApprovalController::class, 'approveUser'])->name('approveUser');
-Route::get('/approve-user/index', [ApprovalController::class, 'create'])->name('approve.index');
+Route::get('/approve-user/index', [ApprovalController::class, 'index'])->name('approve.index');
