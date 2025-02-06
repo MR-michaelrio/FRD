@@ -28,11 +28,11 @@ Anggota
                         <td>{{ $nomor++ }}</td>
                         <td>{{ $agt->name }}</td>
                         <td>{{ $agt->email }}</td>
-                        <td>{{ $user->isApproved() ? 'active' : 'pending' }}</td>
+                        <td>{{ $agt->isApproved() ? 'active' : 'pending' }}</td>
                         <td>{{ $agt->wilayah }}</td>
                         <td>
-                            @if(!$user->isApproved())
-                                <form method="POST" action="{{ route('approveUser'.$user->id) }}">
+                            @if(!$agt->isApproved())
+                                <form method="POST" action="{{ route('approveUser'.$agt->id) }}">
                                     @csrf
                                     <button type="submit">Approve</button>
                                 </form>
