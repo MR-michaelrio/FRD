@@ -19,4 +19,8 @@ class anggota extends Model
     public function Regu(){
         return $this->belongsTo(Regu::class,'id_regu', 'id_regu');
     }
+    public function isApproved() {
+        $totalSupervisors = DB::table('users')->where('level', 'supervisor')->count();
+        return $this->approvals()->count() >= $totalSupervisors;
+    }
 }
