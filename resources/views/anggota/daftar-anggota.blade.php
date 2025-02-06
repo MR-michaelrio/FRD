@@ -61,9 +61,9 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Wilayah</label>
-                            <select class="form-control select2" name="wilayah" style="width: 100%;">
+                            <select class="form-control select2" name="wilayah" style="width: 100%;text-transform: capitalize;">
                                 @foreach($wilayah as $r)
-                                    <option value="{{ $r->id_wilayah }}" style="text-transform: capitalize;">{{ $r->nama_wilayah }}</option>
+                                    <option value="{{ $r->id_wilayah }}" >{{ $r->nama_wilayah }}</option>
                                 @endforeach
                             </select>
                         </div>
