@@ -151,9 +151,18 @@
 
                 <li class="nav-item">
                     <a href="{{ route('lembaga.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-globe-asia"></i>
+                        <i class="nav-icon fas fa-grip-horizontal"></i>
                         <p>
                             Lembaga
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('lembaga.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-grip-horizontal"></i>
+                        <p>
+                            Approval
                         </p>
                     </a>
                 </li>

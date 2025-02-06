@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -48,7 +49,7 @@ class User extends Authenticatable
     ];
 
     public function approvals() {
-        return $this->hasMany(UserApproval::class);
+        return $this->hasMany(UserApproval::class, 'id_user');
     }
 
     public function isApproved() {

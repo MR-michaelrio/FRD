@@ -9,6 +9,7 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WilayahController;
 use App\Http\Controllers\LembagasController;
+use App\Http\Controllers\ApprovalController;
 use App\Models\anggota;
 use App\Models\Laporan;
 use Carbon\Carbon;
@@ -68,3 +69,4 @@ Route::get('/daftar-lembaga', [LembagasController::class, 'create'])->name('lemb
 Route::get('/daftar-wilayah', [WilayahController::class, 'create'])->name('wilayah.create');
 Route::post('/lembaga', [LembagasController::class, 'store'])->name('lembaga.store');
 Route::post('/wilayah', [WilayahController::class, 'store'])->name('wilayah.store');
+Route::post('/approve-user/{userId}', [ApprovalController::class, 'approveUser'])->name('approveUser');
