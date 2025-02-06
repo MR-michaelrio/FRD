@@ -61,9 +61,9 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Wilayah</label>
-                            <select class="form-control select2" name="wilayah" style="width: 100%;text-transform: capitalize;">
+                            <select class="form-control select2" name="wilayah" style="width: 100%;">
                                 @foreach($wilayah as $r)
-                                    <option value="{{ $r->id_wilayah }}" >{{ $r->nama_wilayah }}</option>
+                                    <option value="{{ $r->id_wilayah }}" >{{ ucwords($r->nama_wilayah) }}</option>
                                 @endforeach
                             </select>
                         </div>
