@@ -32,7 +32,7 @@ Anggota
                         <td>{{ $agt->wilayah }}</td>
                         <td>
                             @if(!$agt->isApproved())
-                                <form method="POST" action="{{ route('approveUser, $agt->id) }}">
+                                <form method="POST" action="{{ route('approveUser', $agt->id) }}">
                                     @csrf
                                     <button type="submit">Approve</button>
                                 </form>
