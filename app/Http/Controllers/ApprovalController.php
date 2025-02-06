@@ -21,7 +21,7 @@ class ApprovalController extends Controller
 
         // Cek apakah user sudah disetujui oleh supervisor ini
         $existingApproval = UserApproval::where('id_user', $userId)
-                                        ->where('id_supervisor', $supervisorId)
+                                        ->where('supervisor', $supervisorId)
                                         ->first();
 
         if ($existingApproval) {
@@ -31,7 +31,7 @@ class ApprovalController extends Controller
         // Simpan approval baru
         UserApproval::create([
             'id_user' => $userId,
-            'id_supervisor' => $supervisorId,
+            'supervisor' => $supervisorId,
             'approved_at' => now()
         ]);
 
