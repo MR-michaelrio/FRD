@@ -25,7 +25,7 @@ class ApprovalController extends Controller
                                         ->first();
 
         if ($existingApproval) {
-            return response()->json(['message' => 'Anda sudah menyetujui user ini'], 400);
+            return redirect()->back()->with('success', 'Anda Sudah Menyetujui User Ini');
         }
 
         // Simpan approval baru
@@ -41,6 +41,6 @@ class ApprovalController extends Controller
             $user->update(['status' => 'active']);
         }
 
-        return response()->json(['message' => 'User berhasil disetujui']);
+        return redirect()->back()->with('success', 'Anda Sudah Menyetujui User Ini');
     }
 }
