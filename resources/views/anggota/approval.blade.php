@@ -29,7 +29,6 @@ Anggota
                         <td>{{ $agt->name }}</td>
                         <td>{{ $agt->email }}</td>
                         <td>{{ $agt->isApproved() ? 'active' : 'pending' }}</td>
-                        <td>{{ $agt->wilayah }}</td>
                         <td>
                             @if(!$agt->isApproved())
                                 <form method="POST" action="{{ route('approveUser', $agt->id) }}">
