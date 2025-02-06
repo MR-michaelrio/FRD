@@ -57,9 +57,9 @@
                     <div class="row mb-2">
                         <div class="col-md-6">
                             <label class="form-label">Nama Lembaga</label>
-                            <select class="form-control select2" name="wilayah" style="width: 100%;" required>
-                                @foreach($wilayah as $r)
-                                    <option value="{{ $r->id_wilayah }}" >{{ ucwords($r->nama_wilayah) }}</option>
+                            <select class="form-control select2" name="lembaga" style="width: 100%;" required>
+                                @foreach($lembaga as $l)
+                                    <option value="{{ $l->id_lembaga }}" >{{ ucwords($r->nama_lembaga) }}</option>
                                 @endforeach
                             </select>
                         </div>
