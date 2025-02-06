@@ -31,7 +31,7 @@ Anggota
                         <td>{{ $agt->isApproved() ? 'active' : 'pending' }}</td>
                         <td>
                         @php
-    $isApprovedByMe = optional($agt->user)->approvals()->where('id_supervisor', auth()->id())->exists() ?? false;
+    $isApprovedByMe = optional($agt->user)->approvals()->where('supervisor', auth()->id())->exists() ?? false;
 @endphp
 
 @if(!$agt->isApproved() && !$isApprovedByMe)
