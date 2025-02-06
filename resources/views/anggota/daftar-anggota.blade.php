@@ -59,7 +59,7 @@
                             <label class="form-label">Nama Lembaga</label>
                             <select class="form-control select3" name="lembaga" style="width: 100%;" required>
                                 @foreach($lembaga as $l)
-                                    <option value="{{ $l->id_lembaga }}" >{{ ucwords($r->nama_lembaga) }}</option>
+                                    <option value="{{ $l->id_lembaga }}" >{{ ucwords($l->nama_lembaga) }}</option>
                                 @endforeach
                             </select>
                         </div>
