@@ -160,7 +160,7 @@
 
                 <li class="nav-item">
                     <a href="{{ route('approve.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-grip-horizontal"></i>
+                        <i class="nav-icon fas fa-user-check"></i>
                         <p>
                             Approval
                         </p>

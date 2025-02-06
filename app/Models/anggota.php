@@ -23,4 +23,8 @@ class anggota extends Model
         $totalSupervisors = DB::table('users')->where('level', 'supervisor')->count();
         return $this->approvals()->count() >= $totalSupervisors;
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class,'id_anggota', 'id_anggota');
+    }
 }
