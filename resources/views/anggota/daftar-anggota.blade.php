@@ -84,7 +84,7 @@
                     <div class="row mb-2">
                         <div class="col-md-6">
                             <label class="form-label">No Tlp Darurat 1</label>
-                            <input type="tel" class="form-control" name="no_darurat1" required>
+                            <input type="tel" class="form-control" name="no_darurat1" placeholder="62811......." required>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Nama Pemegang Telp Darurat 1</label>
@@ -94,7 +94,7 @@
                     <div class="row mb-2">
                         <div class="col-md-6">
                             <label class="form-label">No Tlp Darurat 2</label>
-                            <input type="tel"  class="form-control" name="no_darurat2">
+                            <input type="tel"  class="form-control" name="no_darurat2" placeholder="62811.......">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Nama Pemegang No Tlp Darurat 2</label>

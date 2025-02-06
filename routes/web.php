@@ -62,7 +62,7 @@ Route::post('/absen1',[AbsenController::class, 'store2'])->name('absen.store2');
 
 Route::get('/absen3',[AbsenController::class, 'index3'])->name('absen.index3');
 Route::post('/anggota/daftar', [AnggotaController::class, 'daftar'])->name('anggota.daftar');
-Route::get('/form_reg', [AnggotaController::class, 'indexdaftar'])->name('anggota.indexdaftar');
+Route::get('/daftar-anggota', [AnggotaController::class, 'indexdaftar'])->name('anggota.indexdaftar');
 
 Route::get('/daftar-lembaga', [LembagasController::class, 'create'])->name('lembaga.create');
 Route::get('/daftar-wilayah', [WilayahController::class, 'create'])->name('wilayah.create');
