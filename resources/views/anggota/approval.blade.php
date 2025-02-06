@@ -30,17 +30,12 @@ Anggota
                         <td>{{ $agt->email }}</td>
                         <td>{{ $agt->isApproved() ? 'active' : 'pending' }}</td>
                         <td>
-                        @php
-    $isApprovedByMe = optional($agt->user)->approvals()->where('supervisor', auth()->id())->exists() ?? false;
-@endphp
-
-@if(!$agt->isApproved() && !$isApprovedByMe)
-    <form method="POST" action="{{ route('approveUser', $agt->id) }}">
-        @csrf
-        <button type="submit">Approve</button>
-    </form>
-@endif
-
+                        @if(!$agt->user->isApproved() && !$agt->user->approvals()->where('supervisor', auth()->id())->exists())
+        <form method="POST" action="{{ route('approveUser', $agt->id) }}">
+            @csrf
+            <button type="submit">Approve</button>
+        </form>
+    @endif
                         </td>
                     </tr>
                     @endforeach
