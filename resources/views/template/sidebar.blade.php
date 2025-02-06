@@ -159,7 +159,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('lembaga.index') }}" class="nav-link">
+                    <a href="{{ route('approve.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-grip-horizontal"></i>
                         <p>
                             Approval
