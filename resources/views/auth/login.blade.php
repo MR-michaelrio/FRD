@@ -55,7 +55,7 @@
                         @enderror
                     </div>
                     <div class="mb-2">
-                        <label class="form-label">Email Address</label>
+                        <label class="form-label">Password</label>
                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                         @error('password')
                             <span class="invalid-feedback" role="alert">
