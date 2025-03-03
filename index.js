@@ -7,7 +7,7 @@ const schedule = require('node-schedule');
 
   // Create a MySQL connection pool
   const pool = mysql.createPool({
-    host: '101.255.101.60',      // Database host
+    host: '127.0.0.1',      // Database host
     user: 'michael',             // Database username
     password: 'tomsK9as',        // Database password
     database: 'frd',             // Database name
@@ -48,8 +48,6 @@ venom
 
     app.get('/laporanfinal', async (req, res) => {
       const groupIds = ['6282114578009@c.us','120363026258560001@g.us','120363183182250375@g.us', '120363173044009164@g.us','120363277021729569@g.us'];
-      // const groupIds = ['6282114578009@c.us'];
-
       const kejadian = req.query.kejadian;
       const kejadian_arr = JSON.parse(kejadian);
 
@@ -74,7 +72,15 @@ venom
     });
 
     app.get('/laporan', async (req, res) => {
-      const groupIds = ['6282114578009@c.us','120363041008637358@g.us','120363026258560001@g.us', '120363173044009164@g.us','120363277021729569@g.us','120363146636607303@g.us'];
+      const groupIds = [
+          '6282114578009@c.us',
+          '120363041008637358@g.us',
+          '120363026258560001@g.us',
+          '120363173044009164@g.us',
+          '120363277021729569@g.us',
+          '120363146636607303@g.us'
+      ];
+  
       const kejadian = JSON.parse(req.query.kejadian);
       const regu = kejadian.regu;
       const objek = kejadian.objek;
@@ -85,44 +91,43 @@ venom
       const situasi = kejadian.situasi;
       const alamat = kejadian.alamat;
       const status = req.query.status;
-      const message = `*DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nStatus: ${status}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;      
-      const message2 = `*DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nAlamat: ${alamat}\nStatus: ${status}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;      
+  
+      const message = `*DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nStatus: ${status}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;
+      const message2 = `*DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nAlamat: ${alamat}\nStatus: ${status}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;
+  
       console.log('Laporan1:', message);
       console.log('Laporan2:', message2);
+  
       try {
-        const sendMessages = groupIds.map(groupId => {
-          if (groupId !== '120363041008637358@g.us' && groupId !== '120363146636607303@g.us') {
-            return client.sendText(groupId, message2);
-          } else {
-            return client.sendText(groupId, message);
+          for (const groupId of groupIds) {
+              try {
+                  if (groupId !== '120363041008637358@g.us' && groupId !== '120363146636607303@g.us') {
+                      await client.sendText(groupId, message2);
+                  } else {
+                      await client.sendText(groupId, message);
+                  }
+                  console.log(`Pesan berhasil dikirim ke: ${groupId}`);
+              } catch (error) {
+                  console.error(`Gagal mengirim pesan ke ${groupId}:`, error.message);
+              }
           }
-        });
-        await Promise.all(sendMessages);
-        res.redirect('http://101.255.101.60/lpr');
+          res.redirect('https://laporan.id-responder.org/lpr');
       } catch (error) {
-        console.error('Error sending message:', error);
-        res.status(500).send('Error sending message');
+          console.error('Terjadi kesalahan saat mengirim laporan:', error);
+          res.status(500).send('Error sending message');
       }
-      
-      // try {
-      //     for (const groupId of groupIds) {
-      //       if(groupId != '120363041008637358@g.us' && groupId != '120363146636607303@g.us'){
-      //         await client.sendText(groupId, message2);
-      //       }else{
-      //         await client.sendText(groupId, message);
-      //       }
-      //     }
-      //     res.redirect('http://101.255.101.60/lpr');
-      //   } catch (error) {
-      //     console.error('Error sending message:', error);
-      //     res.status(500).send('Error sending message');
-      //   }
-      
-    });
-
-    app.get('/updatelaporan', async (req, res) => {
-      const groupIds = ['6282114578009@c.us','120363041008637358@g.us','120363026258560001@g.us', '120363173044009164@g.us','120363277021729569@g.us','120363146636607303@g.us'];
-
+  });
+  
+  app.get('/updatelaporan', async (req, res) => {
+      const groupIds = [
+          '6282114578009@c.us',
+          '120363041008637358@g.us',
+          '120363026258560001@g.us',
+          '120363173044009164@g.us',
+          '120363277021729569@g.us',
+          '120363146636607303@g.us'
+      ];
+  
       const kejadian = JSON.parse(req.query.kejadian);
       const regu = kejadian.regu;
       const objek = kejadian.objek;
@@ -134,40 +139,35 @@ venom
       const status = kejadian.status;
       const alamat = kejadian.alamat;
       const selesai = kejadian.waktu_selesai;
-        try {
-          const message = `*UPDATE DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nStatus: ${status}\nWaktu Selesai: ${selesai}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;      
-          const message2 = `*UPDATE DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nAlamat: ${alamat}\nStatus: ${status}\nWaktu Selesai: ${selesai}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;      
+  
+      const message = `*UPDATE DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nStatus: ${status}\nWaktu Selesai: ${selesai}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;
+      const message2 = `*UPDATE DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nAlamat: ${alamat}\nStatus: ${status}\nWaktu Selesai: ${selesai}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;
+  
+      try {
           for (const groupId of groupIds) {
-            if(groupId != '120363041008637358@g.us' && groupId != '120363146636607303@g.us'){
-              await client.sendText(groupId, message2);
-            }else{
-              await client.sendText(groupId, message);
-            }
+              try {
+                  if (groupId !== '120363041008637358@g.us' && groupId !== '120363146636607303@g.us') {
+                      await client.sendText(groupId, message2);
+                  } else {
+                      await client.sendText(groupId, message);
+                  }
+                  console.log(`Pesan berhasil dikirim ke: ${groupId}`);
+              } catch (error) {
+                  console.error(`Gagal mengirim pesan ke ${groupId}:`, error.message);
+              }
           }
-          res.redirect('http://101.255.101.60/lpr');
-        } catch (error) {
-          console.error('Error sending message:', error);
+          res.redirect('https://laporan.id-responder.org/lpr');
+      } catch (error) {
+          console.error('Terjadi kesalahan saat memperbarui laporan:', error);
           res.status(500).send('Error sending message');
-        }
-      
-    });
+      }
+  });
+  
 
     app.get('/absen', async (req, res) => {
       const pdfFileName = req.query.namafile;
       const wilayah = req.query.wilayah;
-      // let groupIds;
-      // let caption;
        const groupIds = ['6282114578009@c.us','120363041008637358@g.us','120363026258560001@g.us', '120363183182250375@g.us','120363277021729569@g.us', '120363146636607303@g.us'];
-      // if (wilayah === 'jakarta') {
-      //     // groupIds = ['6282114578009@c.us', '120363041008637358@g.us', '120363026258560001@g.us', '120363183182250375@g.us'];
-      //     groupIds = ['6282114578009@c.us', '6281286858680@c.us'];
-      //     caption = 'Absen Jakarta';
-      // } else if (wilayah === 'bekasi') {
-      //     // groupIds = ['6282114578009@c.us', '120363277021729569@g.us', '120363146636607303@g.us', '120363183182250375@g.us'];
-      //     groupIds = ['6282114578009@c.us', '6281286858680@c.us'];
-      //     caption = 'Absen Bekasi';
-      // }
-  
       try {
           // Path to the PDF file you want to send
           const filePath = `../frd/public/pdf/${pdfFileName}`;
@@ -181,7 +181,7 @@ venom
               await client.sendFile(groupId, filePath, pdfFileName, caption);
           }
           console.log('File sent successfully');
-          res.redirect('http://101.255.101.60/');
+          res.redirect('https://laporan.id-responder.org/');
   
       } catch (error) {
           console.error('Error sending file:', error);
