@@ -39,7 +39,11 @@ venom
     session: 'session-name',
     puppeteerOptions: {
       headless: "new",
-      executablePath: '/root/.cache/puppeteer/chrome/linux-121.0.6167.85/chrome-linux64/chrome', // or the path to your Chrome binary
+      executablePath: '/usr/bin/google-chrome-stable',
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+      ]
     }
   })
   .then((client) => {
