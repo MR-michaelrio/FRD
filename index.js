@@ -38,7 +38,7 @@ venom
   .create({
     session: 'session-name',
     puppeteerOptions: {
-      headless: true,
+      headless: "new",
       executablePath: '/root/.cache/puppeteer/chrome/linux-121.0.6167.85/chrome-linux64/chrome', // or the path to your Chrome binary
     }
   })
