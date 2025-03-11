@@ -30,7 +30,7 @@ Anggota
                         <td>{{ $agt->email }}</td>
                         <td>{{ $agt->isApproved() ? 'active' : 'pending' }}</td>
                         <td>
-                            @if(!$agt->isApproved() && !$isApprovedByMe)
+                            @if(!$agt->isApproved())
                                 <form method="POST" action="{{ route('approveUser', $agt->id) }}">
                                     @csrf
                                     <button type="submit">Approve</button>
