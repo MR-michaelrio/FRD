@@ -228,7 +228,7 @@ venom
 
   function start(client) {
     client.onMessage(async (message) => {
-        // console.log('Received message:', message);
+        console.log('Received message:', message);
         const dataKeyword = 'Data Kejadian Kebakaran';
         const dataKeyword2 = 'Data Kejadian KEBAKARAN';
         const updateKeyword = 'Update Data Kejadian Kebakaran';
