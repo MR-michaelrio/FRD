@@ -7,7 +7,7 @@ const schedule = require('node-schedule');
 
   // Create a MySQL connection pool
   const pool = mysql.createPool({
-    host: '101.255.101.60',      // Database host
+    host: '127.0.0.1',      // Database host
     user: 'frd',             // Database username
     password: 'tomsK9as',        // Database password
     database: 'frd',             // Database name
