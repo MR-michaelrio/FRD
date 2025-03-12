@@ -30,7 +30,7 @@
                     <tr>
                         <td>{{ $nomor++ }}</td>
                         <td>{{ $w->nama_lembaga }}</td>
-                        <td><img src="{{ asset($w->logo_lembaga) }}" alt="" srcset=""></td>
+                        <td><img src="{{ asset($w->logo_lembaga) }}" width="20" alt="" srcset=""></td>
                         <td>
                             <!-- Tombol Edit -->
                             <a href="{{ route('lembaga.edit', $w->id_lembaga) }}" class="btn btn-warning btn-sm">Edit</a>
