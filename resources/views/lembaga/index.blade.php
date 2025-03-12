@@ -7,7 +7,7 @@
 @section('content')
 <div class="col-12">
     <div class="card">
-        <a href="{{route('lembaga.create')}}">ADD</a>
+        <a href="{{route('lembaga.create')}}" class="btn btn-secondary">ADD</a>
     </div>
     <div class="card">
         <!-- /.card-header -->
