@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         $jmlhanggota = anggota::all()->count();
-        return view('index',compact('jmlhanggota'));
+        return view('template.master',compact('jmlhanggota'));
         // return redirect()->route('index');
         // return view("home");
     }
