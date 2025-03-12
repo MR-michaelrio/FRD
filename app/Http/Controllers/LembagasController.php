@@ -39,7 +39,6 @@ class LembagasController extends Controller
     {
         $request->validate([
             'nama_lembaga' => 'required|string|max:255',
-            'logo_lembaga' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Maks 2MB
         ]);
 
         // Simpan logo jika ada
