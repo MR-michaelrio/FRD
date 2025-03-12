@@ -6,10 +6,11 @@
 
 @section('content')
 <div class="col-12">
+
     <div class="card">
-        <a href="{{route('lembaga.create')}}" class="btn btn-block btn-success">ADD</a>
-    </div>
-    <div class="card">
+        <div class="card-header">
+            <a href="{{route('lembaga.create')}}" class="btn btn-success">ADD</a>
+        </div>
         <!-- /.card-header -->
         <div class="card-body table-responsive p-0">
             <table class="table table-hover text-nowrap">
