@@ -56,7 +56,7 @@
                     </div>
                     <div class="mb-2">
                         <label class="form-label">Logo Lembaga</label>
-                        <input type="file" class="form-control" name="logo_lembaga" accept="image/*" required>
+                        <input type="file" class="form-control" name="logo_lembaga" accept="image/*">
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Daftar</button>
                 </form>
