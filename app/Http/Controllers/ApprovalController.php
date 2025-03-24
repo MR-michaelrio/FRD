@@ -45,6 +45,10 @@ class ApprovalController extends Controller
             $user->update(['status' => 'active']);
         }
 
-        return redirect()->back()->with('success', 'Anda Sudah Menyetujui User Ini');
+        return redirect()->back()->with('sweetalert', [
+            'title' => 'Approval Sukses',
+            'text' => 'Akun Ini Sudah Bisa Digunakan.',
+            'icon' => 'success'
+        ]);
     }
 }
