@@ -15,6 +15,9 @@
 @section('content')
 <div class="col-12">
     <div class="card">
+        <div class="card-header">
+            <a href="{{route('wilayah.create')}}" class="btn btn-success">ADD</a>
+        </div>
         <!-- /.card-header -->
         <div class="card-body table-responsive p-0">
             <table class="table table-hover text-nowrap">
