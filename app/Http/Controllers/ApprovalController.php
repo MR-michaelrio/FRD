@@ -43,6 +43,7 @@ class ApprovalController extends Controller
         $user = User::find($userId);
         if ($user->isApproved()) {
             $user->update(['status' => 'active']);
+            UserApproval::where('id_user', $userId)->delete();
         }
 
         return redirect()->back()->with('sweetalert', [
@@ -51,4 +52,24 @@ class ApprovalController extends Controller
             'icon' => 'success'
         ]);
     }
+
+    public function deleteapproveUser($userId)
+    {
+        // Cari user berdasarkan ID
+        $user = User::where('id', $userId)->first();
+
+        if ($user) {
+            $user->delete(); // Hapus user
+        }
+
+        // Hapus semua approval terkait user ini
+        UserApproval::where('id_user', $userId)->delete();
+
+        return redirect()->back()->with('sweetalert', [
+            'title' => 'Menghapus User',
+            'text' => 'Akun Ini Sudah Dihapus',
+            'icon' => 'success'
+        ]);
+    }
+
 }

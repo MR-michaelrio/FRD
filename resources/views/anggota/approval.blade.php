@@ -33,9 +33,13 @@ Anggota
                             @if(!$agt->isApproved())
                                 <form method="POST" action="{{ route('approveUser', $agt->id) }}">
                                     @csrf
-                                    <button type="submit">Approve</button>
+                                    <button type="submit" class="btn btn-success btn-sm">Approve</button>
                                 </form>
                             @endif
+                            <form method="POST" action="{{ route('deleteapproveUser', $agt->id) }}">
+                                @csrf
+                                <button type="submit" class="btn btn-warning btn-sm">Delete</button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach

@@ -69,5 +69,7 @@ Route::get('/daftar-lembaga', [LembagasController::class, 'create'])->name('lemb
 Route::get('/daftar-wilayah', [WilayahController::class, 'create'])->name('wilayah.create');
 Route::post('/lembaga', [LembagasController::class, 'store'])->name('lembaga.store');
 Route::post('/wilayah', [WilayahController::class, 'store'])->name('wilayah.store');
+
 Route::post('/approve-user/{userId}', [ApprovalController::class, 'approveUser'])->name('approveUser');
+Route::post('/delete-approve-user/{userId}', [ApprovalController::class, 'deleteapproveUser'])->name('deleteapproveUser');
 Route::get('/approve-user/index', [ApprovalController::class, 'index'])->name('approve.index');
