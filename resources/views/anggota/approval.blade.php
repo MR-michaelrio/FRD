@@ -39,7 +39,7 @@ Anggota
                                 @endif
                                 <form method="POST" action="{{ route('deleteapproveUser', $agt->id) }}">
                                     @csrf
-                                    <button type="submit" class="btn btn-warning btn-sm">Delete</button>
+                                    <button type="submit" class="btn btn-warning btn-sm ml-2">Delete</button>
                                 </form>
                             </div>
                         </td>
