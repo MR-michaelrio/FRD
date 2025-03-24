@@ -37,11 +37,12 @@ Anggota
                                         <button type="submit" class="btn btn-success btn-sm">Approve</button>
                                     </form>
                                 @endif
+                                @if(Auth::user()->level == "admin")
                                 <form id="deleteForm-{{ $agt->id }}" method="POST" action="{{ route('deleteapproveUser', $agt->id) }}">
                                     @csrf
                                     <button type="button" class="btn btn-warning btn-sm ml-2" onclick="confirmDelete({{ $agt->id }})">Delete</button>
                                 </form>
-
+                                @endif
                             </div>
                         </td>
                     </tr>
