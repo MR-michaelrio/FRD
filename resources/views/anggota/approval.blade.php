@@ -37,10 +37,11 @@ Anggota
                                         <button type="submit" class="btn btn-success btn-sm">Approve</button>
                                     </form>
                                 @endif
-                                <form method="POST" action="{{ route('deleteapproveUser', $agt->id) }}">
+                                <form id="deleteForm-{{ $agt->id }}" method="POST" action="{{ route('deleteapproveUser', $agt->id) }}">
                                     @csrf
-                                    <button type="submit" class="btn btn-warning btn-sm ml-2">Delete</button>
+                                    <button type="button" class="btn btn-warning btn-sm ml-2" onclick="confirmDelete({{ $agt->id }})">Delete</button>
                                 </form>
+
                             </div>
                         </td>
                     </tr>
