@@ -25,7 +25,7 @@ Anggota
                     @endphp
                     @foreach($anggota as $agt)
                     <tr>
-                        <td>{{ $nomor++ }}</td>
+                        <td>{{ $agt->id }}</td>
                         <td>{{ $agt->name }}</td>
                         <td>{{ $agt->email }}</td>
                         <td>{{ $agt->isApproved() ? 'active' : 'pending' }}</td>
