@@ -55,11 +55,14 @@ class User extends Authenticatable
     
     public function isApproved() {
         $approvedCount = $this->approvals()
-            ->whereIn('level', ['supervisor', 'admin'])
+            ->whereHas('approver', function ($query) {
+                $query->whereIn('level', ['supervisor', 'admin']);
+            })
             ->count();
     
         return $approvedCount >= 2; // Minimal 2 yang menyetujui
     }
+    
     
     
 
