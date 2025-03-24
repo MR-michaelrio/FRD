@@ -54,8 +54,12 @@ class User extends Authenticatable
     }
     
     public function isApproved() {
-        $totalSupervisors = DB::table('users')->where('level', 'supervisor')->count();
-        return $this->approvals()->count() >= $totalSupervisors;
+        // Hitung jumlah supervisor dan admin yang menyetujui
+        $approvedCount = $this->approvals()
+            ->whereIn('level', ['supervisor', 'admin']) // Hanya supervisor atau admin
+            ->count();
+    
+        return $approvedCount >= 2; // Minimal 2 yang menyetujui
     }
     
 
