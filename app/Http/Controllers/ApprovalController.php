@@ -25,7 +25,11 @@ class ApprovalController extends Controller
                                         ->first();
 
         if ($existingApproval) {
-            return redirect()->back()->with('success', 'Anda Sudah Menyetujui User Ini');
+            return redirect()->back()->with('sweetalert', [
+                'title' => 'Approval Gagal!',
+                'text' => 'Anda sudah menyetujui user ini sebelumnya.',
+                'icon' => 'warning'
+            ]);
         }
 
         // Simpan approval baru

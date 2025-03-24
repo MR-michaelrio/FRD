@@ -174,6 +174,18 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
     </script>
+    @if(session('sweetalert'))
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Swal.fire({
+            title: "{{ session('sweetalert.title') }}",
+            text: "{{ session('sweetalert.text') }}",
+            icon: "{{ session('sweetalert.icon') }}",
+            confirmButtonText: "OK"
+        });
+    </script>
+@endif
+
     <script>
         $(document).ready(function () {
             $('#dateInput').datepicker();
