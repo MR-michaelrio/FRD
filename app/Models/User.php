@@ -54,13 +54,13 @@ class User extends Authenticatable
     }
     
     public function isApproved() {
-        // Hitung jumlah supervisor dan admin yang menyetujui
         $approvedCount = $this->approvals()
-            ->whereIn('level', ['supervisor', 'admin']) // Hanya supervisor atau admin
+            ->whereIn('level', ['supervisor', 'admin'])
             ->count();
     
         return $approvedCount >= 2; // Minimal 2 yang menyetujui
     }
+    
     
 
     
