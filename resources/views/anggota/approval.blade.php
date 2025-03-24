@@ -28,7 +28,7 @@ Anggota
                         <td>{{ $agt->id }}</td>
                         <td>{{ $agt->name }}</td>
                         <td>{{ $agt->email }}</td>
-                        <td>{{ $agt->isApproved() ? 'active' : 'pending' }}</td>
+                        <td>{{ $agt->status }}</td>
                         <td>
                                 <form method="POST" action="{{ route('approveUser', $agt->id) }}">
                                     @csrf
