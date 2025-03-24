@@ -30,10 +30,12 @@ Anggota
                         <td>{{ $agt->email }}</td>
                         <td>{{ $agt->status }}</td>
                         <td>
+                            @if(!$agt->isApproved())
                                 <form method="POST" action="{{ route('approveUser', $agt->id) }}">
                                     @csrf
                                     <button type="submit">Approve</button>
                                 </form>
+                                @endif
                         </td>
                     </tr>
                     @endforeach
