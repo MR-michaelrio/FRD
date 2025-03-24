@@ -35,7 +35,7 @@ Anggota
                                     @csrf
                                     <button type="submit">Approve</button>
                                 </form>
-                                @endif
+                            @endif
                         </td>
                     </tr>
                     @endforeach
