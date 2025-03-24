@@ -15,7 +15,7 @@ class UserApproval extends Model {
         return $this->belongsTo(User::class, 'id_user');
     }
     public function approver() {
-        return $this->belongsTo(User::class, 'supervisor', 'id_user');
+        return $this->belongsTo(User::class, 'supervisor', 'id');
     }
     
 }
