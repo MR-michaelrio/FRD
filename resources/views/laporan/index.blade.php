@@ -35,9 +35,9 @@ Laporan
                         <a href="{{ route('lpr.edit',$a->id_kejadian) }}" class="btn btn-warning">Edit</a>
                     @endif
 
-                    @if(auth()->user()->level == "supervisor" || auth()->user()->level == "admin")
+                    <!-- @if(auth()->user()->level == "supervisor" || auth()->user()->level == "admin") -->
                         <button type="submit" class="btn btn-danger border" onclick="return confirm('Are you sure you want to delete this data?')">Delete</button>
-                    @endif
+                    <!-- @endif -->
                     
                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                 </form>
