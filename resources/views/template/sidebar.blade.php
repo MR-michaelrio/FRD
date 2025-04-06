@@ -19,6 +19,7 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                @if(auth()->user()->Anggota()->role != "anggota")
                 @if(auth()->user()->level == "admin")
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
@@ -166,7 +167,7 @@
                         </p>
                     </a>
                 </li>
-
+                @endif
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="nav-icon fas fa-sign-out-alt"></i>

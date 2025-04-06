@@ -63,7 +63,10 @@ class User extends Authenticatable
         return $approvedCount >= 2; // Minimal 2 yang menyetujui
     }
     
-    
+    public function Anggota()
+    {
+        return $this->belongsTo(anggota::class,'id_anggota', 'id_anggota');
+    }
     
 
     
