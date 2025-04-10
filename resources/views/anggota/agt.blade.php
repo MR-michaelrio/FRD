@@ -30,7 +30,7 @@ Anggota
                     <tr>
                         <td>{{ $nomor++ }}</td>
                         <td>{{ $agt->nama }}</td>
-                        <td>{{ $agt->lembaga }}</td>
+                        <td>{{ $agt->Lembaga->nama_lembaga }}</td>
                         <td>{{ $agt->role }}</td>
                         <td>{{ $agt->wilayah }}</td>
                         <td>
