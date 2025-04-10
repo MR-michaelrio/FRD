@@ -46,6 +46,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('wilayah', WilayahController::class);
 
     Route::resource('lembaga', LembagasController::class);
+
+    Route::get('/ganti-password',[AnggotaController::class, 'GantiPassword'])->name('ganti.password');
+    Route::post('/ganti-password', [AnggotaController::class, 'UpdatePassword'])->name('update.password');
+
+
 });
 
 Route::get('/damkar', [LaporanController::class, 'damkar65'])->name('damkar');

@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Wilayah;
 use App\Models\Lembaga;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AnggotaController extends Controller
 {
@@ -158,5 +159,30 @@ class AnggotaController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'User Sedang Dalam Pengajuan');
+    }
+
+    public function GantiPassword()
+    {
+        return view('auth.ganti-password');
+    }
+
+    public function UpdatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password'      => ['required'],
+            'new_password'          => ['required', 'min:8'],
+            'new_password_confirmation' => ['required', 'same:new_password'],
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Password lama tidak sesuai.']);
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return back()->with('success', 'Password berhasil diperbarui.');
     }
 }
