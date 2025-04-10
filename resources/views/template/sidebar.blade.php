@@ -169,8 +169,8 @@
                     </li>
                 @endif
                 <li class="nav-item">
-                    <a href="{{ route('approve.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-user-check"></i>
+                    <a href="{{ route('ganti.password') }}" class="nav-link">
+                        <i class="nav-icon fas fa-lock"></i>
                         <p>
                             Ganti Password
                         </p>
