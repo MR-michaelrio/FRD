@@ -59,7 +59,7 @@
             </div>
             <div class="col-md-8">
                 <h2 class="h4 text-center">Ganti Password</h2>
-                <form action="{{ route('password.update') }}" method="post">
+                <form action="{{ route('update.password') }}" method="post">
                     @csrf
                     <div class="mb-2">
                         <label class="form-label">Password Lama</label>
