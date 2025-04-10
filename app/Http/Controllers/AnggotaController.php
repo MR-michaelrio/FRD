@@ -170,7 +170,7 @@ class AnggotaController extends Controller
     {
         $request->validate([
             'current_password'      => ['required'],
-            'new_password'          => ['required', 'min:8'],
+            'new_password'          => ['required'],
             'new_password_confirmation' => ['required', 'same:new_password'],
         ], [
             'current_password.required' => 'Password lama wajib diisi.',
