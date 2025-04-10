@@ -172,6 +172,12 @@ class AnggotaController extends Controller
             'current_password'      => ['required'],
             'new_password'          => ['required', 'min:8'],
             'new_password_confirmation' => ['required', 'same:new_password'],
+        ], [
+            'current_password.required' => 'Password lama wajib diisi.',
+            'new_password.required' => 'Password baru wajib diisi.',
+            'new_password.min' => 'Password baru minimal harus terdiri dari 8 karakter.',
+            'new_password_confirmation.required' => 'Konfirmasi password baru wajib diisi.',
+            'new_password_confirmation.same' => 'Konfirmasi password baru tidak sama dengan password baru.',
         ]);
 
         $user = Auth::user();
@@ -185,4 +191,5 @@ class AnggotaController extends Controller
 
         return back()->with('success', 'Password berhasil diperbarui.');
     }
+
 }
