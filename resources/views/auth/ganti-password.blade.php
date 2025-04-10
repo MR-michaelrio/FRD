@@ -37,6 +37,22 @@
 </head>
 <body class="bg-light">
     <div class="form-container">
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="row align-items-center">
             <div class="col-md-4 logo-container text-center">
                 <img src="{{ asset('img/logo-04.jpg') }}" alt="Logo Lembaga" class="img-fluid">
