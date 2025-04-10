@@ -31,6 +31,9 @@ class anggota extends Model
         return $this->belongsTo(User::class,'id_anggota', 'id_anggota');
     }
 
-
+    public function Lembaga()
+    {
+        return $this->belongsTo(Lembaga::class,'lembaga', 'id_lembaga');
+    }
 
 }

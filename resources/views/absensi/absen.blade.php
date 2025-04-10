@@ -110,7 +110,7 @@
                     <hr style="border-top: 3px solid black;">
                     @foreach($ag as $a)
                     <div class="mb-3">
-                        <label class="form-label formlabel1">R - {{ $a->nama }} - {{ $a->lembaga }}<span
+                        <label class="form-label formlabel1">R - {{ $a->nama }} - {{ $a->Lembaga->nama_lembaga }}<span
                                 style="color: red;">*</span></label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="absenshadir[{{ $a->id_anggota }}]"
