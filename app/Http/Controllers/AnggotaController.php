@@ -90,6 +90,7 @@ class AnggotaController extends Controller
     public function update(Request $request, $id)
     {
         $agt = anggota::find($id);
+        $user = User::where("id_anggota",$id)->first();
 // echo $request->wilayah;
         $agt->update([
             'nama'=>$request->nama,
@@ -106,8 +107,17 @@ class AnggotaController extends Controller
             'id_regu'=>$request->id_regu,
             'role'=>$request->role,
             'wilayah'=>$request->wilayah
-            
         ]);
+
+        if ($request->role != "anggota" && $user) {
+            $user->update([
+                "level" => "supervisor"   // pakai =>, bukan =
+            ]);
+        }else{
+            $user->update([
+                "level" => "basic"   // pakai =>, bukan =
+            ]);
+        }
         // echo $agt;
         return redirect()->route('agt.index2');
     }
