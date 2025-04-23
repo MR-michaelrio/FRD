@@ -79,6 +79,7 @@
                                 </a>
                             </li>
                         </ul>
+                        @if(auth()->user()->level == "admin")
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{ route('absen.index2') }}" class="nav-link">
@@ -95,6 +96,7 @@
                                 </a>
                             </li>
                         </ul>
+                        @endif
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{ route('absen.index') }}" class="nav-link">
