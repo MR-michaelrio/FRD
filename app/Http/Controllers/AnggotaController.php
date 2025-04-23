@@ -76,8 +76,9 @@ class AnggotaController extends Controller
     public function edit($id)
     {
         $data = anggota::findorFail($id);
+        $lmb = Lembaga::all();
         $regu = Regu::all();
-        return view('anggota.edit', compact('data','regu'));
+        return view('anggota.edit', compact('data','regu', 'lmb'));
     }
 
     /**
