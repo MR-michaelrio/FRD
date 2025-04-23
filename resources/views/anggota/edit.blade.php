@@ -112,4 +112,13 @@ Anggota
         </form>
     </div>
 </div>
+    <script>
+        $(document).ready(function () {
+
+            $('.select3').select2({
+                theme: "bootstrap4",
+                placeholder: "Pilih Lembaga",
+            });
+        });
+    </script>
 @endsection
