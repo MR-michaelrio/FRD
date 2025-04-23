@@ -95,7 +95,6 @@ class AbsenController extends Controller
         
         // Process attendance for each member
         $ag = anggota::all()->where('wilayah',$request->wilayah);
-        
         foreach ($ag as $a) {
             $hadirKey = 'absenshadir.' . $a->id_anggota;
             $selectedValue = $request->input($hadirKey);
