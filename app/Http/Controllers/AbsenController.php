@@ -197,8 +197,9 @@ class AbsenController extends Controller
     {
         $data = absensi::where('id_absen',$id)->get();
         $absen = Absen::find($id);
-        $pdf = PDF::loadView('absensi.pdf', compact('data','absen'));
+        $wilayah = Wilayah::where("id_wilayah",$absen->wilayah)->first();
 
+        $pdf = PDF::loadView('absensi.pdf', compact('data','absen','wilayah'));
         $pdfContent = $pdf->output();
         $publicPath = public_path('pdf');
         if (!is_dir($publicPath)) {
