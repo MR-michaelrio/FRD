@@ -90,7 +90,7 @@
                                 <input type="text" id="datepicker" placeholder="dd/mm/yyyy" name="tanggal_absen"
                                     class="form-control" autocomplete="off" required>
                                     
-                                <input type="hidden" name="wilayah" value="{{$id}}">
+                                <input type="hidden" name="wilayah" value="{{$namawilayah->nama_wilayah}}">
                             </div>
                         </div>
                     </div>
