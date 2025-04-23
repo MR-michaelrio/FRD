@@ -73,6 +73,14 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
+                                <a href="{{ route('absen.form', auth()->user()->Anggota?->wilayah) }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Absen</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
                                 <a href="{{ route('absen.index2') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Absen Jakarta</p>

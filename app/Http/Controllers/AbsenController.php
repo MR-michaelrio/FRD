@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Absen;
 use App\Models\Absensi;
 use App\Models\anggota;
+use App\Models\Wilayah;
 use Illuminate\Support\Str;
 use PDF;
 use Illuminate\Support\Facades\File;
@@ -24,18 +25,31 @@ class AbsenController extends Controller
         return view('absensi.index', compact('absen'));
     }
 
+    public function indexByWilayah($wilayah)
+    {
+        $anggota = Anggota::where('role', '!=', 'anggota')
+                    ->where('wilayah', $wilayah)
+                    ->get();
+
+        $ag = Anggota::where('wilayah', $wilayah)->get();
+        $namawilayah = Wilayah::where('id_wilayah', $wilayah)->first();
+
+        return view('absensi.absen', compact('anggota', 'ag', 'namawilayah'));
+    }
+
+
     public function index2()
     {
-        $anggota = anggota::where('role','!=','anggota')->where('wilayah','jakarta')->get();
-        $ag = anggota::all()->where('wilayah','jakarta');
+        $anggota = anggota::where('role','!=','anggota')->where('wilayah','1')->get();
+        $ag = anggota::all()->where('wilayah','1');
         $id = 'jakarta';
         return view('absensi.absen', compact('anggota','ag','id'));
     }
 
     public function index3()
     {
-        $anggota = Anggota::where('role', '!=', 'anggota')->where('wilayah', 'bekasi')->get();
-        $ag = anggota::all()->where('wilayah','bekasi');
+        $anggota = Anggota::where('role', '!=', 'anggota')->where('wilayah', '2')->get();
+        $ag = anggota::all()->where('wilayah','2');
         $id = 'bekasi';
         return view('absensi.absen', compact('anggota','ag','id'));
     }

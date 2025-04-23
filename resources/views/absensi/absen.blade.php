@@ -77,7 +77,7 @@
 <body>
     <div class="container">
         <div class="card">
-            <h5 class="card-header">LAPORAN ABSENSI Indonesia Emergency Responder <span style="text-transform: uppercase;">{{$id}}</span></h5>
+            <h5 class="card-header">LAPORAN ABSENSI Indonesia Emergency Responder <span style="text-transform: uppercase;">{{$namawilayah->nama_wilayah}}</span></h5>
             <form action="{{ route('absen.store2')}}" method="post">
                 @csrf
                 <div class="card-body">
