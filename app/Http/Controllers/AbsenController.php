@@ -31,7 +31,7 @@ class AbsenController extends Controller
                     ->where('wilayah', $wilayah)
                     ->get();
 
-        return $anggota;
+        return $anggota->Regu;
 
         $ag = Anggota::where('wilayah', $wilayah)->get();
         $namawilayah = Wilayah::where('id_wilayah', $wilayah)->first();
