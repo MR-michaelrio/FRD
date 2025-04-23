@@ -19,7 +19,14 @@ Anggota
                 </div>
                 <div class="form-group">
                     <label>Lembaga</label>
-                    <input type="text" class="form-control" name="lembaga" value="{{ $data->Lembaga->nama_lembaga }}" placeholder="Input Lembaga">
+                    <select class="form-control select3" name="lembaga" style="width: 100%;" required>
+                        @foreach($lembaga as $l)
+                            <option value="{{ $l->id_lembaga }}" 
+                                {{ $l->id_lembaga == old('lembaga', $data->id_lembaga ?? '') ? 'selected' : '' }}>
+                                {{ ucwords($l->nama_lembaga) }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <label>Email</label>
