@@ -30,7 +30,7 @@ Anggota
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="text" class="form-control" name="email" value="{{ $data->email }}" placeholder="Input Email">
+                    <input type="text" class="form-control" name="email" value="{{ $data->user->email }}" placeholder="Input Email">
                 </div>
                 <div class="form-group">
                     <label>Tanggal Lahir</label>
