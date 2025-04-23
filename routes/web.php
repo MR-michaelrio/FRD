@@ -63,7 +63,7 @@ Route::get('/absenshow/{id}',[AbsenController::class, 'show'])->name('absen.show
 Route::get('/laporan1',[LaporanFinalController::class, 'laporanfinal'])->name('laporan.final');
 Route::post('/laporan1',[LaporanFinalController::class, 'store'])->name('laporan.store');
 
-Route::get('/absenbywilayah/{wilayah}', [AbsensiController::class, 'indexByWilayah'])->name('absen.indexbywilayah');
+Route::get('/absenbywilayah/{wilayah}', [AbsenController::class, 'indexByWilayah'])->name('absen.indexbywilayah');
 Route::get('/absen1',[AbsenController::class, 'index2'])->name('absen.index2');
 Route::post('/absen1',[AbsenController::class, 'store2'])->name('absen.store2');
 
