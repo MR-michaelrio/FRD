@@ -99,8 +99,9 @@ Anggota
                 <div class="form-group">
                     <label>Wilayah</label>
                     <select class="form-control select2" name="wilayah" style="width: 100%;">
-                        <option value="jakarta" @if($data->wilayah == 'jakarta') selected @endif>Jakarta</option>
-                        <option value="bekasi" @if($data->wilayah == 'bekasi') selected @endif>Bekasi</option>
+                        @foreach($wilayah as $w)
+                            <option value="{{ $w->id_wilayah }}" @if($data->id_wilayah == $w->id_wilayah) selected @endif>@if($w->nama_wilayah == "null")-@else{{ $w->nama_wilayah }}@endif</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
