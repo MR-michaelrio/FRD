@@ -19,7 +19,7 @@ Anggota
                 </div>
                 <div class="form-group">
                     <label>Lembaga</label>
-                    <input type="text" class="form-control" name="lembaga" value="{{ $data->lembaga }}" placeholder="Input Lembaga">
+                    <input type="text" class="form-control" name="lembaga" value="{{ $data->Lembaga->nama_lembaga }}" placeholder="Input Lembaga">
                 </div>
                 <div class="form-group">
                     <label>Email</label>

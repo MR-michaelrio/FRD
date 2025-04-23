@@ -91,7 +91,7 @@ class AnggotaController extends Controller
     {
         $agt = anggota::find($id);
         $user = User::where("id_anggota",$id)->first();
-// echo $request->wilayah;
+        // echo $request->wilayah;
         $agt->update([
             'nama'=>$request->nama,
             'lembaga'=>$request->lembaga,
