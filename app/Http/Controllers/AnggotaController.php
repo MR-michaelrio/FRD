@@ -157,6 +157,7 @@ class AnggotaController extends Controller
             'nama_darurat2' => $request->nama_darurat2,
             'tanggal_lahir' => $request->tanggal_lahir,
             'jenis_kelamin' => $request->jenis_kelamin,
+            'wilayah' => $request->wilayah
         ]);
 
         User::create([
