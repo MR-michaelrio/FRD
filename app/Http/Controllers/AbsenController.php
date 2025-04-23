@@ -28,10 +28,11 @@ class AbsenController extends Controller
     public function indexByWilayah($wilayah)
     {
         $anggota = Anggota::where('role', '!=', 'anggota')
+                    ->where('role', '!=', 'admin')
                     ->where('wilayah', $wilayah)
                     ->get();
 
-        $ag = Anggota::where('wilayah', $wilayah)->get();
+        $ag = Anggota::where('wilayah', $wilayah)->where('role', '!=', 'admin')->get();
         $namawilayah = Wilayah::where('id_wilayah', $wilayah)->first();
 
         return view('absensi.absen', compact('anggota', 'ag', 'namawilayah'));
