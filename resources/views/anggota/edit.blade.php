@@ -20,10 +20,10 @@ Anggota
                 <div class="form-group">
                     <label>Lembaga</label>
                     <select class="form-control select3" name="lembaga" style="width: 100%;" required>
-                        @foreach($lembaga as $l)
-                            <option value="{{ $lmb->id_lembaga }}" 
-                                {{ $lmb->id_lembaga == old('lembaga', $data->id_lembaga ?? '') ? 'selected' : '' }}>
-                                {{ ucwords($lmb->nama_lembaga) }}
+                        @foreach($lmb as $l)
+                            <option value="{{ $l->id_lembaga }}" 
+                                {{ $l->id_lembaga == old('lembaga', $data->id_lembaga ?? '') ? 'selected' : '' }}>
+                                {{ ucwords($l->nama_lembaga) }}
                             </option>
                         @endforeach
                     </select>
