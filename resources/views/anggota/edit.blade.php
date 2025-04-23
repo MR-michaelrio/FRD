@@ -19,7 +19,7 @@ Anggota
                 </div>
                 <div class="form-group">
                     <label>Lembaga</label>
-                    <select class="form-control select3" name="lembaga" style="width: 100%;" required>
+                    <select class="form-control select2" name="lembaga" style="width: 100%;" required>
                         @foreach($lmb as $l)
                             <option value="{{ $l->id_lembaga }}" 
                                 {{ $l->id_lembaga == old('lembaga', $data->id_lembaga ?? '') ? 'selected' : '' }}>
@@ -112,13 +112,4 @@ Anggota
         </form>
     </div>
 </div>
-    <script>
-        $(document).ready(function () {
-
-            $('.select3').select2({
-                theme: "bootstrap4",
-                placeholder: "Pilih Lembaga",
-            });
-        });
-    </script>
 @endsection
