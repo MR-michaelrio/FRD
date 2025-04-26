@@ -77,7 +77,7 @@ venom
 
     app.get('/laporan', async (req, res) => {
       try {
-        const [results] = await db.query('SELECT nomor_group FROM wa');
+        const [results] = await pool.query('SELECT nomor_group FROM wa');
         const groupIds = results.map(row => row.nomor_group);
 
         const kejadian = JSON.parse(req.query.kejadian);
@@ -99,7 +99,7 @@ venom
         // Kirim ke semua grup
         const sendTasks = groupIds.map(async (groupId) => {
           try {
-              const msgToSend = isSSC === 1 ? message2 : message;
+              const msgToSend = isSSC === 1 ? message2 : message1;
               await client.sendText(groupId, msgToSend);
               console.log(`✅ Pesan berhasil dikirim ke: ${groupId}`);
           } catch (err) {
