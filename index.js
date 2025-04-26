@@ -77,7 +77,7 @@ venom
 
     app.get('/laporan', async (req, res) => {
       try {
-        const [results] = await pool.query('SELECT nomor_group FROM wa');
+        const [results] = await pool.query('SELECT nomor_group, isSSC FROM wa');
         const groupIds = results.map(row => row.nomor_group);
 
         const kejadian = JSON.parse(req.query.kejadian);
@@ -90,27 +90,33 @@ venom
         const situasi = kejadian.situasi;
         const alamat = kejadian.alamat;
         const status = req.query.status;
-        const isSSC = parseInt(req.query.isSSC);
 
         // Dua versi pesan
         const message1 = `*DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nStatus: ${status}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;
         const message2 = `*DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nAlamat: ${alamat}\nStatus: ${status}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;
 
-        // Kirim ke semua grup
-        const sendTasks = groupIds.map(async (groupId) => {
-          try {
-              const msgToSend = isSSC === 1 ? message2 : message1;
-              await client.sendText(groupId, msgToSend);
-              console.log(`✅ Pesan berhasil dikirim ke: ${groupId}`);
-          } catch (err) {
-              console.error(`❌ Gagal mengirim pesan ke ${groupId}: ${err.message}`);
-          }
+        // Kirim pesan berdasarkan isSSC setiap nomor_group
+        const promises = groupIds.map(async (groupId) => {
+          // Ambil isSSC berdasarkan nomor_group
+          const group = results.find(row => row.nomor_group === groupId);
+            const isSSC = group ? group.isSSC : 0;  // Jika tidak ditemukan, gunakan 0 sebagai default
+
+            const message = `*DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nStatus: ${status}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;
+            const message2 = `*DATA LAPORAN KEJADIAN*\n\nKejadian: ${kjd}\nAlamat: ${alamat}\nStatus: ${status}\nObjek: ${objek}\nSituasi: ${situasi}\nRegu: ${regu}\nTanggal Input Form: ${tanggal}\nNama Petugas: ${nama}\n\nResponder: \n${responder}\n\n*NOTE: DATA INTERNAL MOHON UNTUK TIDAK KELUAR GRUP ‼*`;
+
+            // Tentukan pesan yang akan dikirim berdasarkan nilai isSSC
+            const msgToSend = isSSC === 1 ? message2 : message;
+
+            try {
+                await client.sendText(groupId, msgToSend);
+                console.log(`✅ Pesan berhasil dikirim ke: ${groupId}`);
+            } catch (error) {
+                console.error(`❌ Gagal mengirim pesan ke ${groupId}:`, error.message);
+            }
         });
 
-        // Tunggu semua proses selesai
-        await Promise.allSettled(sendTasks);
-
-        console.log("📌 Semua pesan telah diproses. Redirecting...");
+        // Tunggu semua pesan selesai
+        await Promise.allSettled(promises);
         res.redirect('https://laporan.id-responder.org/lpr');
       }catch (error) {
         console.error('⚠️ Terjadi kesalahan saat memproses laporan:', error.message);
