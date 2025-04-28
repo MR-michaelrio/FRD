@@ -195,8 +195,7 @@ venom
 
       try {
           const [results] = await pool.query('SELECT nomor_group, id_wilayah, isSSC FROM wa');
-          const groupIds = results.map(row => row.nomor_group);
-          
+
           // Path to the PDF file you want to send
           const filePath = `../laporan.id-responder.org/FRD/public/pdf/${pdfFileName}`;
           const caption = 'Absen'
@@ -218,7 +217,7 @@ venom
         await Promise.allSettled(promises);
 
         console.log('📌 Semua file berhasil diproses');
-        res.redirect('https://laporan.id-responder.org/');
+        res.redirect('https://laporan.id-responder.org/home');
   
       } catch (error) {
           console.error('Error sending file:', error);
