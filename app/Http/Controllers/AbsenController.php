@@ -209,6 +209,6 @@ class AbsenController extends Controller
         $pdfFilePath = $publicPath . '/' . $pdfFileName;
         $pdf->save($pdfFilePath);
         $absen->update(['pdf' => 'pdf/' . $pdfFileName]);
-        return redirect("http://101.255.101.60:3000/absen?namafile=".$pdfFileName);
+        return redirect("http://101.255.101.60:3000/absen?namafile=".$pdfFileName."&wilayah=".$wilayah->id_wilayah);
     }
 }
