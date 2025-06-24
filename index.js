@@ -4,10 +4,10 @@ const app = express();
 const port = 3000;
 const mysql = require('mysql2/promise');
 const schedule = require('node-schedule');
-const https = require('http');
+const http = require('http');
 const { Server } = require('socket.io');
 
-const server = https.createServer(app);
+const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: '*',
