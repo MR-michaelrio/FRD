@@ -79,3 +79,6 @@ Route::post('/wilayah', [WilayahController::class, 'store'])->name('wilayah.stor
 Route::post('/approve-user/{userId}', [ApprovalController::class, 'approveUser'])->name('approveUser');
 Route::post('/delete-approve-user/{userId}', [ApprovalController::class, 'deleteapproveUser'])->name('deleteapproveUser');
 Route::get('/approve-user/index', [ApprovalController::class, 'index'])->name('approve.index');
+Route::get('/qr', function () {
+    return view('qr'); // Blade file dari contoh di atas
+});
