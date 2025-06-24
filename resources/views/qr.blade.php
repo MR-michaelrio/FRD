@@ -10,7 +10,9 @@
     <div id="qrcode">Menunggu QR...</div>
 
     <script>
-        const socket = io('https://wa.id-responder.org'); // sesuaikan jika beda host
+        const socket = io("https://wa.id-responder.org", {
+        transports: ["websocket", "polling"]
+        });
 
         socket.on('qr', function(qr) {
             console.log('QR diterima:', qr);
