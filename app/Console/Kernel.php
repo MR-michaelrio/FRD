@@ -19,8 +19,11 @@ class Kernel extends ConsoleKernel
     
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('update:laporan-status')->timezone('Asia/Jakarta')->everyMinute();
+        $schedule->command('update:laporan-status')
+                ->timezone('Asia/Jakarta')
+                ->dailyAt('08:00'); // Setiap hari pada pukul 08:00
     }
+
 
     /**
      * Register the commands for the application.
