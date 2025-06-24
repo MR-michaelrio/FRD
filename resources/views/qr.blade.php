@@ -14,7 +14,7 @@
 
         socket.on('qr', function(qr) {
             console.log('QR diterima:', qr);
-            const qrImage = `http://101.255.101.60:3000/create-qr-code/?size=300x300&data=${encodeURIComponent(qr)}`;
+            const qrImage = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qr)}`;
             document.getElementById('qrcode').innerHTML = `<img src="${qrImage}" alt="QR Code WhatsApp">`;
         });
     </script>
