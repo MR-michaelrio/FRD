@@ -9,9 +9,10 @@ const https = require('https');
 const { Server } = require('socket.io');
 
 const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/laporan.id-responder.org/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/laporan.id-responder.org/fullchain.pem')
+  key: fs.readFileSync('/www/server/panel/vhost/cert/laporan.id-responder.org/privkey.pem'),
+  cert: fs.readFileSync('/www/server/panel/vhost/cert/laporan.id-responder.org/fullchain.pem')
 };
+
 
 const server = https.createServer(options, app);
 const io = new Server(server, {
