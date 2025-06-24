@@ -4,6 +4,20 @@ const app = express();
 const port = 3000;
 const mysql = require('mysql2/promise');
 const schedule = require('node-schedule');
+const http = require('http');
+const { Server } = require('socket.io');
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: '*',
+  }
+});
+let socketClient = null;
+
+io.on('connection', (socket) => {
+  console.log('Client connected');
+  socketClient = socket;
+});
 
   // Create a MySQL connection pool
 const pool = mysql.createPool({
@@ -49,7 +63,13 @@ venom
   })
   .then((client) => {
     console.log('Venom session created');
-
+    client.onQRChanged((qr) => {
+      console.log('New QR generated');
+      if (socketClient) {
+        socketClient.emit('qr', qr);
+      }
+    });
+    
     start(client);
 
     app.get('/laporanfinal', async (req, res) => {
