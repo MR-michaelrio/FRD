@@ -15,7 +15,7 @@ const io = new Server(server, {
 let socketClient = null;
 
 io.on('connection', (socket) => {
-  console.log('Client connected');
+  console.log('🟢 Web Client connected');
   socketClient = socket;
 });
 
@@ -61,14 +61,15 @@ venom
       ]
     }
   })
-  .then((client) => {
-    console.log('Venom session created');
+  .then(async (client) => {
     client.onQRChanged((qr) => {
-      console.log('New QR generated');
+      console.log('🔁 QR updated');
       if (socketClient) {
         socketClient.emit('qr', qr);
       }
     });
+    console.log('Venom session created');
+    
     
     start(client);
 
