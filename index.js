@@ -4,21 +4,13 @@ const app = express();
 const port = 3000;
 const mysql = require('mysql2/promise');
 const schedule = require('node-schedule');
-const fs = require('fs');
-const https = require('https');
+const https = require('http');
 const { Server } = require('socket.io');
 
-const options = {
-  key: fs.readFileSync('/www/server/panel/vhost/cert/laporan.id-responder.org/privkey.pem'),
-  cert: fs.readFileSync('/www/server/panel/vhost/cert/laporan.id-responder.org/fullchain.pem')
-};
-
-
-const server = https.createServer(options, app);
+const server = https.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://laporan.id-responder.org",
-    methods: ["GET", "POST"]
+    origin: '*',
   }
 });
 let socketClient = null;
