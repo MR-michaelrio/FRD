@@ -6,11 +6,16 @@ const mysql = require('mysql2/promise');
 const schedule = require('node-schedule');
 const http = require('http');
 const { Server } = require('socket.io');
-
+const cors = require('cors');
+app.use(cors({
+  origin: "https://laporan.id-responder.org",
+  credentials: true
+}));
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: '*',
+    origin: ['https://laporan.id-responder.org']
+
   }
 });
 let socketClient = null;
