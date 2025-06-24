@@ -4,15 +4,30 @@ const app = express();
 const port = 3000;
 const mysql = require('mysql2/promise');
 const schedule = require('node-schedule');
+const http = require('http');
+const { Server } = require('socket.io');
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: '*',
+  }
+});
+let socketClient = null;
+
+io.on('connection', (socket) => {
+  console.log('Client connected');
+  socketClient = socket;
+});
 
   // Create a MySQL connection pool
-  const pool = mysql.createPool({
-    host: '127.0.0.1',      // Database host
-    user: 'frd',             // Database username
-    password: 'tomsK9as',        // Database password
-    database: 'frd',             // Database name
-    port: 3306                   // Database port (default 3306)
-  });
+const pool = mysql.createPool({
+  host: '127.0.0.1',      // Database host
+  user: 'frd',             // Database username
+  password: 'tomsK9as',        // Database password
+  database: 'frd',             // Database name
+  port: 3306                   // Database port (default 3306)
+});
+
 app.use(express.urlencoded({ extended: true }));
 
 const teams = ["A", "B", "C"];
@@ -36,7 +51,7 @@ const sendMessage = (client) => {
 
 venom
   .create({
-    session: 'session-name',
+    session: 'live-qr',
     puppeteerOptions: {
       headless: "new",
       executablePath: '/usr/bin/google-chrome-stable',
@@ -48,6 +63,13 @@ venom
   })
   .then((client) => {
     console.log('Venom session created');
+    client.onQRChanged((qr) => {
+      console.log('New QR generated');
+      if (socketClient) {
+        socketClient.emit('qr', qr);
+      }
+    });
+
     start(client);
 
     app.get('/laporanfinal', async (req, res) => {
