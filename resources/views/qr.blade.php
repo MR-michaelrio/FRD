@@ -10,7 +10,7 @@
     <div id="qrcode">Menunggu QR...</div>
 
     <script>
-        const socket = io('http://localhost:3000'); // sesuaikan jika beda host
+        const socket = io('http://101.255.101.60:3000'); // sesuaikan jika beda host
 
         socket.on('qr', function(qr) {
             console.log('QR diterima:', qr);
