@@ -50,6 +50,7 @@ function broadcastQR(base64Qr) {
   });
 }
 server.on('request', app); // Gabungkan Express ke server HTTPS
+app.use('/restart-wa', restartRoute);
 
 server.listen(7071, () => {
   console.log("WebSocket WSS server running on port 7071");
