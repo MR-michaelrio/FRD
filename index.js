@@ -9,9 +9,10 @@ const path = require('path');
 const fs = require('fs');
 let connectedClients = [];
 const server = https.createServer({
-  cert: fs.readFileSync('/etc/letsencrypt/live/laporan.id-responder.org/fullchain.pem'),
-  key: fs.readFileSync('/etc/letsencrypt/live/laporan.id-responder.org/privkey.pem')
+  cert: fs.readFileSync('/www/server/panel/vhost/cert/wa.id-responder.org/fullchain.pem'),
+  key: fs.readFileSync('/www/server/panel/vhost/cert/wa.id-responder.org/privkey.pem')
 });
+
 wss.on('connection', ws => {
   connectedClients.push(ws);
   ws.on('close', () => {
