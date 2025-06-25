@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
+  <meta charset="UTF-8">
   <title>Scan QR WhatsApp</title>
 </head>
 <body>
   <h1>Scan QR untuk Login WhatsApp</h1>
-  <img id="qrImage" src="" style="width:300px;"><br><br>
+  
+  <div id="qrSection">
+    <img id="qrImage" src="" alt="QR Code WhatsApp" style="width:300px;">
+  </div>
 
   <script>
     const ws = new WebSocket("wss://wa.id-responder.org:7071");
@@ -18,8 +22,14 @@
       try {
         const message = JSON.parse(event.data);
         console.log(message);
+
         if (message.type === 'qr') {
           document.getElementById('qrImage').src = message.data;
+        }
+
+        if (message.type === 'ready') {
+          // Hide QR when WA is ready
+          document.getElementById('qrSection').style.display = 'none';
         }
       } catch (e) {
         console.error("Invalid message format:", event.data);
