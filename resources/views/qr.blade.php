@@ -1,24 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Live QR WhatsApp</title>
-    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <title>Scan QR WhatsApp</title>
 </head>
 <body>
-    <h2>Scan QR WhatsApp</h2>
-    <div id="qrcode">Menunggu QR...</div>
+  <h1>Scan QR untuk Login WhatsApp</h1>
+  <img id="qrImage" src="" style="width:300px;">
 
-    <script>
-        const socket = io("https://101.255.101.60:3000", {
-        transports: ["websocket", "polling"]
-        });
+  <script>
+    const ws = new WebSocket('ws://localhost:7071');
 
-        socket.on('qr', function(qr) {
-            console.log('QR diterima:', qr);
-            const qrImage = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qr)}`;
-            document.getElementById('qrcode').innerHTML = `<img src="${qrImage}" alt="QR Code WhatsApp">`;
-        });
-    </script>
+    ws.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+      if (message.type === 'qr') {
+        document.getElementById('qrImage').src = message.data;
+      }
+    };
+  </script>
 </body>
 </html>
