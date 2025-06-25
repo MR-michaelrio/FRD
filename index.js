@@ -7,15 +7,18 @@ const schedule = require('node-schedule');
 const WebSocket = require('ws');
 const path = require('path');
 const fs = require('fs');
-const wss = new WebSocket.Server({ port: 7071 }); // WebSocket server di port 7071
 let connectedClients = [];
-
+const server = https.createServer({
+  cert: fs.readFileSync('/etc/letsencrypt/live/laporan.id-responder.org/fullchain.pem'),
+  key: fs.readFileSync('/etc/letsencrypt/live/laporan.id-responder.org/privkey.pem')
+});
 wss.on('connection', ws => {
   connectedClients.push(ws);
   ws.on('close', () => {
     connectedClients = connectedClients.filter(client => client !== ws);
   });
 });
+const wss = new WebSocket.Server({ server,port: 7071 });
 
 function broadcastQR(base64Qr) {
   connectedClients.forEach(client => {
