@@ -4,20 +4,27 @@ const app = express();
 const port = 3000;
 const mysql = require('mysql2/promise');
 const schedule = require('node-schedule');
-const http = require('http');
+const https = require('https');
 const { Server } = require('socket.io');
 const cors = require('cors');
-app.use(cors({
-  origin: "https://laporan.id-responder.org",
-  credentials: true
-}));
-const server = http.createServer(app);
+const fs = require('fs');
+const server = https.createServer(options, app);
+
 const io = new Server(server, {
   cors: {
     origin: ['https://laporan.id-responder.org']
-
   }
 });
+
+app.use(cors({
+  origin: 'https://laporan.id-responder.org',
+  credentials: true
+}));
+const options = {
+  key: fs.readFileSync('/www/server/panel/vhost/cert/wa.id-responder.org/privkey.pem'),
+  cert: fs.readFileSync('/www/server/panel/vhost/cert/wa.id-responder.org/fullchain.pem')
+};
+
 let socketClient = null;
 
 io.on('connection', (socket) => {
@@ -334,4 +341,7 @@ venom
 
 app.listen(port, () => {
   console.log(`API listening at http://localhost:${port}`);
+});
+server.listen(443, () => {
+  console.log('✅ Server berjalan di https://laporan.id-responder.org');
 });
