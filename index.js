@@ -8,6 +8,10 @@ const WebSocket = require('ws');
 const path = require('path');
 const https = require("https");
 const restartRoute = require("./restart");
+const cors = require('cors');
+app.use(cors({
+  origin: 'https://laporan.id-responder.org'
+}));
 
 const fs = require('fs');
 let connectedClients = [];
