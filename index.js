@@ -83,7 +83,13 @@ const sendMessage = (client) => {
   // Update indeks regu untuk pengiriman berikutnya
   currentTeamIndex = (currentTeamIndex + 1) % teams.length;
 };
-
+function broadcastReady() {
+  connectedClients.forEach(client => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(JSON.stringify({ type: 'ready' }));
+    }
+  });
+}
 venom
   .create(
     'live-qr',
@@ -99,7 +105,7 @@ venom
   )
   .then(async (client) => {
     console.log('Venom session created');
-    
+    broadcastReady();
     start(client);
 
     app.get('/laporanfinal', async (req, res) => {
