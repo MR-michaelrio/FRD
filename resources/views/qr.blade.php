@@ -9,6 +9,8 @@
   
   <div id="qrSection">
     <img id="qrImage" src="" alt="QR Code WhatsApp" style="width:300px;">
+    <p id="statusMessage" style="display: none;">WhatsApp berhasil terhubung.</p>
+
   </div>
 
   <script>
@@ -30,6 +32,8 @@
         if (message.type === 'ready') {
           // Hide QR when WA is ready
           document.getElementById('qrSection').style.display = 'none';
+          document.getElementById('statusMessage').style.display = 'block';
+
         }
       } catch (e) {
         console.error("Invalid message format:", event.data);
