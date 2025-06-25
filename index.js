@@ -6,6 +6,8 @@ const mysql = require('mysql2/promise');
 const schedule = require('node-schedule');
 const WebSocket = require('ws');
 const path = require('path');
+const https = require("https");
+
 const fs = require('fs');
 let connectedClients = [];
 const server = https.createServer({
@@ -13,13 +15,18 @@ const server = https.createServer({
   key: fs.readFileSync('/www/server/panel/vhost/cert/wa.id-responder.org/privkey.pem')
 });
 
-wss.on('connection', ws => {
-  connectedClients.push(ws);
-  ws.on('close', () => {
-    connectedClients = connectedClients.filter(client => client !== ws);
-  });
-});
+
 const wss = new WebSocket.Server({ server,port: 7071 });
+
+wss.on("connection", (socket) => {
+  console.log("Client connected");
+
+  socket.on("message", (msg) => {
+    console.log("Received:", msg);
+  });
+
+  socket.send("Hello from server");
+});
 
 function broadcastQR(base64Qr) {
   connectedClients.forEach(client => {
@@ -28,6 +35,10 @@ function broadcastQR(base64Qr) {
     }
   });
 }
+
+server.listen(7071, () => {
+  console.log("WebSocket WSS server running on port 7071");
+});
   // Create a MySQL connection pool
 const pool = mysql.createPool({
   host: '127.0.0.1',      // Database host
