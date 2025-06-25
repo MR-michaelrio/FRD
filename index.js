@@ -20,6 +20,14 @@ const wss = new WebSocket.Server({ server });
 
 wss.on("connection", (socket) => {
   console.log("Client connected");
+  
+  // Tambahkan socket ke daftar client
+  connectedClients.push(socket);
+
+  // Hapus socket dari daftar jika client disconnect
+  socket.on("close", () => {
+    connectedClients = connectedClients.filter(client => client !== socket);
+  });
 
   socket.on("message", (msg) => {
     console.log("Received:", msg);
@@ -27,6 +35,7 @@ wss.on("connection", (socket) => {
 
   socket.send("Hello from server");
 });
+
 
 function broadcastQR(base64Qr) {
   connectedClients.forEach(client => {
