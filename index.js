@@ -11,12 +11,12 @@ const https = require("https");
 const fs = require('fs');
 let connectedClients = [];
 const server = https.createServer({
-  cert: fs.readFileSync('/www/server/panel/vhost/cert/wa.id-responder.org/fullchain.pem'),
-  key: fs.readFileSync('/www/server/panel/vhost/cert/wa.id-responder.org/privkey.pem')
+  cert: fs.readFileSync('/www/wwwroot/wa/certs/fullchain.pem'),
+  key: fs.readFileSync('/www/wwwroot/wa/certs/privkey.pem'),
 });
 
 
-const wss = new WebSocket.Server({ server,port: 7071 });
+const wss = new WebSocket.Server({ server });
 
 wss.on("connection", (socket) => {
   console.log("Client connected");
