@@ -64,19 +64,6 @@ const pool = mysql.createPool({
 });
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-app.post("/restart-wa", (req, res) => {
-  exec("sudo pm2 restart wa", (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Gagal restart PM2 WA: ${error.message}`);
-      return res.json({ success: false, message: error.message });
-    }
-    console.log(`PM2 WA restarted: ${stdout}`);
-    res.json({ success: true });
-  });
-});
-
 
 const teams = ["A", "B", "C"];
 let currentTeamIndex = 0;
