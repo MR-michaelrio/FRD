@@ -4,30 +4,26 @@ const app = express();
 const port = 3000;
 const mysql = require('mysql2/promise');
 const schedule = require('node-schedule');
-const https = require('https');
-const { Server } = require('socket.io');
-const cors = require('cors');
+const WebSocket = require('ws');
+const path = require('path');
 const fs = require('fs');
-app.use(cors());
-const options = {
-  key: fs.readFileSync("/www/server/panel/vhost/cert/laporan.id-responder.org/privkey.pem"),
-  cert: fs.readFileSync("/www/server/panel/vhost/cert/laporan.id-responder.org/fullchain.pem"),
-};
+const wss = new WebSocket.Server({ port: 7071 }); // WebSocket server di port 7071
+let connectedClients = [];
 
-const server = https.createServer(options, app);
-const io = new Server(server, {
-  cors: {
-    origin: "*",
-  },
+wss.on('connection', ws => {
+  connectedClients.push(ws);
+  ws.on('close', () => {
+    connectedClients = connectedClients.filter(client => client !== ws);
+  });
 });
 
-let socketClient = null;
-
-io.on('connection', (socket) => {
-  console.log('🟢 Web Client connected');
-  socketClient = socket;
-});
-
+function broadcastQR(base64Qr) {
+  connectedClients.forEach(client => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(JSON.stringify({ type: 'qr', data: base64Qr }));
+    }
+  });
+}
   // Create a MySQL connection pool
 const pool = mysql.createPool({
   host: '127.0.0.1',      // Database host
@@ -58,27 +54,22 @@ const sendMessage = (client) => {
   currentTeamIndex = (currentTeamIndex + 1) % teams.length;
 };
 
+
 venom
-  .create({
-    session: 'live-qr',
-    puppeteerOptions: {
+  .create(
+    'live-qr',
+    (base64Qr, asciiQR, attempts, urlCode) => {
+      broadcastQR(base64Qr); // kirim QR ke semua client
+    },
+    undefined,
+    {
       headless: "new",
       executablePath: '/usr/bin/google-chrome-stable',
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-      ]
+      args: ["--no-sandbox", "--disable-setuid-sandbox"]
     }
-  })
+  )
   .then(async (client) => {
-    client.onQRChanged((qr) => {
-      console.log('🔁 QR updated');
-      if (socketClient) {
-        socketClient.emit('qr', qr);
-      }
-    });
     console.log('Venom session created');
-    
     
     start(client);
 
@@ -337,7 +328,4 @@ venom
 
 app.listen(port, () => {
   console.log(`API listening at http://localhost:${port}`);
-});
-server.listen(443, () => {
-  console.log('✅ Server berjalan di https://laporan.id-responder.org');
 });
