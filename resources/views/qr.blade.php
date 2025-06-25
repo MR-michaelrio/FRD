@@ -8,7 +8,7 @@
   <img id="qrImage" src="" style="width:300px;">
 
   <script>
-const socket = new WebSocket("wss://wa.id-responder.org:7071");
+const ws = new WebSocket("wss://wa.id-responder.org:7071");
 
     ws.onmessage = (event) => {
       const message = JSON.parse(event.data);
