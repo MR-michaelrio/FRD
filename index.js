@@ -7,6 +7,7 @@ const schedule = require('node-schedule');
 const WebSocket = require('ws');
 const path = require('path');
 const https = require("https");
+const restartRoute = require("./routes/restart");
 
 const fs = require('fs');
 let connectedClients = [];
@@ -77,6 +78,7 @@ const sendMessage = (client) => {
   // Update indeks regu untuk pengiriman berikutnya
   currentTeamIndex = (currentTeamIndex + 1) % teams.length;
 };
+app.use(restartRoute);
 
 
 venom
