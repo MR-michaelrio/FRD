@@ -42,7 +42,7 @@
     document.getElementById("restartBtn").onclick = async () => {
       document.getElementById("status").innerText = "Restarting PM2 WA...";
       try {
-        const response = await fetch("https://wa.id-responder.org:7071/restart-wa", { method: "POST" });
+        const response = await fetch("https://wa.id-responder.org:3000/restart-wa", { method: "POST" });
         const result = await response.json();
         if (result.success) {
           document.getElementById("status").innerText = "PM2 WA berhasil direstart.";
