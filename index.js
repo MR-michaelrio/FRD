@@ -67,7 +67,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.post("/restart-wa", (req, res) => {
-  exec("pm2 restart wa", (error, stdout, stderr) => {
+  exec("sudo pm2 restart wa", (error, stdout, stderr) => {
     if (error) {
       console.error(`Gagal restart PM2 WA: ${error.message}`);
       return res.json({ success: false, message: error.message });
