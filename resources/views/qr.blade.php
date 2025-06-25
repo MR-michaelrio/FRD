@@ -5,7 +5,6 @@
 </head>
 <body>
   <h1>Scan QR untuk Login WhatsApp</h1>
-  <img id="qrImage" src="" style="width:300px;">
   <img id="qr" />
 
   <script>
@@ -19,11 +18,8 @@
       try {
         const message = JSON.parse(event.data);
         console.log(message);
-        if (message.type === 'qr') {
-          document.getElementById('qrImage').src = message.data;
-        }
         if (data.type === 'qr') {
-        document.getElementById("qr").src = "data:image/png;base64," + data.data;
+            document.getElementById("qr").src = "data:image/png;base64," + data.data;
         }
       } catch (e) {
         console.error("Invalid message format:", event.data);
