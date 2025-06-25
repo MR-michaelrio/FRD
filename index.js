@@ -45,6 +45,7 @@ function broadcastQR(base64Qr) {
     }
   });
 }
+server.on('request', app); // Gabungkan Express ke server HTTPS
 
 server.listen(7071, () => {
   console.log("WebSocket WSS server running on port 7071");
@@ -78,8 +79,6 @@ const sendMessage = (client) => {
   // Update indeks regu untuk pengiriman berikutnya
   currentTeamIndex = (currentTeamIndex + 1) % teams.length;
 };
-app.use(restartRoute);
-
 
 venom
   .create(
