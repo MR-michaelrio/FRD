@@ -10,7 +10,7 @@
     <div id="qrcode">Menunggu QR...</div>
 
     <script>
-        const socket = io("https://wa.id-responder.org", {
+        const socket = io("https://101.255.101.60:3000", {
         transports: ["websocket", "polling"]
         });
 
