@@ -8,22 +8,18 @@ const https = require('https');
 const { Server } = require('socket.io');
 const cors = require('cors');
 const fs = require('fs');
-const server = https.createServer(options, app);
+app.use(cors());
+const options = {
+  key: fs.readFileSync("/www/server/panel/vhost/cert/laporan.id-responder.org/privkey.pem"),
+  cert: fs.readFileSync("/www/server/panel/vhost/cert/laporan.id-responder.org/fullchain.pem"),
+};
 
+const server = https.createServer(options, app);
 const io = new Server(server, {
   cors: {
-    origin: ['https://laporan.id-responder.org']
-  }
+    origin: "*",
+  },
 });
-
-app.use(cors({
-  origin: 'https://laporan.id-responder.org',
-  credentials: true
-}));
-const options = {
-  key: fs.readFileSync('/www/server/panel/vhost/cert/wa.id-responder.org/privkey.pem'),
-  cert: fs.readFileSync('/www/server/panel/vhost/cert/wa.id-responder.org/fullchain.pem')
-};
 
 let socketClient = null;
 
