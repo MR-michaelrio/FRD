@@ -7,7 +7,7 @@ const schedule = require('node-schedule');
 const WebSocket = require('ws');
 const path = require('path');
 const https = require("https");
-const restartRoute = require("./routes/restart");
+const restartRoute = require("restart");
 
 const fs = require('fs');
 let connectedClients = [];
