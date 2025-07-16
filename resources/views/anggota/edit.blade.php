@@ -21,9 +21,8 @@ Anggota
                     <label>Lembaga</label>
                     <select class="form-control select2" name="lembaga" style="width: 100%;" required>
                         @foreach($lmb as $l)
-                            <option value="{{ $l->id_lembaga }}" @if($data->id_lembaga == $l->id_lembaga) selected @endif>@if($l->nama_lembaga == "null")-@else{{ $r->nama_lembaga }}@endif</option>
+                            <option value="{{ $l->id_lembaga }}" @if($data->id_lembaga == $l->id_lembaga) selected @endif>@if($l->nama_lembaga == "null")-@else{{ $l->nama_lembaga }}@endif</option>
                         @endforeach
-                        
                     </select>
                 </div>
                 <div class="form-group">
