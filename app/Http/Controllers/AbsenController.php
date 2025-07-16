@@ -45,6 +45,7 @@ class AbsenController extends Controller
         $ag = anggota::all()->where('wilayah','1');
         $id = 'Jakarta';
         $namawilayah = Wilayah::where('id_wilayah', $id)->first();
+        return $namawilayah;
         return view('absensi.absen', compact('anggota','ag','id', 'namawilayah'));
     }
 
