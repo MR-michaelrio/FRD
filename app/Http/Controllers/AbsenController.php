@@ -44,7 +44,8 @@ class AbsenController extends Controller
         $anggota = anggota::where('role','!=','anggota')->where('wilayah','1')->get();
         $ag = anggota::all()->where('wilayah','1');
         $id = 'jakarta';
-        return view('absensi.absen', compact('anggota','ag','id'));
+        $namawilayah = Wilayah::where('id_wilayah', $id)->first();
+        return view('absensi.absen', compact('anggota','ag','id', 'namawilayah'));
     }
 
     public function index3()
@@ -52,7 +53,8 @@ class AbsenController extends Controller
         $anggota = Anggota::where('role', '!=', 'anggota')->where('wilayah', '2')->get();
         $ag = anggota::all()->where('wilayah','2');
         $id = 'bekasi';
-        return view('absensi.absen', compact('anggota','ag','id'));
+        $namawilayah = Wilayah::where('id_wilayah', $id)->first();
+        return view('absensi.absen', compact('anggota','ag','id','namawilayah'));
     }
 
     /**
