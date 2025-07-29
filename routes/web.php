@@ -66,6 +66,7 @@ Route::post('/laporan1',[LaporanFinalController::class, 'store'])->name('laporan
 Route::get('/absenbywilayah/{wilayah}', [AbsenController::class, 'indexByWilayah'])->name('absen.indexbywilayah');
 Route::get('/absen1',[AbsenController::class, 'index2'])->name('absen.index2');
 Route::post('/absen1',[AbsenController::class, 'store2'])->name('absen.store2');
+Route::post('/absen3',[AbsenController::class, 'store3'])->name('absen.store3');
 
 Route::get('/absen3',[AbsenController::class, 'index3'])->name('absen.index3');
 Route::post('/anggota/daftar', [AnggotaController::class, 'daftar'])->name('anggota.daftar');
