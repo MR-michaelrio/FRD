@@ -17,7 +17,6 @@ app.use(cors({
   origin: 'https://laporan.id-responder.org'
 }));
 
-// WEBSOCKET SERVER
 let connectedClients = [];
 const server = https.createServer({
   cert: fs.readFileSync('/www/wwwroot/wa/certs/fullchain.pem'),
@@ -59,7 +58,6 @@ server.listen(7071, () => {
   console.log("WebSocket WSS server running on port 7071");
 });
 
-// DATABASE
 const pool = mysql.createPool({
   host: '127.0.0.1',
   user: 'frd',
@@ -70,7 +68,6 @@ const pool = mysql.createPool({
 
 app.use(express.urlencoded({ extended: true }));
 
-// WHATSAPP CLIENT
 const client = new Client({
   authStrategy: new LocalAuth({ clientId: "live-qr" }),
   puppeteer: {
@@ -93,7 +90,6 @@ client.on('ready', () => {
   broadcastReady();
 });
 
-// CRON JOB
 const teams = ["A", "B", "C"];
 let currentTeamIndex = 0;
 const sendMessage = async () => {
@@ -110,9 +106,7 @@ const sendMessage = async () => {
 };
 schedule.scheduleJob('0 8 * * *', sendMessage);
 
-// ROUTES
 
-// LAPORAN FINAL
 app.get('/laporanfinal', async (req, res) => {
   const groupIds = [
     '6282114578009@c.us',
@@ -143,7 +137,6 @@ app.get('/laporanfinal', async (req, res) => {
   }
 });
 
-// LAPORAN
 app.get('/laporan', async (req, res) => {
   try {
     const [results] = await pool.query('SELECT nomor_group, isSSC FROM wa');
@@ -189,7 +182,6 @@ app.get('/laporan', async (req, res) => {
   }
 });
 
-// UPDATE LAPORAN
 app.get('/updatelaporan', async (req, res) => {
   try {
     const [results] = await pool.query('SELECT nomor_group, isSSC FROM wa');
@@ -237,7 +229,6 @@ app.get('/updatelaporan', async (req, res) => {
   }
 });
 
-// ABSEN
 app.get('/absen', async (req, res) => {
   const pdfFileName = req.query.namafile;
   const wilayah = req.query.wilayah;
@@ -270,7 +261,6 @@ app.get('/absen', async (req, res) => {
   }
 });
 
-// MESSAGE HANDLER
 client.on('message', async (message) => {
   const dataKeyword = 'Data Kejadian Kebakaran';
   const dataKeyword2 = 'Data Kejadian KEBAKARAN';
