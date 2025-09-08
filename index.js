@@ -80,6 +80,7 @@ const client = new Client({
 client.on('qr', (qr) => {
   qrcode.toDataURL(qr, (err, url) => {
     if (!err) {
+      console.log("qr",url)
       broadcastQR(url);
     }
   });
