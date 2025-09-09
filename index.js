@@ -321,9 +321,6 @@ client.on('message', async (message) => {
 
       const targetNumbers = [
         '120363026258560001@g.us',
-        '120363183182250375@g.us',
-        '120363173044009164@g.us',
-        '120363277021729569@g.us'
       ];
 
       for (const number of targetNumbers) {
