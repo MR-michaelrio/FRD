@@ -26,7 +26,8 @@ class User extends Authenticatable
         'regu',
         'id_anggota',
         'wilayah',
-        'status'
+        'status',
+        'fcm_token'
     ];
 
     /**
