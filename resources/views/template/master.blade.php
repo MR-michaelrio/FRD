@@ -336,6 +336,45 @@ onMessage(messaging, (payload) => {
         body: payload.notification.body
     });
 });
+
+document.getElementById('enableNotif').addEventListener('click', async () => {
+
+  // 1️⃣ Register SW
+  const registration = await navigator.serviceWorker.register(
+    '/firebase-messaging-sw.js'
+  );
+
+  // 2️⃣ Request permission (WAJIB user gesture)
+  const permission = await Notification.requestPermission();
+
+  if (permission !== 'granted') {
+    alert('Notifikasi belum diizinkan');
+    return;
+  }
+
+  // 3️⃣ Ambil token
+  const token = await getToken(messaging, {
+    vapidKey: 'BBlPfuteR8wFlVbzQNQ7FFN6XT_MKw2Hmqs9vHOPgXN0WIOVBugpRdxwD8G0x5_BgWSjEOsizucxvQUqUpQisL0',
+    serviceWorkerRegistration: registration
+  });
+
+  console.log('FCM TOKEN (iOS):', token);
+
+  // 4️⃣ Kirim ke backend
+  await fetch('/save-fcm-token', {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute('content')
+    },
+    body: JSON.stringify({ token })
+  });
+
+  alert('Notifikasi berhasil diaktifkan');
+});
 </script>
 
 </body>
