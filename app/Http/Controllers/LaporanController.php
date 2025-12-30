@@ -65,6 +65,7 @@ class LaporanController extends Controller
     public function store(Request $request, FirebaseNotificationService $fcm)
     {
         //
+        \Log::info('MASUK STORE LAPORAN');
         $names = Anggota::where('id_regu', auth()->user()->regu)->pluck('nama')->toArray();
         $petugas_piket = implode(', ', $names);
         $regu = Regu::where('id_regu', auth()->user()->regu)->pluck('nama_regu')->first();
