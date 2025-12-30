@@ -86,6 +86,10 @@
                     
                     <div class="row">
                         <div class="col-12">
+                            <button id="enableNotif" class="btn btn-success">
+  Aktifkan Notifikasi
+</button>
+
                             @if(auth()->check() && auth()->user()->level === 'basic')
                                 @forelse($tiket as $a)
                                 <div class="card @if($a->status=='selesai')card-success @else card-danger @endif">
