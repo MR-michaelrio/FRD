@@ -59,7 +59,7 @@ class FirebaseNotificationService
     {
         $accessToken = $this->getAccessToken();
 
-        Http::withToken($accessToken)->post(
+        $response = Http::withToken($accessToken)->post(
             "https://fcm.googleapis.com/v1/projects/{$this->projectId}/messages:send",
             [
                 'message' => [
@@ -76,5 +76,7 @@ class FirebaseNotificationService
                 ]
             ]
         );
+        \Log::info('FCM STATUS', ['status' => $response->status()]);
+        \Log::info('FCM BODY', $response->json());
     }
 }
