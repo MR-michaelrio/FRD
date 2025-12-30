@@ -87,7 +87,7 @@
                     <div class="row">
                         <div class="col-12">
                             <button id="enableNotif" class="btn btn-success">
-  Aktifkan Notifikasi
+  Aktifkan Notifsikasi
 </button>
 
                             @if(auth()->check() && auth()->user()->level === 'basic')
