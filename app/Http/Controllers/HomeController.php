@@ -44,11 +44,17 @@ class HomeController extends Controller
 
     public function saveToken(Request $request)
     {
+        \Log::info('SAVE TOKEN MASUK', [
+            'user_id' => auth()->id(),
+            'token' => substr($request->token, 0, 20)
+        ]);
+
         auth()->user()->update([
             'fcm_token' => $request->token
         ]);
 
         return response()->json(['success' => true]);
     }
+
 
 }
