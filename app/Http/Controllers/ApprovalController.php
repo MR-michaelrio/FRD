@@ -39,17 +39,31 @@ class ApprovalController extends Controller
             'approved_at' => now()
         ]);
 
-        // Cek apakah user sudah disetujui oleh semua supervisor
-        $user = User::find($userId);
-        if ($user->isApproved()) {
-            $user->update(['status' => 'active']);
-            UserApproval::where('id_user', $userId)->delete();
+        // Hitung jumlah approval dari user non-basic
+        $approvalCount = UserApproval::where('id_user', $userId)
+        ->whereHas('approver', function ($q) {
+            $q->whereIn('level', ['supervisor', 'admin']);
+        })
+        ->count();
+
+        // Jika sudah 2 approval → aktifkan user
+        if ($approvalCount >= 2) {
+            User::where('id', $userId)->update([
+                'status' => 'active'
+            ]);
+
+            return redirect()->back()->with('sweetalert', [
+                'title' => 'Approval Lengkap',
+                'text'  => 'Akun Ini Sudah Bisa Digunakan.',
+                'icon'  => 'success'
+            ]);
         }
 
+        // Jika baru 1 approval
         return redirect()->back()->with('sweetalert', [
-            'title' => 'Approval Sukses',
-            'text' => 'Akun Ini Sudah Bisa Digunakan.',
-            'icon' => 'success'
+            'title' => 'Approval Berhasil',
+            'text'  => 'Anda sudah melakukan approval.',
+            'icon'  => 'info'
         ]);
     }
 

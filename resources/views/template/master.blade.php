@@ -83,7 +83,59 @@
             <section class="content">
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
+                    
                     <div class="row">
+                        <div class="col-12">
+                            @if(auth()->check() && auth()->user()->level === 'basic')
+                                @forelse($tiket as $a)
+                                <div class="card @if($a->status=='selesai')card-success @else card-danger @endif">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Laporan Kejadian IER</h3>
+                                        <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body" style="display: block;">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <!-- /.card-header -->
+                                                <div class="card-body table-responsive p-0">
+                                                    <table class="table table-hover text-nowrap">
+                                                        <tr>
+                                                            <th>Jenis Kejadian</th>
+                                                            <td>{{ $a->kejadian }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Waktu Kejadian</th>
+                                                            <td>{{ $a->terima_berita }} </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Tanggal Kejadian</th>
+                                                            <td>{{ \Carbon\Carbon::parse($a->tanggal)->format('d-m-Y') }} </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Responder</th>
+                                                            <td>{!! nl2br($a->responder) !!} </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                @empty
+                                <div class="card card-primary">
+                                    <div class="card-body" style="display: block;">
+                                        Tidak Ada Laporan
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                @endforelse 
+                            @endif
+                        </div>
+
                         @if(request()->is('/') || request()->is('index'))
                         <div class="col-lg-3 col-6">
                             <div class="small-box bg-warning">

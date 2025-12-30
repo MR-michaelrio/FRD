@@ -82,3 +82,5 @@ Route::get('/approve-user/index', [ApprovalController::class, 'index'])->name('a
 Route::get('/qr', function () {
     return view('qr'); // Blade file dari contoh di atas
 });
+
+Route::post('/save-fcm-token', [HomeController::class, 'saveToken']);

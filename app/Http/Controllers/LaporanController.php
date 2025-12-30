@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Laporan;
 use App\Models\anggota;
 use App\Models\Regu;
+use App\Models\User;
+
 use Carbon\Carbon;
 use DB;
 
@@ -71,14 +73,30 @@ class LaporanController extends Controller
             'petugas_piket' => $petugas_piket,
             'nama_petugas' => $nama_petugas
         ], $request->all()));  
+
+        $users = User::whereNotNull('fcm_token')->get();
+
+        foreach ($users as $user) {
+            try {
+                $fcm->send(
+                    $user->fcm_token,
+                    '🚨 Laporan Baru',
+                    'Ada laporan baru dari regu ' . $regu
+                );
+            } catch (\Throwable $e) {
+                // ❗ jangan gagalkan store kalau notif gagal
+                \Log::error('FCM Error: ' . $e->getMessage());
+            }
+        }
         // Convert the laporans collection to an array
-        $laporansArray = $kejadian->toArray();
+        // $laporansArray = $kejadian->toArray();
 
         // Encode the array to a JSON format for URL safety
-        $encodedLaporans = urlencode(json_encode($laporansArray));
+        // $encodedLaporans = urlencode(json_encode($laporansArray));
 
-        $redirectUrl = 'http://101.255.101.60:3000/laporan?status=' . 'aktif' . '&kejadian=' . $encodedLaporans;
-        return redirect($redirectUrl);
+        // $redirectUrl = 'http://101.255.101.60:3000/laporan?status=' . 'aktif' . '&kejadian=' . $encodedLaporans;
+        // return redirect($redirectUrl);
+        return redirect()->route("lpr.index");
     }
 
     /**

@@ -70,4 +70,15 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if(session('sweetalert'))
+    <script>
+        Swal.fire({
+            title: "{{ session('sweetalert.title') }}",
+            text: "{{ session('sweetalert.text') }}",
+            icon: "{{ session('sweetalert.icon') }}",
+            confirmButtonText: "OK"
+        });
+    </script>
+@endif
 </html>

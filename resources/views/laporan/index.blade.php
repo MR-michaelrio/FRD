@@ -21,7 +21,7 @@ Laporan
     @forelse($tiket as $a)
     <div class="card @if($a->status=='selesai')card-success @else card-danger @endif">
         <div class="card-header">
-            <h3 class="card-title">Laporan Kejadian FRD</h3>
+            <h3 class="card-title">Laporan Kejadian IER</h3>
 
             <div class="card-tools">
                 
