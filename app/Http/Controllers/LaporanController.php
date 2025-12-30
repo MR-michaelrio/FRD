@@ -11,6 +11,7 @@ use App\Models\User;
 
 use Carbon\Carbon;
 use DB;
+use App\Services\FirebaseNotificationService;
 
 class LaporanController extends Controller
 {
@@ -61,7 +62,7 @@ class LaporanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, FirebaseNotificationService $fcm)
     {
         //
         $names = Anggota::where('id_regu', auth()->user()->regu)->pluck('nama')->toArray();
