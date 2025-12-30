@@ -76,6 +76,10 @@ class LaporanController extends Controller
             'nama_petugas' => $nama_petugas
         ], $request->all()));  
 
+        \Log::info('JUMLAH USER FCM', [
+            'count' => User::whereNotNull('fcm_token')->count()
+        ]);
+
         $users = User::whereNotNull('fcm_token')->get();
 
         foreach ($users as $user) {
@@ -85,6 +89,9 @@ class LaporanController extends Controller
                     '🚨 Laporan Baru',
                     'Ada laporan baru dari regu ' . $regu
                 );
+                \Log::info('KIRIM KE TOKEN', [
+                    'token' => substr($user->fcm_token, 0, 20)
+                ]);
             } catch (\Throwable $e) {
                 // ❗ jangan gagalkan store kalau notif gagal
                 \Log::error('FCM Error: ' . $e->getMessage());

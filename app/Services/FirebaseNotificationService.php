@@ -57,6 +57,7 @@ class FirebaseNotificationService
 
     public function send(string $token, string $title, string $body): void
     {
+        \Log::info('MASUK FCM SEND');
         $accessToken = $this->getAccessToken();
 
         $response = Http::withToken($accessToken)->post(
