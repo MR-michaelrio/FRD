@@ -20,13 +20,13 @@ class AnggotaController extends Controller
      */
     public function index()
     {
-        $anggota = anggota::all()->where('role', '!=', 'anggota');
+        $anggota = Anggota::all()->where('role', '!=', 'anggota');
         return view('anggota.agt101&102', compact('anggota'));
     }
 
     public function index2()
     {
-        $anggota = anggota::all();
+        $anggota = Anggota::all();
         return view('anggota.agt2', compact('anggota'));
     }
 
@@ -49,7 +49,7 @@ class AnggotaController extends Controller
      */
     public function store(Request $request)
     {
-        anggota::create(array_filter($request->all(), function ($value) {
+        Anggota::create(array_filter($request->all(), function ($value) {
             return !is_null($value);
         }));
 
@@ -75,7 +75,7 @@ class AnggotaController extends Controller
      */
     public function edit($id)
     {
-        $data = anggota::findorFail($id);
+        $data = Anggota::findorFail($id);
         $lmb = Lembaga::all();
         $regu = Regu::all();
         $wilayah = Wilayah::all();
@@ -91,7 +91,7 @@ class AnggotaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $agt = anggota::find($id);
+        $agt = Anggota::find($id);
         $user = User::where("id_anggota", $id)->first();
         // echo $request->wilayah;
         $agt->update([
@@ -133,7 +133,7 @@ class AnggotaController extends Controller
      */
     public function destroy($id)
     {
-        $agt = anggota::find($id);
+        $agt = Anggota::find($id);
         $agt->delete();
         return redirect()->route('agt.index2');
     }
@@ -147,7 +147,7 @@ class AnggotaController extends Controller
 
     public function daftar(Request $request)
     {
-        $a = anggota::create([
+        $a = Anggota::create([
             'nama' => $request->nama,
             'lembaga' => $request->lembaga,
             'no_pemegang' => $request->no_pemegang,

@@ -41,8 +41,8 @@ class AbsenController extends Controller
 
     public function index2()
     {
-        $anggota = anggota::where('role', '!=', 'anggota')->where('wilayah', '1')->get();
-        $ag = anggota::all()->where('wilayah', '1');
+        $anggota = Anggota::where('role', '!=', 'anggota')->where('wilayah', '1')->get();
+        $ag = Anggota::all()->where('wilayah', '1');
         $id = 'Jakarta';
         $namawilayah = Wilayah::where('nama_wilayah', $id)->first();
         return view('absensi.absen', compact('anggota', 'ag', 'id', 'namawilayah'));
@@ -51,7 +51,7 @@ class AbsenController extends Controller
     public function index3()
     {
         $anggota = Anggota::where('role', '!=', 'anggota')->where('wilayah', '2')->get();
-        $ag = anggota::all()->where('wilayah', '2');
+        $ag = Anggota::all()->where('wilayah', '2');
         $id = 'Bekasi';
         $namawilayah = Wilayah::where('nama_wilayah', $id)->first();
         return view('absensi.absen', compact('anggota', 'ag', 'id', 'namawilayah'));
@@ -96,7 +96,7 @@ class AbsenController extends Controller
         ]);
 
         // Process attendance for each member
-        $ag = anggota::all()->where('wilayah', $request->wilayah);
+        $ag = Anggota::all()->where('wilayah', $request->wilayah);
         foreach ($ag as $a) {
             $hadirKey = 'absenshadir.' . $a->id_anggota;
             $selectedValue = $request->input($hadirKey);

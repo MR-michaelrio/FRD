@@ -17,6 +17,6 @@ class Wilayah extends Model
 
     public function anggota()
     {
-        return $this->belongsTo(anggota::class,'supervisor', 'id_anggota');
+        return $this->belongsTo(Anggota::class,'supervisor', 'id_anggota');
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\laporanfinal;
 use App\Models\Regu;
 use App\Models\Anggota;
 use App\Models\Laporan_Final;
@@ -27,7 +26,7 @@ class LaporanFinalController extends Controller
     public function laporanfinal()
     {
         $regu = Regu::where('nama_regu', '!=', 'null')->get();
-        $anggota = anggota::where('role', '=', '102')->get();
+        $anggota = Anggota::where('role', '=', '102')->get();
         return view('laporanfinal.laporan', compact('regu', 'anggota'));
     }
 
