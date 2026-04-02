@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\laporanfinal;
 use App\Models\Regu;
-use App\Models\anggota;
+use App\Models\Anggota;
 use App\Models\Laporan_Final;
 use App\Models\Kejadian;
 use Carbon\Carbon;
 use DB;
+
 class LaporanFinalController extends Controller
 {
     /**
@@ -25,9 +26,9 @@ class LaporanFinalController extends Controller
 
     public function laporanfinal()
     {
-        $regu = Regu::where('nama_regu','!=','null')->get();
-        $anggota = anggota::where('role','=','102')->get();
-        return view('laporanfinal.laporan',compact('regu','anggota'));
+        $regu = Regu::where('nama_regu', '!=', 'null')->get();
+        $anggota = anggota::where('role', '=', '102')->get();
+        return view('laporanfinal.laporan', compact('regu', 'anggota'));
     }
 
     /**
@@ -37,7 +38,7 @@ class LaporanFinalController extends Controller
      */
     public function create()
     {
-        //
+    //
     }
 
     /**
@@ -51,16 +52,16 @@ class LaporanFinalController extends Controller
         $tanggal = $request->input('tanggal');
         $jam = $request->input('jam');
         $menit = $request->input('menit');
-        
+
         // $date = \DateTime::createFromFormat('Y-m-d', $tanggal);
         $myDate = Carbon::createFromFormat('d-m-Y', $tanggal)->format('Y-m-d');
-        
+
         $tanggal_kejadian = $myDate . ' ' . str_pad($jam, 2, '0', STR_PAD_LEFT) . ':' . str_pad($menit, 2, '0', STR_PAD_LEFT) . ':00';
-        
+
         $nama_petugas = $request->input('nama_petugas');
         $regu = $request->input('regu');
         $kejadian = $request->input('kejadian');
-        
+
         $petugas_piket = $request->input('petugas_piket');
         $petugas_piket_string = !empty($petugas_piket) ? implode(', ', $petugas_piket) : '';
 
@@ -68,12 +69,12 @@ class LaporanFinalController extends Controller
         do {
             $id_kejadian = rand(100000, 999999);
         } while (DB::table('kejadian')->where('id_kejadian', $id_kejadian)->exists());
-        
+
         $longTextID = DB::table('kejadian')->insertGetId([
             'id_kejadian' => $id_kejadian,
             'kejadian' => $kejadian
         ]);
-        
+
         // Assuming you have a "Laporan" model with a corresponding migration
         Laporan_Final::create([
             'nama_petugas' => $nama_petugas,
@@ -82,7 +83,7 @@ class LaporanFinalController extends Controller
             'tanggal' => $myDate,
             'id_kejadian' => $id_kejadian
         ]);
-        
+
         return redirect()->route('laporanfinal.index');
     }
 
@@ -95,8 +96,8 @@ class LaporanFinalController extends Controller
     public function show($id)
     {
         $data = Laporan_Final::find($id);
-        $laporan = Laporan_Final::where('id_laporan',$id)->get();
-        return view('laporanfinal.show', compact('data','laporan'));
+        $laporan = Laporan_Final::where('id_laporan', $id)->get();
+        return view('laporanfinal.show', compact('data', 'laporan'));
     }
 
     /**
@@ -135,6 +136,6 @@ class LaporanFinalController extends Controller
      */
     public function destroy($id)
     {
-        //
+    //
     }
 }

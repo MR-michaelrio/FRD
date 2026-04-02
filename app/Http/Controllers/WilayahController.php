@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Wilayah;
-use App\Models\anggota;
+use App\Models\Anggota;
 use Illuminate\Support\Facades\Log;
 
 class WilayahController extends Controller
@@ -56,7 +56,7 @@ class WilayahController extends Controller
      */
     public function show($id)
     {
-        //
+    //
     }
 
     /**
@@ -67,7 +67,7 @@ class WilayahController extends Controller
      */
     public function edit($id)
     {
-        //
+    //
     }
 
     /**
@@ -81,7 +81,7 @@ class WilayahController extends Controller
     public function update(Request $request, $id)
     {
         // Temukan wilayah berdasarkan ID
-        $wilayah = Wilayah::where('id_wilayah',$id)->first();
+        $wilayah = Wilayah::where('id_wilayah', $id)->first();
         Log::info('Updating supervisor to: ' . $request->supervisor);
 
         // Menangani logika pembaruan berdasarkan field yang diterima
@@ -101,7 +101,7 @@ class WilayahController extends Controller
             Log::info('Updating nama wilayah to: ' . $request->nama_wilayah);
             $wilayah->nama_wilayah = $request->nama_wilayah;
         }
-        
+
         // Simpan perubahan ke database
         $wilayah->save();
 
@@ -120,6 +120,6 @@ class WilayahController extends Controller
      */
     public function destroy($id)
     {
-        //
+    //
     }
 }

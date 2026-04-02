@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -25,25 +26,25 @@ class LaporanController extends Controller
         $tanggal = Carbon::now()->format('d-m-Y');
 
         $tiket = Laporan::where('tanggal', $tanggal)
-                ->orwhere('status', 'aktif')
-                ->orderBy('status', 'asc')
-                ->get();
+            ->orwhere('status', 'aktif')
+            ->orderBy('status', 'asc')
+            ->get();
 
         $damkar = DB::table('damkar_65')
             ->whereRaw("DATE(tanggal) = ?", [Carbon::now()->format('Y-m-d')])
             ->get();
 
-        return view('laporan.index',compact('tiket','damkar'));
+        return view('laporan.index', compact('tiket', 'damkar'));
     }
 
     public function rekap()
     {
         $tiket = Laporan::orderBy('status', 'asc')
-                ->get();
+            ->get();
 
         $damkar = DB::table('damkar_65')->get();
 
-        return view('laporan.rekap',compact('tiket','damkar'));
+        return view('laporan.rekap', compact('tiket', 'damkar'));
     }
 
     /**
@@ -74,7 +75,7 @@ class LaporanController extends Controller
             'regu' => $regu,
             'petugas_piket' => $petugas_piket,
             'nama_petugas' => $nama_petugas
-        ], $request->all()));  
+        ], $request->all()));
 
         \Log::info('JUMLAH USER FCM', [
             'count' => User::whereNotNull('fcm_token')->count()
@@ -92,7 +93,8 @@ class LaporanController extends Controller
                 \Log::info('KIRIM KE TOKEN', [
                     'token' => substr($user->fcm_token, 0, 20)
                 ]);
-            } catch (\Throwable $e) {
+            }
+            catch (\Throwable $e) {
                 // ❗ jangan gagalkan store kalau notif gagal
                 \Log::error('FCM Error: ' . $e->getMessage());
             }
@@ -108,7 +110,7 @@ class LaporanController extends Controller
      */
     public function show($id)
     {
-        //
+    //
     }
 
     /**
@@ -120,7 +122,7 @@ class LaporanController extends Controller
     public function edit($id)
     {
         $a = Laporan::find($id);
-        return view('laporan.edit',compact('a'));
+        return view('laporan.edit', compact('a'));
     }
 
     /**
@@ -144,16 +146,16 @@ class LaporanController extends Controller
         $laporan = Laporan::where('id_kejadian', $id)->first();
 
         $laporan->update([
-            'kejadian'=>$request->kejadian,
-            'objek'=>$request->objek,
-            'tanggal'=>$request->tanggal,
-            'terima_berita'=>$request->terima_berita,
-            'situasi'=>$request->situasi,
-            'pengerahan_akhir'=>$request->pengerahan_akhir,
-            'alamat'=>$request->alamat,
-            'responder'=>$request->responder,
-            'status'=>"selesai",
-            'waktu_selesai'=>$request->waktu_selesai
+            'kejadian' => $request->kejadian,
+            'objek' => $request->objek,
+            'tanggal' => $request->tanggal,
+            'terima_berita' => $request->terima_berita,
+            'situasi' => $request->situasi,
+            'pengerahan_akhir' => $request->pengerahan_akhir,
+            'alamat' => $request->alamat,
+            'responder' => $request->responder,
+            'status' => "selesai",
+            'waktu_selesai' => $request->waktu_selesai
         ]);
         return redirect()->route("lpr.index");
     }
@@ -164,19 +166,20 @@ class LaporanController extends Controller
         $tanggal = $request->input('table_search');
         $inputDate = date('Y-d-m', strtotime(str_replace('-', '/', $tanggal)));
 
-        if($tanggal == ''){
+        if ($tanggal == '') {
             $tiket = Laporan::where('tanggal', Carbon::now()->format('d-m-Y'))->orderBy('status', 'asc')->get();
             $damkar = DB::table('damkar_65')
                 ->whereRaw("DATE(tanggal) = ?", [Carbon::now()->format('Y-m-d')])
                 ->get();
-        }else{
-            $tiket = Laporan::where('tanggal',$tanggal)->get();
+        }
+        else {
+            $tiket = Laporan::where('tanggal', $tanggal)->get();
             $damkar = DB::table('damkar_65')
                 ->whereRaw("DATE(tanggal) = ?", $inputDate)
                 ->get();
         }
 
-        return view('laporan.index',compact('tiket','damkar'));
+        return view('laporan.index', compact('tiket', 'damkar'));
 
     }
 
@@ -186,17 +189,18 @@ class LaporanController extends Controller
         $tanggal = $request->input('table_search');
         $inputDate = date('Y-d-m', strtotime(str_replace('-', '/', $tanggal)));
 
-        if($tanggal == ''){
+        if ($tanggal == '') {
             $tiket = Laporan::orderBy('status', 'asc')->get();
             $damkar = DB::table('damkar_65')->get();
-        }else{
-            $tiket = Laporan::where('tanggal',$tanggal)->get();
+        }
+        else {
+            $tiket = Laporan::where('tanggal', $tanggal)->get();
             $damkar = DB::table('damkar_65')
                 ->whereRaw("DATE(tanggal) = ?", $inputDate)
                 ->get();
         }
 
-        return view('laporan.rekap',compact('tiket','damkar'));
+        return view('laporan.rekap', compact('tiket', 'damkar'));
 
     }
 
@@ -210,7 +214,7 @@ class LaporanController extends Controller
     public function destroy($id)
     {
         $laporan = Laporan::where('id_kejadian', $id)->first(); // Menggunakan first() untuk mendapatkan satu model
-        if($laporan) {
+        if ($laporan) {
             $laporan->delete(); // Menghapus record yang cocok
         }
         return redirect()->route('lpr.index');

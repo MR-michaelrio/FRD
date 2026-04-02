@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Absen;
 use App\Models\Absensi;
-use App\Models\anggota;
+use App\Models\Anggota;
 use App\Models\Wilayah;
 use Illuminate\Support\Str;
 use PDF;
@@ -28,9 +28,9 @@ class AbsenController extends Controller
     public function indexByWilayah($wilayah)
     {
         $anggota = Anggota::where('role', '!=', 'anggota')
-                    ->where('role', '!=', 'admin')
-                    ->where('wilayah', $wilayah)
-                    ->get();
+            ->where('role', '!=', 'admin')
+            ->where('wilayah', $wilayah)
+            ->get();
 
         $ag = Anggota::where('wilayah', $wilayah)->where('role', '!=', 'admin')->get();
         $namawilayah = Wilayah::where('id_wilayah', $wilayah)->first();
@@ -41,20 +41,20 @@ class AbsenController extends Controller
 
     public function index2()
     {
-        $anggota = anggota::where('role','!=','anggota')->where('wilayah','1')->get();
-        $ag = anggota::all()->where('wilayah','1');
+        $anggota = anggota::where('role', '!=', 'anggota')->where('wilayah', '1')->get();
+        $ag = anggota::all()->where('wilayah', '1');
         $id = 'Jakarta';
         $namawilayah = Wilayah::where('nama_wilayah', $id)->first();
-        return view('absensi.absen', compact('anggota','ag','id', 'namawilayah'));
+        return view('absensi.absen', compact('anggota', 'ag', 'id', 'namawilayah'));
     }
 
     public function index3()
     {
         $anggota = Anggota::where('role', '!=', 'anggota')->where('wilayah', '2')->get();
-        $ag = anggota::all()->where('wilayah','2');
+        $ag = anggota::all()->where('wilayah', '2');
         $id = 'Bekasi';
         $namawilayah = Wilayah::where('nama_wilayah', $id)->first();
-        return view('absensi.absen', compact('anggota','ag','id','namawilayah'));
+        return view('absensi.absen', compact('anggota', 'ag', 'id', 'namawilayah'));
     }
 
     /**
@@ -64,7 +64,7 @@ class AbsenController extends Controller
      */
     public function create()
     {
-        //
+    //
     }
 
     /**
@@ -75,9 +75,9 @@ class AbsenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    //
     }
-    
+
     public function store2(Request $request)
     {
         // Generate a unique random ID for 'Absen'
@@ -94,17 +94,18 @@ class AbsenController extends Controller
             'catatan' => $request->catatan,
             'wilayah' => $request->wilayah
         ]);
-        
+
         // Process attendance for each member
-        $ag = anggota::all()->where('wilayah',$request->wilayah);
+        $ag = anggota::all()->where('wilayah', $request->wilayah);
         foreach ($ag as $a) {
             $hadirKey = 'absenshadir.' . $a->id_anggota;
             $selectedValue = $request->input($hadirKey);
-            
+
             // Check if "Lain" is selected and "Lain Text" is provided; otherwise, default to "Hadir" or "Tidak Hadir"
             if ($selectedValue === 'lain' && $request->has("lainText.{$a->id_anggota}")) {
                 $absenshadir = $request->input("lainText.{$a->id_anggota}");
-            } else {
+            }
+            else {
                 $absenshadir = $selectedValue === 'hadir' ? 'hadir' : 'tidak hadir';
             }
             // Create the 'Absensi' record
@@ -115,7 +116,7 @@ class AbsenController extends Controller
                 'wilayah' => $request->wilayah
             ]);
         }
-        return redirect()->route('absen.pdf',$absen->id_absen);    
+        return redirect()->route('absen.pdf', $absen->id_absen);
     }
     /**
      * Display the specified resource.
@@ -126,11 +127,11 @@ class AbsenController extends Controller
     public function show($id)
     {
         $data = Absensi::join('anggota', 'absensi.id_anggota', '=', 'anggota.id_anggota')
-        ->where('absensi.id_absen', $id)
-        ->get();
+            ->where('absensi.id_absen', $id)
+            ->get();
         $tanggal = Absen::find($id);
-        
-        return view('absensi.show',compact('data','tanggal'));
+
+        return view('absensi.show', compact('data', 'tanggal'));
     }
 
     /**
@@ -139,12 +140,12 @@ class AbsenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id_anggota,$id_absen)
+    public function edit($id_anggota, $id_absen)
     {
         $absen = Absensi::where('id_anggota', $id_anggota)
-        ->where('id_absen', $id_absen)
-        ->first();
-        return view('absensi.editabsen',compact('absen'));
+            ->where('id_absen', $id_absen)
+            ->first();
+        return view('absensi.editabsen', compact('absen'));
     }
 
     /**
@@ -154,18 +155,18 @@ class AbsenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id_anggota,$id_absen)
+    public function update(Request $request, $id_anggota, $id_absen)
     {
         //
         $absen = Absensi::where('id_anggota', $id_anggota)
-        ->where('id_absen', $id_absen)
-        ->first();
-        $a= $absen->update([
+            ->where('id_absen', $id_absen)
+            ->first();
+        $a = $absen->update([
             'absenshadir' => $request->absenshadir
         ]);
-        return redirect()->route('absen.show',$absen->id_absen);
+        return redirect()->route('absen.show', $absen->id_absen);
     }
-    
+
     /**
      * Remove the specified resource from storage.
      *
@@ -174,21 +175,21 @@ class AbsenController extends Controller
      */
     public function destroy($id)
     {
-        $absensi = Absensi::where('id_absen',$id)->get();
+        $absensi = Absensi::where('id_absen', $id)->get();
         $absen = Absen::find($id);
         if ($absen) {
             foreach ($absensi as $absensiItem) {
                 $absensiItem->delete();
             }
-        
+
             if (!empty($absen->pdf)) {
                 $filePath = public_path($absen->pdf);
-        
+
                 if (File::exists($filePath)) {
                     File::delete($filePath);
                 }
             }
-        
+
             $absen->delete();
         }
 
@@ -197,11 +198,11 @@ class AbsenController extends Controller
 
     public function generatePDF($id)
     {
-        $data = absensi::where('id_absen',$id)->get();
+        $data = absensi::where('id_absen', $id)->get();
         $absen = Absen::find($id);
-        $wilayah = Wilayah::where("id_wilayah",$absen->wilayah)->first();
+        $wilayah = Wilayah::where("id_wilayah", $absen->wilayah)->first();
 
-        $pdf = PDF::loadView('absensi.pdf', compact('data','absen','wilayah'));
+        $pdf = PDF::loadView('absensi.pdf', compact('data', 'absen', 'wilayah'));
         $pdfContent = $pdf->output();
         $publicPath = public_path('pdf');
         if (!is_dir($publicPath)) {

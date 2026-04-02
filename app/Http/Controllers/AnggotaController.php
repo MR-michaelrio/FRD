@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\anggota;
+use App\Models\Anggota;
 use App\Models\Regu;
 use App\Models\User;
 use App\Models\Wilayah;
@@ -20,14 +20,14 @@ class AnggotaController extends Controller
      */
     public function index()
     {
-        $anggota = anggota::all()->where('role','!=','anggota');
-        return view('anggota.agt101&102',compact('anggota'));
+        $anggota = anggota::all()->where('role', '!=', 'anggota');
+        return view('anggota.agt101&102', compact('anggota'));
     }
 
     public function index2()
     {
         $anggota = anggota::all();
-        return view('anggota.agt2',compact('anggota'));
+        return view('anggota.agt2', compact('anggota'));
     }
 
     /**
@@ -49,10 +49,10 @@ class AnggotaController extends Controller
      */
     public function store(Request $request)
     {
-        anggota::create(array_filter($request->all(), function($value) {
+        anggota::create(array_filter($request->all(), function ($value) {
             return !is_null($value);
         }));
-        
+
         return redirect()->route('agt.index2');
     }
 
@@ -64,7 +64,7 @@ class AnggotaController extends Controller
      */
     public function show($id)
     {
-        //
+    //
     }
 
     /**
@@ -79,7 +79,7 @@ class AnggotaController extends Controller
         $lmb = Lembaga::all();
         $regu = Regu::all();
         $wilayah = Wilayah::all();
-        return view('anggota.edit', compact('data','regu', 'lmb', 'wilayah'));
+        return view('anggota.edit', compact('data', 'regu', 'lmb', 'wilayah'));
     }
 
     /**
@@ -92,32 +92,33 @@ class AnggotaController extends Controller
     public function update(Request $request, $id)
     {
         $agt = anggota::find($id);
-        $user = User::where("id_anggota",$id)->first();
+        $user = User::where("id_anggota", $id)->first();
         // echo $request->wilayah;
         $agt->update([
-            'nama'=>$request->nama,
-            'lembaga'=>$request->lembaga,
-            'email'=>$request->email,
-            'tanggal_lahir'=>$request->tanggal_lahir,
-            'jenis_kelamin'=>$request->jenis_kelamin,
-            'alamat'=>$request->alamat,
-            'no_pemegang'=>$request->no_pemegang,
-            'no_darurat1'=>$request->no_darurat1,
-            'nama_darurat1'=>$request->nama_darurat1,
-            'no_darurat2'=>$request->no_darurat2,
-            'nama_darurat2'=>$request->nama_darurat2,
-            'id_regu'=>$request->id_regu,
-            'role'=>$request->role,
-            'wilayah'=>$request->wilayah
+            'nama' => $request->nama,
+            'lembaga' => $request->lembaga,
+            'email' => $request->email,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'alamat' => $request->alamat,
+            'no_pemegang' => $request->no_pemegang,
+            'no_darurat1' => $request->no_darurat1,
+            'nama_darurat1' => $request->nama_darurat1,
+            'no_darurat2' => $request->no_darurat2,
+            'nama_darurat2' => $request->nama_darurat2,
+            'id_regu' => $request->id_regu,
+            'role' => $request->role,
+            'wilayah' => $request->wilayah
         ]);
 
         if ($request->role != "anggota" && $user) {
             $user->update([
-                "level" => "supervisor"   // pakai =>, bukan =
+                "level" => "supervisor" // pakai =>, bukan =
             ]);
-        }else{
+        }
+        else {
             $user->update([
-                "level" => "basic"   // pakai =>, bukan =
+                "level" => "basic" // pakai =>, bukan =
             ]);
         }
         // echo $agt;
@@ -182,8 +183,8 @@ class AnggotaController extends Controller
     public function UpdatePassword(Request $request)
     {
         $request->validate([
-            'current_password'      => ['required'],
-            'new_password'          => ['required'],
+            'current_password' => ['required'],
+            'new_password' => ['required'],
             'new_password_confirmation' => ['required', 'same:new_password'],
         ], [
             'current_password.required' => 'Password lama wajib diisi.',
