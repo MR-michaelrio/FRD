@@ -48,23 +48,6 @@ class UpdateLaporanStatus extends Command
         ->whereBetween('updated_at', [Carbon::yesterday(), Carbon::now()])
         ->get();
 
-    // Convert the laporans collection to an array
-    $laporansArray = $laporans->toArray();
-
-    // Encode the array to a JSON format for URL safety
-    $encodedLaporans = urlencode(json_encode($laporansArray));
-
-    // Access user properties if the user is authenticated
-    $redirectUrl = 'http://101.255.101.60:3000/laporanfinal?tanggal_kejadian=' . Carbon::yesterday() . '&kejadian=' . $encodedLaporans;
-
-    // Display an informational message
-    $this->info('Making HTTP request to: ' . $redirectUrl);
-
-    // Make an HTTP request to the desired endpoint
-    $response = Http::get($redirectUrl);
-
-    // Display the response status and content
-    $this->info('HTTP Response Status: ' . $response->status());
     Log::info('update:laporan-status command executed successfully.');
 
     // Return 0 to indicate successful execution

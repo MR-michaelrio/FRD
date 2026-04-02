@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use App\Models\Laporan;
-use App\Models\anggota;
+use App\Models\Anggota;
 use App\Models\Regu;
 use App\Models\User;
 
@@ -97,14 +97,6 @@ class LaporanController extends Controller
                 \Log::error('FCM Error: ' . $e->getMessage());
             }
         }
-        // Convert the laporans collection to an array
-        // $laporansArray = $kejadian->toArray();
-
-        // Encode the array to a JSON format for URL safety
-        // $encodedLaporans = urlencode(json_encode($laporansArray));
-
-        // $redirectUrl = 'http://101.255.101.60:3000/laporan?status=' . 'aktif' . '&kejadian=' . $encodedLaporans;
-        // return redirect($redirectUrl);
         return redirect()->route("lpr.index");
     }
 
@@ -143,15 +135,7 @@ class LaporanController extends Controller
         //
         $laporan = Laporan::find($id);
         $laporan->update($request->all());
-        // Convert the laporans collection to an array
-        $laporan->refresh();
-
-        $laporansArray = $laporan->toArray();
-
-        // Encode the array to a JSON format for URL safety
-        $encodedLaporans = urlencode(json_encode($laporansArray));
-        $redirectUrl = 'http://101.255.101.60:3000/updatelaporan?tanggal_kejadian=' . Carbon::yesterday() . '&kejadian=' . $encodedLaporans;
-        return redirect($redirectUrl);
+        return redirect()->route("lpr.index");
     }
 
     public function selesai(Request $request, $id)
@@ -171,14 +155,7 @@ class LaporanController extends Controller
             'status'=>"selesai",
             'waktu_selesai'=>$request->waktu_selesai
         ]);
-        $laporan->refresh();
-
-        $laporansArray = $laporan->toArray();
-
-        // Encode the array to a JSON format for URL safety
-        $encodedLaporans = urlencode(json_encode($laporansArray));
-        $redirectUrl = 'http://101.255.101.60:3000/updatelaporan?tanggal_kejadian=' . Carbon::yesterday() . '&kejadian=' . $encodedLaporans;
-        return redirect($redirectUrl);
+        return redirect()->route("lpr.index");
     }
 
     public function search(Request $request)

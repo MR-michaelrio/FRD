@@ -101,7 +101,7 @@
                             <input class="form-check-input" type="radio" required name="petugas" value="{{ $agt->id_anggota }}"
                                 id="{{ $agt->id_anggota }}1" @if($absen->id_anggota == $agt->id_anggota) checked @endif>
                             <label class="form-check-label" for="{{ $agt->id_anggota }}1">
-                                {{ $agt->nama }} - {{ $agt->Regu->nama_regu}}
+                                {{ $agt->nama }} - {{ $agt->Regu?->nama_regu}}
                             </label>
                         </div>
                         @endforeach
@@ -112,7 +112,7 @@
                         $absensiModel = $absensi->where('id_anggota', $a->id_anggota)->first();
                     @endphp
                     <div class="mb-3">
-                        <label class="form-label formlabel1">R - {{ $a->nama }} - {{ $a->instansi }}<span
+                        <label class="form-label formlabel1">R - {{ $a->nama }} - {{ $a->Lembaga?->nama_lembaga }}<span
                                 style="color: red;">*</span></label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="absenshadir[{{ $a->id_anggota }}]"

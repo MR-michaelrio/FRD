@@ -83,11 +83,7 @@ class LaporanFinalController extends Controller
             'id_kejadian' => $id_kejadian
         ]);
         
-        $encodedKejadian = urlencode($kejadian);
-        
-        $redirectUrl = 'http://101.255.101.60:3000/laporanfinal?tanggal_kejadian=' . $tanggal_kejadian . '&regu=' . $regu . '&petugas_piket=' . $petugas_piket_string . '&nama_petugas=' . $nama_petugas . '&kejadian=' . $encodedKejadian;
-        
-        return redirect($redirectUrl);
+        return redirect()->route('laporanfinal.index');
     }
 
     /**

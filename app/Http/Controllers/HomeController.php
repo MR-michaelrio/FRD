@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\anggota;
+use App\Models\Anggota;
 use App\Models\Laporan;
 use Carbon\Carbon;
 class HomeController extends Controller
@@ -20,7 +20,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $jmlhanggota = anggota::all()->count();
+        $jmlhanggota = Anggota::all()->count();
         
         $tanggal = Carbon::now()->format('d-m-Y');
 

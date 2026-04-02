@@ -49,7 +49,7 @@
             <tbody>
                 <tr>
                     <td style="text-align:center">{{$no++}}</td>
-                    <td>{{ $d->anggota->nama }} - {{ $d->anggota->Lembaga->nama_lembaga }}</td>
+                    <td>{{ $d->anggota->nama }} - {{ $d->anggota->Lembaga?->nama_lembaga }}</td>
                     <td>
                         {{ $d->absenshadir }}
                     </td>
