@@ -6,10 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Anggota;
 use App\Models\Laporan;
 use Carbon\Carbon;
+
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
+     * Create a news controller instance.
      *
      * @return void
      */
@@ -21,7 +22,7 @@ class HomeController extends Controller
     public function index()
     {
         $jmlhanggota = Anggota::all()->count();
-        
+
         $tanggal = Carbon::now()->format('d-m-Y');
 
         // $tiket = Laporan::where('tanggal', $tanggal)
@@ -30,16 +31,16 @@ class HomeController extends Controller
         //         ->orderBy('status', 'asc')
         //         ->get();
 
-                $tiket = Laporan::where(function ($query) use ($tanggal) {
-        $query->whereDate('tanggal', $tanggal)
-              ->orWhere('status', 'aktif');
-    })
-    ->whereDate('tanggal', [Carbon::now()->format('d')])
-    ->orderBy('status', 'asc')
-    ->get();
+        $tiket = Laporan::where(function ($query) use ($tanggal) {
+            $query->whereDate('tanggal', $tanggal)
+                ->orWhere('status', 'aktif');
+        })
+            ->whereDate('tanggal', [Carbon::now()->format('d')])
+            ->orderBy('status', 'asc')
+            ->get();
 
 
-        return view('template.master',compact('jmlhanggota','tiket'));
+        return view('template.master', compact('jmlhanggota', 'tiket'));
     }
 
     public function saveToken(Request $request)
